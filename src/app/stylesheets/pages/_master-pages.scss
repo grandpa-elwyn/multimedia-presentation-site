@@ -1,0 +1,23 @@
+// @mixin page-image($background-image, $overlay-color, $overlay-opacity, $text-color, $border-color)
+// @mixin page-timeline($background-color, $text-color, $highlight-color, $link-color, $dot-diameter)
+// @mixin header-page($alignment, $text-color, $background-color, $border-color, $header-border-color)
+
+.page-1 {
+  @include page-image($night, .7, $white, $electric);
+}
+
+.page-2 {
+  @include page-timeline($white, $slate, $electric, $petal, 15px);
+}
+
+.page-3 {
+  @include header-page(right, $white, $night, $petal, $electric);
+}
+
+.page-4 {
+  @include page-image($night, .7, $white, $petal);
+}
+
+.page-5 {
+  @include page-timeline($white, $slate, $petal, $petal, 15px);
+}

@@ -1,0 +1,89 @@
+.event-container {
+  @extend %justify-content-flex-start;
+  @extend %align-items-flex-start;
+  @include add-flex(row, nowrap);
+
+  &:last-child {
+
+    .event-date,
+    .event-text {
+      padding-bottom: 40px;
+    }
+  }
+}
+
+.event-date,
+.event-text {
+  padding-top: 40px;
+}
+
+.event-date {
+  @extend %align-items-center;
+  @include add-flex(row, nowrap);
+  @include flex(2, 1, 90px);
+  margin-right: -9px;
+  margin-top: -.75rem;
+  max-width: 200px;
+
+  h2 {
+    font-size: 1.125rem;
+    padding: 5px 7px;
+  }
+
+  .date-box-line {
+    @include flex(1, 2, 5vw);
+  }
+}
+
+.event-dot {
+  @include border-radius(50%);
+  z-index: 25;
+}
+
+.event-text {
+  @include flex(3, 1, 240px);
+  max-width: 780px;
+  min-height: 15vh;
+  padding-left: 30px;
+}
+
+@mixin event-container($text-color, $highlight-color) {
+
+  .event-date {
+
+    h2 {
+      border: $single-border $highlight-color;
+      color: $text-color;
+    }
+
+    .date-box-line {
+      border-top: $single-border $highlight-color;
+    }
+  }
+
+  .event-text {
+    border-left: $single-border $text-color;
+  }
+}
+
+@mixin event-dot($color1, $color2, $diameter) {
+  @include box-shadow(
+    0 0 0 #{$diameter / 5} $color2,
+    0 0 0 #{$diameter / 3} $color1
+  );
+  background-color: $color1;
+  height: $diameter;
+  width: $diameter;
+}
+
+// SKELETON
+// <div class="event-container">
+//     <div class="event-date">
+//     <h2>{date}</h2>
+//     <div class="date-box-line"></div>
+//     <div class="event-dot"></div>
+//   </div>
+//   <div class="event-text">
+//     {summary}
+//   </div>
+// </div>

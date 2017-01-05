@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400i|Yanone+Kaffeesatz:300,400');
+
+body,
+%serif-base {
+  font-family: 'Gentium Book Basic', serif;
+  font-weight: 400;
+}
+
+%sans-serif-base {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 400;
+  letter-spacing: .07rem;
+  line-height: 140%;
+}
+
+h1 {
+  @extend %serif-base;
+  @include border(bottom, 2px, solid);
+  font-size: 3rem;
+  letter-spacing: .125rem;
+  text-transform: lowercase;
+}
+
+h2 {
+  @extend %sans-serif-base;
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
+%link-style {
+  @extend %sans-serif-base;
+  text-transform: uppercase;
+}
+
+a {
+  &:link,
+  &:hover,
+  &:active,
+  &:visited {
+    @extend %link-style;
+  }
+}

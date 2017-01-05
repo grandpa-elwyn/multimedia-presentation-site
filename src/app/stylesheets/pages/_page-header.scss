@@ -1,0 +1,73 @@
+// MASTER
+@mixin header-content-align($text-align) {
+  text-align: $text-align;
+
+  @if $text-align == right {
+    .header-block {
+    @extend %align-content-flex-end;
+    }
+  } @else if $text-align == left {
+    .header-block {
+    @extend %align-content-flex-start;
+    }
+  }
+}
+
+@mixin bracket($border-color) {
+  border: $single-border $border-color;
+  height: 20vh;
+}
+
+.header-page {
+  @extend %page-cover-visible;
+  @include add-flex(column, nowrap);
+
+  .page-content-container {
+    @extend %justify-content-space-between;
+    max-height: 90vh;
+    min-height: 60vh;
+  }
+
+  .bracket-top,
+  .bracket-bottom,
+  .header-block {
+    max-width: 900px;
+    width: 90vw;
+  }
+
+  .header-block {
+    margin: -10vh auto;
+    padding: 0 5vw;
+  }
+
+  h1 {
+    display: inline-block;
+    margin: 12px auto 15px;
+    padding-bottom: 5px;
+  }
+
+  h2 {
+    font-weight: 300;
+  }
+}
+
+// INSTANCES
+@mixin header-page($alignment, $text-color, $background-color, $border-color, $header-border-color) {
+  @include header-content-align($alignment);
+  color: $text-color;
+  background-color: $background-color;
+
+  .bracket-top {
+    @include bracket($border-color);
+    border-bottom: 0;
+  }
+
+  .bracket-bottom {
+    @include bracket($border-color);
+    border-top: 0;
+  }
+
+  h1 {
+    border-bottom: $single-border $header-border-color;
+  }
+}

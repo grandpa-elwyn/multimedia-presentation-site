@@ -1,0 +1,65 @@
+// ....absorbed by react class
+// @mixin page-image-bg($imgsrc) {
+//   background-image: url($imgsrc);
+// }
+
+@mixin page-image-top($overlaycolor, $opacity) {
+  background-color: rgba($overlaycolor, $opacity);
+}
+
+.page-image-bg {
+  @extend %page-cover-visible;
+  @include add-flex(column, nowrap);
+  @include header-content-align(left);
+  background-size: cover;
+
+  .page-content-container {
+
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.page-image-top {
+  @extend %page-cover-visible;
+  min-width: 100vw;
+
+}
+
+// INSTANCES
+@mixin page-image($overlay-color, $overlay-opacity, $text-color, $border-color) {
+  color: $text-color;
+
+  // &.page-image-bg {
+  //   @include page-image-bg($background-image);
+  // }
+
+  .page-image-top {
+    @include page-image-top($overlay-color, $overlay-opacity);
+
+    .page-content-container {
+      h1 {
+        border-bottom: $single-border $border-color;
+      }
+    }
+  }
+}
+
+// SKELETON
+
+// <div class="page-{#} page-image-bg">
+//   <div class="page-{#} page-image-top">
+//     <div class="page-content-container">
+//       <h1>{header}</h1>
+//       <h2>
+//       {description}
+//       </h2>
+//     </div>
+//   </div>
+// </div>

@@ -1,0 +1,35 @@
+.page-timeline {
+  @extend %page-fit-content;
+  @include add-flex(column, nowrap);
+
+  .page-content-container {
+    @extend %align-content-flex-start;
+  }
+}
+
+.page-timeline-header {
+  @extend %align-self-flex-end;
+
+  h2 {
+    font-size: 2.5rem;
+ }
+}
+
+// @mixin event-dot($color1, $color2, $diameter)
+// @mixin event-container($text-color, $highlight-color)
+
+@mixin page-timeline($background-color, $text-color, $highlight-color, $link-color, $dot-diameter) {
+
+  @include event-container($text-color, $highlight-color);
+
+  background-color: $background-color;
+  color: $text-color;
+
+  .event-dot {
+    @include event-dot($highlight-color, $background-color, $dot-diameter);
+  }
+
+  .link-dot {
+    @include event-dot($link-color, $background-color, $dot-diameter);
+  }
+}

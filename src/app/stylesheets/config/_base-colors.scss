@@ -1,0 +1,24 @@
+$white: #fff;
+$slate: #121619;
+$electric: #3cc47c;
+$night: #011b23;
+$petal: #fcafa9;
+
+// $raisin: #240101;
+// $flamingo: #ef767a;
+// $coral: #C57B57;
+
+@mixin color-scheme($text-color, $background-color, $border-color, $link-color) {
+  border-color: $border-color;
+  background-color: $background-color;
+
+  body,
+  %serif-base,
+  %sans-serif-base {
+    color: $text-color;
+  }
+
+  %link-style {
+    color: $link-color;
+  }
+}
