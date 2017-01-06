@@ -1,0 +1,36 @@
+// MASTER
+.page-video {
+  @extend %page-cover-visible;
+  @include add-flex(column, nowrap);
+
+  .page-content-container {
+    @extend %justify-content-space-between;
+    @extend %align-items-center;
+    @extend %align-content-center;
+    max-height: 90vh;
+    min-height: 60vh;
+  }
+
+  h1 {
+    display: inline-block;
+    font-size: 5vmax;
+    margin: 12px auto 15px;
+    padding-bottom: 5px;
+  }
+
+  h2 {
+    font-size: 2.5vmax;
+    font-weight: 300;
+  }
+}
+
+// INSTANCES
+@mixin header-page($alignment, $text-color, $background-color, $border-color, $header-border-color) {
+  @include header-content-align($alignment);
+  color: $text-color;
+  background-color: $background-color;
+
+  h1 {
+    border-bottom: $single-border $header-border-color;
+  }
+}

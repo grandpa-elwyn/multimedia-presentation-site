@@ -69,11 +69,17 @@
 	
 	var _page_timeline2 = _interopRequireDefault(_page_timeline);
 	
-	var _content_headerPage = __webpack_require__(/*! ./assets/content_header-page */ 182);
+	var _content_headerPage = __webpack_require__(/*! ./assets/content_header-page */ 183);
 	
-	var _page_frameHeader = __webpack_require__(/*! ./pages/page_frame-header */ 183);
+	var _page_frameHeader = __webpack_require__(/*! ./pages/page_frame-header */ 184);
 	
 	var _page_frameHeader2 = _interopRequireDefault(_page_frameHeader);
+	
+	var _content_videoPage = __webpack_require__(/*! ./assets/content_video-page */ 185);
+	
+	var _page_video = __webpack_require__(/*! ./pages/page_video */ 186);
+	
+	var _page_video2 = _interopRequireDefault(_page_video);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -101,7 +107,8 @@
 	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page_1 }),
 	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page_2 }),
 	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page_3 }),
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page_4 })
+	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page_4 }),
+	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page_5 })
 	      );
 	    }
 	  }]);
@@ -22082,8 +22089,8 @@
 	    header: 'Les Rallizes Dénudés',
 	    description: 'The most legendary and mysterious group of the Japanese underground, Les Rallizes Denudes went on again, off again until the late 1990\'s.'
 	  },
-	  page_4: {
-	    class: 'page-4',
+	  page_5: {
+	    class: 'page-5',
 	    img: 'lrd2.jpg',
 	    header: 'sound & shows',
 	    description: 'their earliest live performances were accompanied by avant-garde theater groups, but their music proved to be too loud and intense and distracting.'
@@ -22225,7 +22232,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _timelineEvent = __webpack_require__(/*! ../partials/timeline-event */ 185);
+	var _timelineEvent = __webpack_require__(/*! ../partials/timeline-event */ 182);
 	
 	var _timelineEvent2 = _interopRequireDefault(_timelineEvent);
 	
@@ -22284,116 +22291,6 @@
 
 /***/ },
 /* 182 */
-/*!***********************************************!*\
-  !*** ./src/app/assets/content_header-page.js ***!
-  \***********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.HdContent = undefined;
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var HdContent = exports.HdContent = {
-	  page_3: {
-	    class: 'page-3',
-	    header_block: function header_block() {
-	      return [_react2.default.createElement(
-	        'h2',
-	        null,
-	        'mizutani was never pleased with the production value of studio recordings. though they played through four decades, les rallizes d\xE9nud\xE9s released'
-	      ), _react2.default.createElement(
-	        'h1',
-	        null,
-	        'no official recordings'
-	      ), _react2.default.createElement(
-	        'h2',
-	        null,
-	        'of their music.  the discography consists of bootlegs, soundboard archives, and studio scraps.'
-	      )];
-	    }
-	  }
-	};
-
-/***/ },
-/* 183 */
-/*!********************************************!*\
-  !*** ./src/app/pages/page_frame-header.js ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var HeaderPage = function (_React$Component) {
-	  _inherits(HeaderPage, _React$Component);
-	
-	  function HeaderPage(props) {
-	    _classCallCheck(this, HeaderPage);
-	
-	    return _possibleConstructorReturn(this, (HeaderPage.__proto__ || Object.getPrototypeOf(HeaderPage)).call(this, props));
-	  }
-	
-	  _createClass(HeaderPage, [{
-	    key: 'render',
-	    value: function render() {
-	      var current = this.props.page;
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: current.class + ' header-page' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'page-content-container' },
-	          _react2.default.createElement('div', { className: 'bracket-top' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'header-block' },
-	            current.header_block()
-	          ),
-	          _react2.default.createElement('div', { className: 'bracket-bottom' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return HeaderPage;
-	}(_react2.default.Component);
-	
-	exports.default = HeaderPage;
-
-/***/ },
-/* 184 */,
-/* 185 */
 /*!********************************************!*\
   !*** ./src/app/partials/timeline-event.js ***!
   \********************************************/
@@ -22462,6 +22359,318 @@
 	}(_react2.default.Component);
 	
 	exports.default = TimelineEvent;
+
+/***/ },
+/* 183 */
+/*!***********************************************!*\
+  !*** ./src/app/assets/content_header-page.js ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.HdContent = undefined;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var HdContent = exports.HdContent = {
+	  page_3: {
+	    class: 'page-3',
+	    header_block: function header_block() {
+	      return [_react2.default.createElement(
+	        'h2',
+	        null,
+	        'mizutani was never pleased with the production value of studio recordings. though they played through four decades, les rallizes d\xE9nud\xE9s released'
+	      ), _react2.default.createElement(
+	        'h1',
+	        null,
+	        'no official recordings'
+	      ), _react2.default.createElement(
+	        'h2',
+	        null,
+	        'of their music.  the discography consists of bootlegs, soundboard archives, and studio scraps.'
+	      )];
+	    }
+	  }
+	};
+
+/***/ },
+/* 184 */
+/*!********************************************!*\
+  !*** ./src/app/pages/page_frame-header.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HeaderPage = function (_React$Component) {
+	  _inherits(HeaderPage, _React$Component);
+	
+	  function HeaderPage(props) {
+	    _classCallCheck(this, HeaderPage);
+	
+	    return _possibleConstructorReturn(this, (HeaderPage.__proto__ || Object.getPrototypeOf(HeaderPage)).call(this, props));
+	  }
+	
+	  _createClass(HeaderPage, [{
+	    key: 'render',
+	    value: function render() {
+	      var current = this.props.page;
+	      return _react2.default.createElement(
+	        'div',
+	        { className: current.class + ' page-header' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'page-content-container' },
+	          _react2.default.createElement('div', { className: 'bracket-top' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'header-block' },
+	            current.header_block()
+	          ),
+	          _react2.default.createElement('div', { className: 'bracket-bottom' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return HeaderPage;
+	}(_react2.default.Component);
+	
+	exports.default = HeaderPage;
+
+/***/ },
+/* 185 */
+/*!**********************************************!*\
+  !*** ./src/app/assets/content_video-page.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.VidContent = undefined;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var VidContent = exports.VidContent = {
+	  page_4: {
+	    class: 'page-4',
+	    header: 'romance of the black grief (otherwise fallin\' in love with)',
+	    videoId: 'YxOZUseg5OI',
+	    description: ''
+	  }
+	};
+
+/***/ },
+/* 186 */
+/*!*************************************!*\
+  !*** ./src/app/pages/page_video.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _mediaVideo_embed = __webpack_require__(/*! ../components/media-video_embed */ 187);
+	
+	var _mediaVideo_embed2 = _interopRequireDefault(_mediaVideo_embed);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var VideoPage = function (_React$Component) {
+	  _inherits(VideoPage, _React$Component);
+	
+	  function VideoPage(props) {
+	    _classCallCheck(this, VideoPage);
+	
+	    return _possibleConstructorReturn(this, (VideoPage.__proto__ || Object.getPrototypeOf(VideoPage)).call(this, props));
+	  }
+	
+	  _createClass(VideoPage, [{
+	    key: 'render',
+	    value: function render() {
+	      var current = this.props.page;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: current.class + ' page-video' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'page-content-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'page-timeline-header' },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              current.header
+	            ),
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              current.description
+	            )
+	          ),
+	          _react2.default.createElement(_mediaVideo_embed2.default, { video: current })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return VideoPage;
+	}(_react2.default.Component);
+	
+	exports.default = VideoPage;
+
+/***/ },
+/* 187 */
+/*!*************************************************!*\
+  !*** ./src/app/components/media-video_embed.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Video = function (_React$Component) {
+	  _inherits(Video, _React$Component);
+	
+	  function Video(props) {
+	    _classCallCheck(this, Video);
+	
+	    var _this = _possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
+	
+	    _this.getDimensions = _this.getDimensions.bind(_this);
+	    _this.constructParams = _this.constructParams.bind(_this);
+	
+	    _this.state = {
+	      playing: false,
+	
+	      parameters: {
+	        // hide controls - 1 to show
+	        'controls': 0,
+	        // hide annotations - 1 to show
+	        'iv_load_policy': 3,
+	        // hide youtube logo in control bar - 0 to show
+	        'modestbranding': 1,
+	        // hide title and uploader before playing - 1 to show
+	        'showinfo': 0,
+	        // hide related videos - 1 to show
+	        'rel': 0
+	        // More options: https://developers.google.com/youtube/player_parameters
+	      }
+	    };
+	
+	    _this.ytBase = 'https://www.youtube.com/embed/';
+	    return _this;
+	  }
+	
+	  _createClass(Video, [{
+	    key: 'getDimensions',
+	    value: function getDimensions() {}
+	  }, {
+	    key: 'constructParams',
+	    value: function constructParams() {
+	      var paramList = this.state.parameters,
+	          paramKeys = Object.keys(paramList),
+	          params = '';
+	      paramKeys.map(function (key) {
+	        if (paramKeys.indexOf(key) === 0) {
+	          params += '?';
+	        } else if (paramKeys.indexOf(key) > 0) {
+	          params += '&';
+	        }
+	        params += key + '=' + paramList[key];
+	      });
+	      return params;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('iframe', { type: 'text/html', width: '640', height: '360', src: '' + this.ytBase + this.props.video.videoId + this.constructParams(), frameborder: '0' });
+	    }
+	  }]);
+	
+	  return Video;
+	}(_react2.default.Component);
+	
+	exports.default = Video;
 
 /***/ }
 /******/ ]);

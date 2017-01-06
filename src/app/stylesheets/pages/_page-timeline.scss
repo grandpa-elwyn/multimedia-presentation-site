@@ -9,10 +9,20 @@
 
 .page-timeline-header {
   @extend %align-self-flex-end;
+  padding-bottom: 40px;
+  text-align: right;
 
-  h2 {
-    font-size: 2.5rem;
+  h1 {
+    font-size: 5vmax;
  }
+}
+
+.event-date h2 {
+  font-size: 2.75vmax;
+}
+
+.event-text {
+  font-size: 2.25vmax;
 }
 
 // @mixin event-dot($color1, $color2, $diameter)

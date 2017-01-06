@@ -1,79 +1,366 @@
-/*
-Error: Undefined mixin 'border'.
-        on line 18 of config/_base-typography.scss, in `border'
-        from line 18 of config/_base-typography.scss
-        from line 6 of styles.scss
-
-13: @import 'pages/page-timeline';
-14: 
-15: @import 'pages/master-pages';
-
-Backtrace:
-config/_base-typography.scss:18:in `border'
-config/_base-typography.scss:18
-styles.scss:6
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:98:in `block in with_mixin'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:98:in `with_mixin'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:349:in `visit_mixin'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:433:in `block (2 levels) in visit_rule'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:433:in `map'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:433:in `block in visit_rule'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:431:in `visit_rule'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `block (2 levels) in visit_import'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `map'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `block in visit_import'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:88:in `block in with_import'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:88:in `with_import'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:325:in `visit_import'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `map'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:159:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:36:in `css_tree'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:331:in `block in watch'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-/home/egpavelka/.gem/ruby/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
+/**
+* SassFlexbox
+* Manage Flexbox in Sass easily.
+*
+* @author     Samuel Marchal (zessx)
+* @version    0.1
 */
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined mixin 'border'.\A         on line 18 of config/_base-typography.scss, in `border'\A         from line 18 of config/_base-typography.scss\A         from line 6 of styles.scss\A \A 13: @import 'pages/page-timeline';\A 14: \A 15: @import 'pages/master-pages';"; }
+/*
+    Display
+ */
+@import url("https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400i|Yanone+Kaffeesatz:300,400");
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container, .event-container, .event-date {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
+/*
+    Flex direction
+ */
+.event-container, .event-date {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+/*
+    Flex wrap
+ */
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container, .event-container, .event-date {
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: none;
+  flex-wrap: nowrap; }
+
+/*
+    Flex flow
+ */
+/*
+    Order
+ */
+/*
+    Flex grow
+ */
+/*
+    Flex shrink
+ */
+/*
+    Flex basis
+ */
+/*
+    Flex
+ */
+/*
+    Justify content
+ */
+.event-container {
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-flex-pack: start;
+  -ms-flex-pack: start;
+  -moz-justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start; }
+
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container {
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-flex-pack: center;
+  -ms-flex-pack: center;
+  -moz-justify-content: center;
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+.page-header .page-content-container, .page-video .page-content-container {
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-flex-pack: justify;
+  -ms-flex-pack: justify;
+  -moz-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between; }
+
+/*
+    Align items
+ */
+.event-container {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start; }
+
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .event-date, .page-video .page-content-container {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+
+/*
+    Align self
+ */
+.page-timeline-header {
+  -ms-flex-item-align: end;
+  -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
+  align-self: flex-end; }
+
+/*
+    Align content
+ */
+.page-image-bg .header-block, .page-timeline .page-content-container {
+  -ms-flex-line-pack: start;
+  -webkit-align-content: flex-start;
+  -moz-align-content: flex-start;
+  align-content: flex-start; }
+
+.page-3 .header-block {
+  -ms-flex-line-pack: end;
+  -webkit-align-content: flex-end;
+  -moz-align-content: flex-end;
+  align-content: flex-end; }
+
+.page-video .page-content-container {
+  -ms-flex-line-pack: center;
+  -webkit-align-content: center;
+  -moz-align-content: center;
+  align-content: center; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+body {
+  overflow-x: hidden; }
+
+body,
+h1 {
+  font-family: 'Gentium Book Basic', serif;
+  font-weight: 400; }
+
+h2, a:link, a:hover, a:active, a:visited {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 400;
+  letter-spacing: .07rem;
+  line-height: 140%; }
+
+h1 {
+  letter-spacing: .125rem;
+  text-transform: lowercase; }
+
+h2 {
+  font-weight: 400; }
+
+a:link, a:hover, a:active, a:visited {
+  text-transform: uppercase; }
+
+body {
+  overflow-x: hidden; }
+
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline {
+  max-width: 100vw; }
+
+.page-header, .page-image-bg, .page-image-top, .page-video {
+  height: 100vh;
+  max-height: 100vh; }
+
+.page-timeline {
+  min-height: 100vh; }
+
+.page-content-container {
+  max-width: 900px;
+  width: 90vw; }
+
+.event-container:last-child .event-date,
+.event-container:last-child .event-text {
+  padding-bottom: 40px; }
+
+.event-date,
+.event-text {
+  padding-top: 40px; }
+
+.event-date {
+  -webkit-flex-grow: 2;
+  -webkit-box-flex: 2;
+  -moz-flex-grow: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  -webkit-flex-shrink: 1;
+  -webkit-box-flex: 1;
+  -moz-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  -webkit-flex-basis: 90px;
+  -moz-flex-basis: 90px;
+  -ms-flex-preferred-size: 90px;
+  flex-basis: 90px;
+  margin-right: -9px;
+  margin-top: -.75rem;
+  max-width: 200px; }
+  .event-date h2 {
+    font-size: 1.125rem;
+    padding: 5px 7px; }
+  .event-date .date-box-line {
+    -webkit-flex-grow: 1;
+    -webkit-box-flex: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 2;
+    -webkit-box-flex: 2;
+    -moz-flex-shrink: 2;
+    -ms-flex-negative: 2;
+    flex-shrink: 2;
+    -webkit-flex-basis: 5vw;
+    -moz-flex-basis: 5vw;
+    -ms-flex-preferred-size: 5vw;
+    flex-basis: 5vw; }
+
+.event-dot {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  z-index: 25; }
+
+.event-text {
+  -webkit-flex-grow: 3;
+  -webkit-box-flex: 3;
+  -moz-flex-grow: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  -webkit-flex-shrink: 1;
+  -webkit-box-flex: 1;
+  -moz-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  -webkit-flex-basis: 240px;
+  -moz-flex-basis: 240px;
+  -ms-flex-preferred-size: 240px;
+  flex-basis: 240px;
+  max-width: 780px;
+  min-height: 15vh;
+  padding-left: 30px; }
+
+.page-header .page-content-container {
+  max-height: 90vh;
+  min-height: 60vh; }
+.page-header .bracket-top,
+.page-header .bracket-bottom,
+.page-header .header-block {
+  max-width: 900px;
+  width: 90vw; }
+.page-header .header-block {
+  margin: -10vh auto;
+  padding: 0 5vw; }
+.page-header h1 {
+  display: inline-block;
+  font-size: 8vmax;
+  margin: 12px auto 15px;
+  padding-bottom: 5px; }
+.page-header h2 {
+  font-size: 2.5vmax;
+  font-weight: 300; }
+
+.page-image-bg {
+  text-align: left;
+  background-size: cover; }
+  .page-image-bg .page-content-container h1 {
+    font-size: 8.5vmax;
+    margin-bottom: 20px; }
+  .page-image-bg .page-content-container h2 {
+    font-size: 2.5vmax;
+    text-transform: uppercase; }
+
+.page-image-top {
+  min-width: 100vw; }
+
+.page-timeline-header {
+  padding-bottom: 40px;
+  text-align: right; }
+  .page-timeline-header h1 {
+    font-size: 5vmax; }
+
+.event-date h2 {
+  font-size: 2.75vmax; }
+
+.event-text {
+  font-size: 2.25vmax; }
+
+.page-video .page-content-container {
+  max-height: 90vh;
+  min-height: 60vh; }
+.page-video h1 {
+  display: inline-block;
+  font-size: 5vmax;
+  margin: 12px auto 15px;
+  padding-bottom: 5px; }
+.page-video h2 {
+  font-size: 2.5vmax;
+  font-weight: 300; }
+
+.page-1 {
+  color: #fff; }
+  .page-1 .page-image-top {
+    background-color: rgba(1, 27, 35, 0.7); }
+    .page-1 .page-image-top .page-content-container h1 {
+      border-bottom: 2px solid #3cc47c; }
+
+.page-2 {
+  background-color: #fff;
+  color: #121619; }
+  .page-2 .event-date h2 {
+    border: 2px solid #3cc47c;
+    color: #121619; }
+  .page-2 .event-date .date-box-line {
+    border-top: 2px solid #3cc47c; }
+  .page-2 .event-text {
+    border-left: 2px solid #121619; }
+  .page-2 .event-dot {
+    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #3cc47c;
+    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #3cc47c;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #3cc47c;
+    background-color: #3cc47c;
+    height: 15px;
+    width: 15px; }
+  .page-2 .link-dot {
+    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #fcafa9;
+    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #fcafa9;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #fcafa9;
+    background-color: #fcafa9;
+    height: 15px;
+    width: 15px; }
+
+.page-3 {
+  text-align: right;
+  color: #fff;
+  background-color: #011b23; }
+  .page-3 h1 {
+    border-bottom: 2px solid #3cc47c; }
+
+.page-5 {
+  color: #fff; }
+  .page-5 .page-image-top {
+    background-color: rgba(1, 27, 35, 0.7); }
+    .page-5 .page-image-top .page-content-container h1 {
+      border-bottom: 2px solid #fcafa9; }
+
+/*# sourceMappingURL=styles.css.map */

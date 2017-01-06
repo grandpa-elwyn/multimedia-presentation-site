@@ -15,9 +15,9 @@
 }
 
 .page-4 {
-  @include page-image($night, .7, $white, $petal);
+  //@include page-timeline($white, $slate, $petal, $petal, 15px);
 }
 
 .page-5 {
-  @include page-timeline($white, $slate, $petal, $petal, 15px);
+  @include page-image($night, .7, $white, $petal);
 }

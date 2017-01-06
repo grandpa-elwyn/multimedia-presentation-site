@@ -15,15 +15,14 @@ body,
 
 h1 {
   @extend %serif-base;
-  @include border(bottom, 2px, solid);
-  font-size: 3rem;
+  // font-size: 3rem;
   letter-spacing: .125rem;
   text-transform: lowercase;
 }
 
 h2 {
   @extend %sans-serif-base;
-  font-size: 1.45rem;
+  // font-size: 1.45rem;
   font-weight: 400;
 }
 
