@@ -11,7 +11,7 @@
 }
 
 .page-3 {
-  @include header-page(right, $white, $night, $petal, $electric);
+  @include page-header(right, $white, $night, $petal, $electric);
 }
 
 .page-4 {

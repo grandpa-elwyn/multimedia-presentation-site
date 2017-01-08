@@ -9,7 +9,7 @@ export default class ImagePage extends React.Component {
   render() {
     var current = this.props.page;
     var currentBg = {
-      backgroundImage: `url(src/app/assets/img/${current.img})`
+      backgroundImage: `url(app/src/assets/img/${current.img})`
     };
 
     return (

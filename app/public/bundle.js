@@ -43,7 +43,7 @@
 /******/ ([
 /* 0 */
 /*!***************************!*\
-  !*** ./src/app/index.jsx ***!
+  !*** ./app/src/index.jsx ***!
   \***************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22065,7 +22065,7 @@
 /***/ },
 /* 178 */
 /*!**********************************************!*\
-  !*** ./src/app/assets/content_image-page.js ***!
+  !*** ./app/src/assets/content_image-page.js ***!
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22100,7 +22100,7 @@
 /***/ },
 /* 179 */
 /*!********************************************!*\
-  !*** ./src/app/pages/page_image-header.js ***!
+  !*** ./app/src/pages/page_image-header.js ***!
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22142,7 +22142,7 @@
 	    value: function render() {
 	      var current = this.props.page;
 	      var currentBg = {
-	        backgroundImage: 'url(src/app/assets/img/' + current.img + ')'
+	        backgroundImage: 'url(app/src/assets/img/' + current.img + ')'
 	      };
 	
 	      return _react2.default.createElement(
@@ -22178,7 +22178,7 @@
 /***/ },
 /* 180 */
 /*!*************************************************!*\
-  !*** ./src/app/assets/content_timeline-page.js ***!
+  !*** ./app/src/assets/content_timeline-page.js ***!
   \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22212,7 +22212,7 @@
 /***/ },
 /* 181 */
 /*!****************************************!*\
-  !*** ./src/app/pages/page_timeline.js ***!
+  !*** ./app/src/pages/page_timeline.js ***!
   \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22292,7 +22292,7 @@
 /***/ },
 /* 182 */
 /*!********************************************!*\
-  !*** ./src/app/partials/timeline-event.js ***!
+  !*** ./app/src/partials/timeline-event.js ***!
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22363,7 +22363,7 @@
 /***/ },
 /* 183 */
 /*!***********************************************!*\
-  !*** ./src/app/assets/content_header-page.js ***!
+  !*** ./app/src/assets/content_header-page.js ***!
   \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22404,7 +22404,7 @@
 /***/ },
 /* 184 */
 /*!********************************************!*\
-  !*** ./src/app/pages/page_frame-header.js ***!
+  !*** ./app/src/pages/page_frame-header.js ***!
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22471,7 +22471,7 @@
 /***/ },
 /* 185 */
 /*!**********************************************!*\
-  !*** ./src/app/assets/content_video-page.js ***!
+  !*** ./app/src/assets/content_video-page.js ***!
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22500,7 +22500,7 @@
 /***/ },
 /* 186 */
 /*!*************************************!*\
-  !*** ./src/app/pages/page_video.js ***!
+  !*** ./app/src/pages/page_video.js ***!
   \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22580,7 +22580,7 @@
 /***/ },
 /* 187 */
 /*!*************************************************!*\
-  !*** ./src/app/components/media-video_embed.js ***!
+  !*** ./app/src/components/media-video_embed.js ***!
   \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22608,6 +22608,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	//import $ from 'jquery';
+	
 	var Video = function (_React$Component) {
 	  _inherits(Video, _React$Component);
 	
@@ -22616,39 +22618,39 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
 	
-	    _this.getDimensions = _this.getDimensions.bind(_this);
 	    _this.constructParams = _this.constructParams.bind(_this);
+	    _this.resizeVideo = _this.resizeVideo.bind(_this);
 	
 	    _this.state = {
-	      playing: false,
-	
-	      parameters: {
-	        // hide controls - 1 to show
-	        'controls': 0,
-	        // hide annotations - 1 to show
-	        'iv_load_policy': 3,
-	        // hide youtube logo in control bar - 0 to show
-	        'modestbranding': 1,
-	        // hide title and uploader before playing - 1 to show
-	        'showinfo': 0,
-	        // hide related videos - 1 to show
-	        'rel': 0
-	        // More options: https://developers.google.com/youtube/player_parameters
-	      }
+	      initWidth: 0,
+	      playerUnit: 0,
+	      playerHeight: 0,
+	      playerWidth: 0
 	    };
-	
-	    _this.ytBase = 'https://www.youtube.com/embed/';
 	    return _this;
 	  }
 	
 	  _createClass(Video, [{
-	    key: 'getDimensions',
-	    value: function getDimensions() {}
-	  }, {
 	    key: 'constructParams',
 	    value: function constructParams() {
-	      var paramList = this.state.parameters,
-	          paramKeys = Object.keys(paramList),
+	
+	      var ParamList = {
+	        parameters: {
+	          // hide controls - 1 to show
+	          'controls': 0,
+	          // hide annotations - 1 to show
+	          'iv_load_policy': 3,
+	          // hide youtube logo in control bar - 0 to show
+	          'modestbranding': 1,
+	          // hide title and uploader before playing - 1 to show
+	          'showinfo': 0,
+	          // hide related videos - 1 to show
+	          'rel': 0
+	          // More options: https://developers.google.com/youtube/player_parameters
+	        }
+	      };
+	
+	      var paramKeys = Object.keys(paramList),
 	          params = '';
 	      paramKeys.map(function (key) {
 	        if (paramKeys.indexOf(key) === 0) {
@@ -22661,9 +22663,41 @@
 	      return params;
 	    }
 	  }, {
+	    key: 'resizeVideo',
+	    value: function resizeVideo() {
+	      if (window.innerWidth > 850) {
+	        return 840;
+	      } else {
+	        return window.innerWidth * .9;
+	      }
+	
+	      this.setState({
+	        initWidth: windowWidth * .9,
+	        playerUnit: initWidth / 16,
+	        playerHeight: playerUnit * 9,
+	        playerWidth: playerUnit * 16
+	      });
+	      console.log(windowWidth, this.state.playerWidth, this.state.playerHeight);
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.resizeVideo();
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.addEventListener('resize', this.resizeVideo);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener('resize', this.resizeVideo);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('iframe', { type: 'text/html', width: '640', height: '360', src: '' + this.ytBase + this.props.video.videoId + this.constructParams(), frameborder: '0' });
+	      return _react2.default.createElement('iframe', { type: 'text/html', width: this.state.playerWidth, height: this.state.playerHeight, src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this.constructParams(), frameBorder: '0' });
 	    }
 	  }]);
 	
