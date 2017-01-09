@@ -14,7 +14,9 @@ export default class HeaderPage extends React.Component {
     <div className='page-content-container'>
       <div className="bracket-top"></div>
       <div className="header-block">
-        {current.header_block()}
+        {current.headerBlock.map(function(p, i) {
+          return <span key = { i }>{ p }</span>;
+        }, this)}
       </div>
       <div className="bracket-bottom"></div>
     </div>

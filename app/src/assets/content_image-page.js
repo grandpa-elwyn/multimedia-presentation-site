@@ -1,13 +1,13 @@
 import React from 'react';
 
 export const ImgContent = {
-   page_1: {
+   page1: {
     class: 'page-1',
     img: 'lrd1.jpg',
     header: 'Les Rallizes Dénudés',
     description: 'The most legendary and mysterious group of the Japanese underground, Les Rallizes Denudes went on again, off again until the late 1990\'s.'
   },
-  page_5: {
+  page5: {
    class: 'page-5',
    img: 'lrd2.jpg',
    header: 'sound & shows',

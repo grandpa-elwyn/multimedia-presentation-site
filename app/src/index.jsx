@@ -18,11 +18,11 @@ class BandBio extends React.Component {
   render() {
     return (
     <div>
-      <ImagePage page={ImgContent.page_1} />
-      <TimelinePage page={TlContent.page_2} />
-      <HeaderPage page={HdContent.page_3} />
-      <VideoPage page={VidContent.page_4} />
-      <ImagePage page={ImgContent.page_5} />
+      <ImagePage page={ImgContent.page1} />
+      <TimelinePage page={TlContent.page2} />
+      <HeaderPage page={HdContent.page3} />
+      <VideoPage page={VidContent.page4} />
+      <ImagePage page={ImgContent.page5} />
     </div>
     );
   }

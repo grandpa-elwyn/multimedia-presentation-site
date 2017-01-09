@@ -7,23 +7,21 @@ export default class Video extends React.Component {
   constructor(props) {
     super(props);
 
-    this.constructParams = this.constructParams.bind(this);
-    this.resizeVideo = this.resizeVideo.bind(this);
+    this._constructParams = this._constructParams.bind(this);
+    this._resizeVideo = this._resizeVideo.bind(this);
 
     this.state = {
-      initWidth: 0,
-      playerUnit: 0,
+      playerWidth: 0,
       playerHeight: 0,
-      playerWidth: 0
+      isLoading: true
     }
   }
 
 
 
-  constructParams() {
+  _constructParams() {
 
-    const ParamList = {
-      parameters: {
+    const paramList = {
         // hide controls - 1 to show
         'controls': 0,
         // hide annotations - 1 to show
@@ -35,12 +33,12 @@ export default class Video extends React.Component {
         // hide related videos - 1 to show
         'rel': 0
         // More options: https://developers.google.com/youtube/player_parameters
-      }
-    };
+      };
 
-    var paramKeys = Object.keys(paramList),
-      params = '';
-  paramKeys.map(function (key) {
+    const paramKeys = Object.keys(paramList);
+    let params = '';
+
+  paramKeys.map((key) => {
     if (paramKeys.indexOf(key) === 0) {
       params += '?';
     } else if (paramKeys.indexOf(key) > 0) {
@@ -48,41 +46,41 @@ export default class Video extends React.Component {
     }
     params += (key + '=' + paramList[key]);
   })
+    console.log(params);
     return params;
   }
 
-  resizeVideo() {
+  _resizeVideo() {
+    let windowWidth;
+
     if (window.innerWidth > 850) {
-      return 840;
+      windowWidth = 850;
+    } else {
+      windowWidth = window.innerWidth;
     }
-    else {
-      return window.innerWidth * .9;
-    }
+    const playerUnit = (windowWidth * .9) / 16;
 
     this.setState({
-      initWidth: windowWidth * .9,
-      playerUnit: initWidth / 16,
       playerHeight: playerUnit * 9,
       playerWidth: playerUnit * 16
-    })
-    console.log(windowWidth, this.state.playerWidth, this.state.playerHeight);
+    });
   }
 
-  componentWillMount() {
-    this.resizeVideo();
-  }
+  componentWillMount() { this._resizeVideo() }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resizeVideo);
+    window.addEventListener('resize', this._resizeVideo);
+
+    setTimeout(() => this.setState({ isLoading: false }), 0);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeVideo);
+    window.removeEventListener('resize', this._resizeVideo);
   }
 
   render() {
     return (
-      <iframe type="text/html" width={this.state.playerWidth} height={this.state.playerHeight} src={`https://www.youtube.com/embed/${this.props.video.videoId}${this.constructParams()}`} frameBorder="0"></iframe>
+      <iframe type='text/html' width={ this.state.playerWidth } height={ this.state.playerHeight } src={`https://www.youtube.com/embed/${ this.props.video.videoId }${ this._constructParams() }`} frameBorder='0'></iframe>
     );
   }
 }

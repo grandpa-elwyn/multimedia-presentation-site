@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const TlContent = {
-   page_2: {
+   page2: {
     class: 'page-2',
     header: 'formation & early sound',
     timeline: [

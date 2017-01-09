@@ -21,3 +21,7 @@
 .page-5 {
   @include page-image($night, .7, $white, $petal);
 }
+
+.ytp-watermark {
+  display: none;
+}

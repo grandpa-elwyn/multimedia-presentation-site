@@ -21,8 +21,8 @@ export default class TimelinePage extends React.Component {
       <div className="page-timeline-header">
       <h1>{current.header}</h1>
       </div>
-      {current.timeline.map(function(entry) {
-        return (<TimelineEvent event={entry} />);
+      {current.timeline.map(function(entry, i) {
+        return (<TimelineEvent key={i} event={entry} />);
       }, this)}
       </div>
     </div>

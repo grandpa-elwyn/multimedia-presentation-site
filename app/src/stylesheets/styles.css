@@ -371,4 +371,7 @@ body {
     .page-5 .page-image-top .page-content-container h1 {
       border-bottom: 2px solid #fcafa9; }
 
+.ytp-watermark {
+  display: none; }
+
 /*# sourceMappingURL=styles.css.map */

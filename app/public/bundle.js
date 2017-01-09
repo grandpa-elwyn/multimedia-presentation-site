@@ -104,11 +104,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page_1 }),
-	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page_2 }),
-	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page_3 }),
-	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page_4 }),
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page_5 })
+	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }),
+	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }),
+	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }),
+	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }),
+	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 })
 	      );
 	    }
 	  }]);
@@ -22083,13 +22083,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ImgContent = exports.ImgContent = {
-	  page_1: {
+	  page1: {
 	    class: 'page-1',
 	    img: 'lrd1.jpg',
 	    header: 'Les Rallizes Dénudés',
 	    description: 'The most legendary and mysterious group of the Japanese underground, Les Rallizes Denudes went on again, off again until the late 1990\'s.'
 	  },
-	  page_5: {
+	  page5: {
 	    class: 'page-5',
 	    img: 'lrd2.jpg',
 	    header: 'sound & shows',
@@ -22196,7 +22196,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var TlContent = exports.TlContent = {
-	  page_2: {
+	  page2: {
 	    class: 'page-2',
 	    header: 'formation & early sound',
 	    timeline: [{
@@ -22276,8 +22276,8 @@
 	              current.header
 	            )
 	          ),
-	          current.timeline.map(function (entry) {
-	            return _react2.default.createElement(_timelineEvent2.default, { event: entry });
+	          current.timeline.map(function (entry, i) {
+	            return _react2.default.createElement(_timelineEvent2.default, { key: i, event: entry });
 	          }, this)
 	        )
 	      );
@@ -22370,7 +22370,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.HdContent = undefined;
 	
@@ -22381,24 +22381,22 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var HdContent = exports.HdContent = {
-	  page_3: {
-	    class: 'page-3',
-	    header_block: function header_block() {
-	      return [_react2.default.createElement(
-	        'h2',
-	        null,
-	        'mizutani was never pleased with the production value of studio recordings. though they played through four decades, les rallizes d\xE9nud\xE9s released'
-	      ), _react2.default.createElement(
-	        'h1',
-	        null,
-	        'no official recordings'
-	      ), _react2.default.createElement(
-	        'h2',
-	        null,
-	        'of their music.  the discography consists of bootlegs, soundboard archives, and studio scraps.'
-	      )];
+	    page3: {
+	        class: 'page-3',
+	        headerBlock: [_react2.default.createElement(
+	            'h2',
+	            { key: '1' },
+	            'mizutani was never pleased with the production value of studio recordings. though they played through four decades, les rallizes d\xE9nud\xE9s released'
+	        ), _react2.default.createElement(
+	            'h1',
+	            { key: '2' },
+	            'no official recordings'
+	        ), _react2.default.createElement(
+	            'h2',
+	            { key: '3' },
+	            'of their music. the discography consists of bootlegs, soundboard archives, and studio scraps.'
+	        )]
 	    }
-	  }
 	};
 
 /***/ },
@@ -22455,7 +22453,13 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'header-block' },
-	            current.header_block()
+	            current.headerBlock.map(function (p, i) {
+	              return _react2.default.createElement(
+	                'span',
+	                { key: i },
+	                p
+	              );
+	            }, this)
 	          ),
 	          _react2.default.createElement('div', { className: 'bracket-bottom' })
 	        )
@@ -22489,11 +22493,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var VidContent = exports.VidContent = {
-	  page_4: {
+	  page4: {
 	    class: 'page-4',
 	    header: 'romance of the black grief (otherwise fallin\' in love with)',
 	    videoId: 'YxOZUseg5OI',
-	    description: ''
+	    description: 'early concert footage.'
 	  }
 	};
 
@@ -22618,40 +22622,38 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
 	
-	    _this.constructParams = _this.constructParams.bind(_this);
-	    _this.resizeVideo = _this.resizeVideo.bind(_this);
+	    _this._constructParams = _this._constructParams.bind(_this);
+	    _this._resizeVideo = _this._resizeVideo.bind(_this);
 	
 	    _this.state = {
-	      initWidth: 0,
-	      playerUnit: 0,
+	      playerWidth: 0,
 	      playerHeight: 0,
-	      playerWidth: 0
+	      isLoading: true
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(Video, [{
-	    key: 'constructParams',
-	    value: function constructParams() {
+	    key: '_constructParams',
+	    value: function _constructParams() {
 	
-	      var ParamList = {
-	        parameters: {
-	          // hide controls - 1 to show
-	          'controls': 0,
-	          // hide annotations - 1 to show
-	          'iv_load_policy': 3,
-	          // hide youtube logo in control bar - 0 to show
-	          'modestbranding': 1,
-	          // hide title and uploader before playing - 1 to show
-	          'showinfo': 0,
-	          // hide related videos - 1 to show
-	          'rel': 0
-	          // More options: https://developers.google.com/youtube/player_parameters
-	        }
+	      var paramList = {
+	        // hide controls - 1 to show
+	        'controls': 0,
+	        // hide annotations - 1 to show
+	        'iv_load_policy': 3,
+	        // hide youtube logo in control bar - 0 to show
+	        'modestbranding': 1,
+	        // hide title and uploader before playing - 1 to show
+	        'showinfo': 0,
+	        // hide related videos - 1 to show
+	        'rel': 0
+	        // More options: https://developers.google.com/youtube/player_parameters
 	      };
 	
-	      var paramKeys = Object.keys(paramList),
-	          params = '';
+	      var paramKeys = Object.keys(paramList);
+	      var params = '';
+	
 	      paramKeys.map(function (key) {
 	        if (paramKeys.indexOf(key) === 0) {
 	          params += '?';
@@ -22660,44 +22662,51 @@
 	        }
 	        params += key + '=' + paramList[key];
 	      });
+	      console.log(params);
 	      return params;
 	    }
 	  }, {
-	    key: 'resizeVideo',
-	    value: function resizeVideo() {
+	    key: '_resizeVideo',
+	    value: function _resizeVideo() {
+	      var windowWidth = void 0;
+	
 	      if (window.innerWidth > 850) {
-	        return 840;
+	        windowWidth = 850;
 	      } else {
-	        return window.innerWidth * .9;
+	        windowWidth = window.innerWidth;
 	      }
+	      var playerUnit = windowWidth * .9 / 16;
 	
 	      this.setState({
-	        initWidth: windowWidth * .9,
-	        playerUnit: initWidth / 16,
 	        playerHeight: playerUnit * 9,
 	        playerWidth: playerUnit * 16
 	      });
-	      console.log(windowWidth, this.state.playerWidth, this.state.playerHeight);
 	    }
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.resizeVideo();
+	      this._resizeVideo();
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      window.addEventListener('resize', this.resizeVideo);
+	      var _this2 = this;
+	
+	      window.addEventListener('resize', this._resizeVideo);
+	
+	      setTimeout(function () {
+	        return _this2.setState({ isLoading: false });
+	      }, 0);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      window.removeEventListener('resize', this.resizeVideo);
+	      window.removeEventListener('resize', this._resizeVideo);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('iframe', { type: 'text/html', width: this.state.playerWidth, height: this.state.playerHeight, src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this.constructParams(), frameBorder: '0' });
+	      return _react2.default.createElement('iframe', { type: 'text/html', width: this.state.playerWidth, height: this.state.playerHeight, src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this._constructParams(), frameBorder: '0' });
 	    }
 	  }]);
 	
