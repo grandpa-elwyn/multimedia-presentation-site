@@ -1,53 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import $ from 'jquery';
 
 export default class Video extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this._constructParams = this._constructParams.bind(this);
     this._resizeVideo = this._resizeVideo.bind(this);
+  }
 
-    this.state = {
-      playerWidth: 0,
-      playerHeight: 0,
-      isLoading: true
+  static defaultProps = {
+    paramSet: {
+      // hide controls - 1 to show
+      controls: 0,
+      // hide annotations - 1 to show
+      iv_load_policy: 3,
+      // hide youtube logo in control bar - 0 to show
+      modestbranding: 1,
+      // hide title and uploader before playing - 1 to show
+      showinfo: 0,
+      // hide related videos - 1 to show
+      rel: 0
+      // More options: https://developers.google.com/youtube/player_parameters
     }
   }
 
+  static propTypes = {
+    paramSet: React.PropTypes.object.isRequired
+  }
 
-
-  _constructParams() {
-
-    const paramList = {
-        // hide controls - 1 to show
-        'controls': 0,
-        // hide annotations - 1 to show
-        'iv_load_policy': 3,
-        // hide youtube logo in control bar - 0 to show
-        'modestbranding': 1,
-        // hide title and uploader before playing - 1 to show
-        'showinfo': 0,
-        // hide related videos - 1 to show
-        'rel': 0
-        // More options: https://developers.google.com/youtube/player_parameters
-      };
-
-    const paramKeys = Object.keys(paramList);
-    let params = '';
-
-  paramKeys.map((key) => {
-    if (paramKeys.indexOf(key) === 0) {
-      params += '?';
-    } else if (paramKeys.indexOf(key) > 0) {
-      params += '&';
-    }
-    params += (key + '=' + paramList[key]);
-  })
-    console.log(params);
-    return params;
+  state = {
+    playerWidth: 0,
+    playerHeight: 0,
+    isLoading: true,
+    isPlaying: false,
+    thisPage: 1,
+    paramStr: (function (params, keys = Object.keys(params)) {
+      let str = '?';
+      keys.map((key, i) => {
+        // if (i > 0) { str += '&'; }
+        str += (key + '=' + params[key] + '&');
+      })
+      return str;
+    }(this.props.paramSet))
   }
 
   _resizeVideo() {
@@ -58,7 +53,7 @@ export default class Video extends React.Component {
     } else {
       windowWidth = window.innerWidth;
     }
-    const playerUnit = (windowWidth * .9) / 16;
+    const playerUnit = (windowWidth * .95) / 16;
 
     this.setState({
       playerHeight: playerUnit * 9,
@@ -66,12 +61,19 @@ export default class Video extends React.Component {
     });
   }
 
+  // _styleIframe() {
+  //   if
+  // }
+
   componentWillMount() { this._resizeVideo() }
 
   componentDidMount() {
     window.addEventListener('resize', this._resizeVideo);
 
-    setTimeout(() => this.setState({ isLoading: false }), 0);
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+      console.log(this.state.isLoading);
+  }, 500);
   }
 
   componentWillUnmount() {
@@ -79,8 +81,18 @@ export default class Video extends React.Component {
   }
 
   render() {
+
+    let containerStyle = {
+      width: this.state.playerWidth,
+      height: this.state.playerHeight,
+    }
+
     return (
-      <iframe type='text/html' width={ this.state.playerWidth } height={ this.state.playerHeight } src={`https://www.youtube.com/embed/${ this.props.video.videoId }${ this._constructParams() }`} frameBorder='0'></iframe>
+      <div style={ containerStyle } className='video-container'>
+        <div className='video-overlay'></div>
+        <iframe className='video' type='text/html' width='100%' height='100%' src={`https://www.youtube.com/embed/${ this.props.video.videoId }${ this.state.paramStr }`}
+          frameBorder='0'></iframe>
+      </div>
     );
   }
 }

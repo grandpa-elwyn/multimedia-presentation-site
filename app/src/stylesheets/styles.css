@@ -75,7 +75,7 @@
   -webkit-justify-content: flex-start;
   justify-content: flex-start; }
 
-.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container {
+.page-header, .page-image-bg, .page-image-top, .page-video, .page-timeline, .page-content-container, .page-video .page-content-container {
   -webkit-box-pack: center;
   -moz-box-pack: center;
   -webkit-flex-pack: center;
@@ -84,7 +84,7 @@
   -webkit-justify-content: center;
   justify-content: center; }
 
-.page-header .page-content-container, .page-video .page-content-container {
+.page-header .page-content-container {
   -webkit-box-pack: justify;
   -moz-box-pack: justify;
   -webkit-flex-pack: justify;
@@ -273,7 +273,7 @@ body {
   padding: 0 5vw; }
 .page-header h1 {
   display: inline-block;
-  font-size: 8vmax;
+  font-size: 7.25vmax;
   margin: 12px auto 15px;
   padding-bottom: 5px; }
 .page-header h2 {
@@ -303,7 +303,7 @@ body {
   font-size: 2.75vmax; }
 
 .event-text {
-  font-size: 2.25vmax; }
+  font-size: 2.55vmax; }
 
 .page-video .page-content-container {
   max-height: 90vh;
@@ -314,8 +314,22 @@ body {
   margin: 12px auto 15px;
   padding-bottom: 5px; }
 .page-video h2 {
-  font-size: 2.5vmax;
+  font-size: 2.75vmax;
   font-weight: 300; }
+
+.video-container {
+  max-width: 90vw;
+  position: relative; }
+
+.video-overlay {
+  background-color: rgba(60, 196, 124, 0.3);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 11111; }
+
+.video {
+  display: block; }
 
 .page-1 {
   color: #fff; }

@@ -4,7 +4,7 @@
   @include add-flex(column, nowrap);
 
   .page-content-container {
-    @extend %justify-content-space-between;
+    @extend %justify-content-center;
     @extend %align-items-center;
     @extend %align-content-center;
     max-height: 90vh;
@@ -19,7 +19,7 @@
   }
 
   h2 {
-    font-size: 2.5vmax;
+    font-size: 2.75vmax;
     font-weight: 300;
   }
 }
@@ -33,4 +33,21 @@
   h1 {
     border-bottom: $single-border $header-border-color;
   }
+}
+
+.video-container {
+  max-width: 90vw;
+  position: relative;
+}
+
+.video-overlay {
+  background-color: transparentize($electric, .7);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 11111;
+}
+
+.video {
+  display: block;
 }

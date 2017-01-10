@@ -19,6 +19,7 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.19.0",
     "css-loader": "^0.26.1",
     "style-loader": "^0.13.1"
   }

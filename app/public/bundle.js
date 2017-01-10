@@ -22612,8 +22612,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//import $ from 'jquery';
-	
 	var Video = function (_React$Component) {
 	  _inherits(Video, _React$Component);
 	
@@ -22622,50 +22620,34 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
 	
-	    _this._constructParams = _this._constructParams.bind(_this);
-	    _this._resizeVideo = _this._resizeVideo.bind(_this);
+	    Object.defineProperty(_this, 'state', {
+	      enumerable: true,
+	      writable: true,
+	      value: {
+	        playerWidth: 0,
+	        playerHeight: 0,
+	        isLoading: true,
+	        isPlaying: false,
+	        thisPage: 1,
+	        paramStr: function (params) {
+	          var keys = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object.keys(params);
 	
-	    _this.state = {
-	      playerWidth: 0,
-	      playerHeight: 0,
-	      isLoading: true
-	    };
+	          var str = '?';
+	          keys.map(function (key, i) {
+	            // if (i > 0) { str += '&'; }
+	            str += key + '=' + params[key] + '&';
+	          });
+	          return str;
+	        }(_this.props.paramSet)
+	      }
+	    });
+	
+	
+	    _this._resizeVideo = _this._resizeVideo.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(Video, [{
-	    key: '_constructParams',
-	    value: function _constructParams() {
-	
-	      var paramList = {
-	        // hide controls - 1 to show
-	        'controls': 0,
-	        // hide annotations - 1 to show
-	        'iv_load_policy': 3,
-	        // hide youtube logo in control bar - 0 to show
-	        'modestbranding': 1,
-	        // hide title and uploader before playing - 1 to show
-	        'showinfo': 0,
-	        // hide related videos - 1 to show
-	        'rel': 0
-	        // More options: https://developers.google.com/youtube/player_parameters
-	      };
-	
-	      var paramKeys = Object.keys(paramList);
-	      var params = '';
-	
-	      paramKeys.map(function (key) {
-	        if (paramKeys.indexOf(key) === 0) {
-	          params += '?';
-	        } else if (paramKeys.indexOf(key) > 0) {
-	          params += '&';
-	        }
-	        params += key + '=' + paramList[key];
-	      });
-	      console.log(params);
-	      return params;
-	    }
-	  }, {
 	    key: '_resizeVideo',
 	    value: function _resizeVideo() {
 	      var windowWidth = void 0;
@@ -22675,13 +22657,18 @@
 	      } else {
 	        windowWidth = window.innerWidth;
 	      }
-	      var playerUnit = windowWidth * .9 / 16;
+	      var playerUnit = windowWidth * .95 / 16;
 	
 	      this.setState({
 	        playerHeight: playerUnit * 9,
 	        playerWidth: playerUnit * 16
 	      });
 	    }
+	
+	    // _styleIframe() {
+	    //   if
+	    // }
+	
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
@@ -22695,8 +22682,9 @@
 	      window.addEventListener('resize', this._resizeVideo);
 	
 	      setTimeout(function () {
-	        return _this2.setState({ isLoading: false });
-	      }, 0);
+	        _this2.setState({ isLoading: false });
+	        console.log(_this2.state.isLoading);
+	      }, 500);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22706,13 +22694,51 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('iframe', { type: 'text/html', width: this.state.playerWidth, height: this.state.playerHeight, src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this._constructParams(), frameBorder: '0' });
+	
+	      var containerStyle = {
+	        width: this.state.playerWidth,
+	        height: this.state.playerHeight
+	      };
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { style: containerStyle, className: 'video-container' },
+	        _react2.default.createElement('div', { className: 'video-overlay' }),
+	        _react2.default.createElement('iframe', { className: 'video', type: 'text/html', width: '100%', height: '100%', src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this.state.paramStr,
+	          frameBorder: '0' })
+	      );
 	    }
 	  }]);
 	
 	  return Video;
 	}(_react2.default.Component);
 	
+	Object.defineProperty(Video, 'defaultProps', {
+	  enumerable: true,
+	  writable: true,
+	  value: {
+	    paramSet: {
+	      // hide controls - 1 to show
+	      controls: 0,
+	      // hide annotations - 1 to show
+	      iv_load_policy: 3,
+	      // hide youtube logo in control bar - 0 to show
+	      modestbranding: 1,
+	      // hide title and uploader before playing - 1 to show
+	      showinfo: 0,
+	      // hide related videos - 1 to show
+	      rel: 0
+	      // More options: https://developers.google.com/youtube/player_parameters
+	    }
+	  }
+	});
+	Object.defineProperty(Video, 'propTypes', {
+	  enumerable: true,
+	  writable: true,
+	  value: {
+	    paramSet: _react2.default.PropTypes.object.isRequired
+	  }
+	});
 	exports.default = Video;
 
 /***/ }
