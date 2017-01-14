@@ -41,13 +41,74 @@
 }
 
 .video-overlay {
-  background-color: transparentize($electric, .7);
+  background-color: transparentize($rose, .7);
   height: 100%;
   position: absolute;
   width: 100%;
   z-index: 11111;
+  display: none;
 }
 
 .video {
   display: block;
+}
+
+.video-player-button {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 68px;
+  height: 48px;
+  margin-left: -34px;
+  margin-top: -24px;
+  color: $white;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: $petal;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.progress-bar-container {
+  height: 10px;
+  background-color: transparentize($night, 0.7);
+  border-radius: 10px;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 0%;
+  max-width: 100%;
+  float: left;
+  height: 10px;
+  border-radius: 10px;
+  background-color: $electric;
+}
+
+@-webkit-keyframes progress {
+    from { }
+
+    to { width: 100% }
+}
+
+@-moz-keyframes progress {
+    from { }
+
+    to { width: 100% }
+}
+
+@-ms-keyframes progress {
+    from { }
+
+    to { width: 100% }
+}
+
+@keyframes progress {
+    from { }
 }

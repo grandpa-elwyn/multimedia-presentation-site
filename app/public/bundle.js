@@ -22256,8 +22256,8 @@
 	  _createClass(TimelinePage, [{
 	    key: 'render',
 	    value: function render() {
-	      var current = this.props.page;
-	      var currentBg = {
+	      var current = this.props.page,
+	          currentBg = {
 	        backgroundImage: 'url(src/app/assets/img/' + current.img + ')'
 	      };
 	
@@ -22278,7 +22278,7 @@
 	          ),
 	          current.timeline.map(function (entry, i) {
 	            return _react2.default.createElement(_timelineEvent2.default, { key: i, event: entry });
-	          }, this)
+	          })
 	        )
 	      );
 	    }
@@ -22604,6 +22604,10 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _media_playerProgress = __webpack_require__(/*! ../components/media_player-progress.js */ 188);
+	
+	var _media_playerProgress2 = _interopRequireDefault(_media_playerProgress);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22611,6 +22615,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var loadVid = void 0;
 	
 	var Video = function (_React$Component) {
 	  _inherits(Video, _React$Component);
@@ -22620,71 +22626,117 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
 	
-	    Object.defineProperty(_this, 'state', {
+	    Object.defineProperty(_this, '_resizeVideo', {
 	      enumerable: true,
 	      writable: true,
-	      value: {
-	        playerWidth: 0,
-	        playerHeight: 0,
-	        isLoading: true,
-	        isPlaying: false,
-	        thisPage: 1,
-	        paramStr: function (params) {
-	          var keys = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object.keys(params);
+	      value: function value() {
+	        var windowWidth = void 0;
 	
-	          var str = '?';
-	          keys.map(function (key, i) {
-	            // if (i > 0) { str += '&'; }
-	            str += key + '=' + params[key] + '&';
-	          });
-	          return str;
-	        }(_this.props.paramSet)
+	        if (window.innerWidth > 850) {
+	          windowWidth = 850;
+	        } else {
+	          windowWidth = window.innerWidth;
+	        }
+	        var playerUnit = windowWidth * .95 / 16;
+	
+	        _this.setState({
+	          playerHeight: playerUnit * 9,
+	          playerWidth: playerUnit * 16
+	        });
+	      }
+	    });
+	    Object.defineProperty(_this, '_onPlayerStateChange', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        switch (e.data) {
+	          case YT.PlayerState.ENDED:
+	            {
+	              _this.setState({ playState: 'unset' });
+	              console.log('ended');
+	              break;
+	            }
+	          case YT.PlayerState.PLAYING:
+	            {
+	              _this.setState({ playState: 'running' });
+	              console.log(_this.state.progress);
+	              break;
+	            }
+	          case YT.PlayerState.PAUSED:
+	            {
+	              _this.setState({ playState: 'paused' });
+	              console.log('paused');
+	              break;
+	            }
+	          case YT.PlayerState.BUFFERING:
+	            {
+	              _this.setState({ playState: 'paused' });
+	              console.log('buffering');
+	              break;
+	            }
+	          case YT.PlayerState.CUED:
+	            {
+	              _this.setState({ playState: 'unset' });
+	              console.log('cued');
+	              break;
+	            }
+	          default:
+	            console.log('return');
+	            return;
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, '_onPlayerReady', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        _this.setState({
+	          playStatus: e.target.getPlayerState(),
+	          duration: e.target.getDuration(),
+	          progress: e.target.getCurrentTime()
+	        });
 	      }
 	    });
 	
 	
-	    _this._resizeVideo = _this._resizeVideo.bind(_this);
+	    _this.state = {
+	      playerWidth: 0,
+	      playerHeight: 0
+	    };
 	    return _this;
 	  }
 	
 	  _createClass(Video, [{
-	    key: '_resizeVideo',
-	    value: function _resizeVideo() {
-	      var windowWidth = void 0;
-	
-	      if (window.innerWidth > 850) {
-	        windowWidth = 850;
-	      } else {
-	        windowWidth = window.innerWidth;
-	      }
-	      var playerUnit = windowWidth * .95 / 16;
-	
-	      this.setState({
-	        playerHeight: playerUnit * 9,
-	        playerWidth: playerUnit * 16
-	      });
-	    }
-	
-	    // _styleIframe() {
-	    //   if
-	    // }
-	
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this._resizeVideo();
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
-	      window.addEventListener('resize', this._resizeVideo);
+	      if (!loadVid) {
+	        loadVid = new Promise(function (r) {
+	          window.onYouTubeIframeAPIReady = function () {
+	            return r(window.YT);
+	          };
+	        });
+	      }
+	      loadVid.then(function (YT) {
+	        _this2.player = new YT.Player(_this2.vidPlayer, {
+	          height: '100%',
+	          width: '100%',
+	          videoId: _this2.props.video.videoId,
+	          playerVars: _this2.props.paramSet,
+	          events: {
+	            onStateChange: _this2._onPlayerStateChange,
+	            onReady: _this2._onPlayerReady
 	
-	      setTimeout(function () {
-	        _this2.setState({ isLoading: false });
-	        console.log(_this2.state.isLoading);
-	      }, 500);
+	          }
+	        });
+	        window.addEventListener('resize', _this2._resizeVideo);
+	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this._resizeVideo();
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22694,6 +22746,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this3 = this;
 	
 	      var containerStyle = {
 	        width: this.state.playerWidth,
@@ -22703,9 +22756,23 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle, className: 'video-container' },
-	        _react2.default.createElement('div', { className: 'video-overlay' }),
-	        _react2.default.createElement('iframe', { className: 'video', type: 'text/html', width: '100%', height: '100%', src: 'https://www.youtube.com/embed/' + this.props.video.videoId + this.state.paramStr,
-	          frameBorder: '0' })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'video-overlay' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'video-player-button' },
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              '\u2610'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement('div', { ref: function ref(r) {
+	            _this3.vidPlayer = r;
+	          } }),
+	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration })
 	      );
 	    }
 	  }]);
@@ -22713,33 +22780,137 @@
 	  return Video;
 	}(_react2.default.Component);
 	
-	Object.defineProperty(Video, 'defaultProps', {
-	  enumerable: true,
-	  writable: true,
-	  value: {
-	    paramSet: {
-	      // hide controls - 1 to show
-	      controls: 0,
-	      // hide annotations - 1 to show
-	      iv_load_policy: 3,
-	      // hide youtube logo in control bar - 0 to show
-	      modestbranding: 1,
-	      // hide title and uploader before playing - 1 to show
-	      showinfo: 0,
-	      // hide related videos - 1 to show
-	      rel: 0
-	      // More options: https://developers.google.com/youtube/player_parameters
-	    }
-	  }
-	});
-	Object.defineProperty(Video, 'propTypes', {
-	  enumerable: true,
-	  writable: true,
-	  value: {
-	    paramSet: _react2.default.PropTypes.object.isRequired
-	  }
-	});
 	exports.default = Video;
+	
+	
+	Video.defaultProps = {
+	  paramSet: {
+	    // hide controls - 1 to show
+	    controls: 0,
+	    // hide annotations - 1 to show
+	    iv_load_policy: 3,
+	    // hide youtube logo in control bar - 0 to show
+	    modestbranding: 1,
+	    // hide title and uploader before playing - 1 to show
+	    showinfo: 0,
+	    // hide related videos - 1 to show
+	    rel: 0
+	    // More options: https://developers.google.com/youtube/player_parameters
+	  }
+	};
+
+/***/ },
+/* 188 */
+/*!*****************************************************!*\
+  !*** ./app/src/components/media_player-progress.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ProgressBar = function (_React$Component) {
+	  _inherits(ProgressBar, _React$Component);
+	
+	  function ProgressBar(props) {
+	    _classCallCheck(this, ProgressBar);
+	
+	    var _this = _possibleConstructorReturn(this, (ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call(this, props));
+	
+	    Object.defineProperty(_this, '_setAnimationStyle', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        Object.keys(_this.props.animationStyle).map(function (prefix) {
+	          _this.props.animationStyle[prefix] = 'progress ' + _this.props.duration + 's linear forwards ' + _this.state.playState;
+	        });
+	      }
+	    });
+	
+	
+	    _this.state = {
+	      playState: 'paused'
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(ProgressBar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this._setAnimationStyle();
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {}
+	
+	    // animation-name: none                 progress
+	    // animation-duration: 0s               this.props.duration
+	    // animation-timing-function: ease      linear
+	    // animation-delay: 0s                  0
+	    // animation-iteration-count: 1         1
+	    // animation-direction: normal          normal
+	    // animation-fill-mode: none            forwards
+	    // animation-play-state: running        -------
+	
+	
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      this._setAnimationStyle();
+	      console.log(this.props.animationStyle, this.props.duration);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'progress-bar-container' },
+	        _react2.default.createElement('div', { className: 'progress-bar', style: this.props.animationStyle })
+	      );
+	    }
+	  }]);
+	
+	  return ProgressBar;
+	}(_react2.default.Component);
+	
+	exports.default = ProgressBar;
+	
+	
+	ProgressBar.defaultProps = {
+	  duration: 0,
+	  animationStyle: {
+	    WebkitAnimation: '',
+	    MozAnimation: '',
+	    msAnimation: '',
+	    animation: ''
+	  }
+	};
+	
+	ProgressBar.propTypes = {
+	  duration: _react2.default.PropTypes.number,
+	  elapsed: _react2.default.PropTypes.func,
+	  animationStyle: _react2.default.PropTypes.object
+	};
 
 /***/ }
 /******/ ]);

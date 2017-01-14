@@ -322,15 +322,58 @@ body {
   position: relative; }
 
 .video-overlay {
-  background-color: rgba(60, 196, 124, 0.3);
+  background-color: rgba(255, 119, 119, 0.3);
   height: 100%;
   position: absolute;
   width: 100%;
-  z-index: 11111; }
+  z-index: 11111;
+  display: none; }
 
 .video {
   display: block; }
 
+.video-player-button {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 68px;
+  height: 48px;
+  margin-left: -34px;
+  margin-top: -24px;
+  color: #fff;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: #fcafa9; }
+  .video-player-button:hover {
+    cursor: pointer; }
+
+.progress-bar-container {
+  height: 10px;
+  background-color: rgba(1, 27, 35, 0.3);
+  border-radius: 10px;
+  width: 100%; }
+
+.progress-bar {
+  width: 0%;
+  max-width: 100%;
+  float: left;
+  height: 10px;
+  border-radius: 10px;
+  background-color: #3cc47c; }
+
+@-webkit-keyframes progress {
+  to {
+    width: 100%; } }
+@-moz-keyframes progress {
+  to {
+    width: 100%; } }
+@-ms-keyframes progress {
+  to {
+    width: 100%; } }
 .page-1 {
   color: #fff; }
   .page-1 .page-image-top {

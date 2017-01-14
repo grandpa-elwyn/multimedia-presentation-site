@@ -10,16 +10,16 @@ export default class VideoPage extends React.Component {
   }
 
   render() {
-    var current = this.props.page;
+    let current = this.props.page;
 
     return (
-    <div className={`${current.class} page-video`}>
-      <div className="page-content-container">
-      <div className="page-timeline-header">
-      <h1>{current.header}</h1>
-      <h2>{current.description}</h2>
+    <div className={`${ current.class } page-video`}>
+      <div className='page-content-container'>
+      <div className='page-timeline-header'>
+      <h1>{ current.header }</h1>
+      <h2>{ current.description }</h2>
       </div>
-      <Video video={current} />
+      <Video video={ current } />
       </div>
     </div>
 

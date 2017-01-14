@@ -1,51 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import ProgressBar from '../components/media_player-progress.js';
+
+let loadVid;
+
 export default class Video extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this._resizeVideo = this._resizeVideo.bind(this);
-  }
-
-  static defaultProps = {
-    paramSet: {
-      // hide controls - 1 to show
-      controls: 0,
-      // hide annotations - 1 to show
-      iv_load_policy: 3,
-      // hide youtube logo in control bar - 0 to show
-      modestbranding: 1,
-      // hide title and uploader before playing - 1 to show
-      showinfo: 0,
-      // hide related videos - 1 to show
-      rel: 0
-      // More options: https://developers.google.com/youtube/player_parameters
+    this.state = {
+      playerWidth: 0,
+      playerHeight: 0
     }
   }
 
-  static propTypes = {
-    paramSet: React.PropTypes.object.isRequired
-  }
-
-  state = {
-    playerWidth: 0,
-    playerHeight: 0,
-    isLoading: true,
-    isPlaying: false,
-    thisPage: 1,
-    paramStr: (function (params, keys = Object.keys(params)) {
-      let str = '?';
-      keys.map((key, i) => {
-        // if (i > 0) { str += '&'; }
-        str += (key + '=' + params[key] + '&');
-      })
-      return str;
-    }(this.props.paramSet))
-  }
-
-  _resizeVideo() {
+  _resizeVideo = () => {
     let windowWidth;
 
     if (window.innerWidth > 850) {
@@ -61,19 +32,73 @@ export default class Video extends React.Component {
     });
   }
 
-  // _styleIframe() {
-  //   if
-  // }
+  _onPlayerStateChange = (e) => {
+    switch(e.data) {
+      case YT.PlayerState.ENDED: {
+        this.setState({ playState: 'unset' });
+        console.log('ended');
+           break;
+         }
+      case YT.PlayerState.PLAYING: {
+          this.setState({ playState: 'running' });
+          console.log(this.state.progress);
+           break;
+         }
+      case YT.PlayerState.PAUSED: {
+        this.setState({ playState: 'paused' });
+        console.log('paused');
+           break;
+         }
+      case YT.PlayerState.BUFFERING: {
+        this.setState({ playState: 'paused' });
+        console.log('buffering');
+           break;
+         }
+      case YT.PlayerState.CUED: {
+        this.setState({ playState: 'unset' });
+        console.log('cued');
+           break;
+         }
+      default:
+        console.log('return');
+           return;
+    }
+  }
 
-  componentWillMount() { this._resizeVideo() }
+  _
+
+  _onPlayerReady = (e) => {
+    this.setState({
+      playStatus: e.target.getPlayerState(),
+      duration: e.target.getDuration(),
+      progress: e.target.getCurrentTime()
+    });
+  }
 
   componentDidMount() {
-    window.addEventListener('resize', this._resizeVideo);
+    if (!loadVid) {
+      loadVid = new Promise((r) => {
+        window.onYouTubeIframeAPIReady = () => r(window.YT);
+      })
+    }
+    loadVid.then((YT) => {
+      this.player = new YT.Player (this.vidPlayer, {
+        height: '100%',
+        width: '100%',
+        videoId: this.props.video.videoId,
+        playerVars: this.props.paramSet,
+        events: {
+          onStateChange: this._onPlayerStateChange,
+          onReady: this._onPlayerReady,
 
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-      console.log(this.state.isLoading);
-  }, 500);
+        }
+      });
+      window.addEventListener('resize', this._resizeVideo);
+    })
+  }
+
+  componentWillMount() {
+    this._resizeVideo();
   }
 
   componentWillUnmount() {
@@ -89,10 +114,32 @@ export default class Video extends React.Component {
 
     return (
       <div style={ containerStyle } className='video-container'>
-        <div className='video-overlay'></div>
-        <iframe className='video' type='text/html' width='100%' height='100%' src={`https://www.youtube.com/embed/${ this.props.video.videoId }${ this.state.paramStr }`}
-          frameBorder='0'></iframe>
+
+        <div className='video-overlay'>
+          <div className='video-player-button'><span>&#9744;</span></div>
+        </div>
+
+        <div ref={(r) => { this.vidPlayer = r }}></div>
+
+        <ProgressBar duration={ this.state.duration } />
+
       </div>
     );
+  }
+}
+
+Video.defaultProps = {
+  paramSet: {
+    // hide controls - 1 to show
+    controls: 0,
+    // hide annotations - 1 to show
+    iv_load_policy: 3,
+    // hide youtube logo in control bar - 0 to show
+    modestbranding: 1,
+    // hide title and uploader before playing - 1 to show
+    showinfo: 0,
+    // hide related videos - 1 to show
+    rel: 0
+    // More options: https://developers.google.com/youtube/player_parameters
   }
 }

@@ -10,20 +10,20 @@ export default class TimelinePage extends React.Component {
   }
 
   render() {
-    var current = this.props.page;
-    var currentBg = {
-      backgroundImage: `url(src/app/assets/img/${current.img})`
-    };
+    let current = this.props.page,
+        currentBg = {
+          backgroundImage: `url(src/app/assets/img/${ current.img })`
+        };
 
     return (
-    <div className={`${current.class} page-timeline`}>
+    <div className={`${ current.class } page-timeline`}>
       <div className="page-content-container">
       <div className="page-timeline-header">
-      <h1>{current.header}</h1>
+      <h1>{ current.header }</h1>
       </div>
-      {current.timeline.map(function(entry, i) {
+      {current.timeline.map((entry, i) => {
         return (<TimelineEvent key={i} event={entry} />);
-      }, this)}
+      })}
       </div>
     </div>
 
