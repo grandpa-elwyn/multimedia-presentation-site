@@ -41,7 +41,7 @@ export default class Video extends React.Component {
          }
       case YT.PlayerState.PLAYING: {
           this.setState({ playState: 'running' });
-          console.log(this.state.progress);
+          console.log(this.state.playState);
            break;
          }
       case YT.PlayerState.PAUSED: {
@@ -65,9 +65,14 @@ export default class Video extends React.Component {
     }
   }
 
-  _
+  _playButton = () => {
+    this.player.a.previousSibling.childNodes[0].style.display = 'none';
+    console.log(this.player.a.previousSibling.childNodes[0].style);
+    this.player.playVideo();
+  }
 
   _onPlayerReady = (e) => {
+    console.log(e);
     this.setState({
       playStatus: e.target.getPlayerState(),
       duration: e.target.getDuration(),
@@ -89,8 +94,7 @@ export default class Video extends React.Component {
         playerVars: this.props.paramSet,
         events: {
           onStateChange: this._onPlayerStateChange,
-          onReady: this._onPlayerReady,
-
+          onReady: this._onPlayerReady
         }
       });
       window.addEventListener('resize', this._resizeVideo);
@@ -115,13 +119,15 @@ export default class Video extends React.Component {
     return (
       <div style={ containerStyle } className='video-container'>
 
+        <ProgressBar duration={ this.state.duration } playState={ this.state.playState }/>
+        
         <div className='video-overlay'>
-          <div className='video-player-button'><span>&#9744;</span></div>
+          <div className='video-player-button' onClick={this._playButton}><span>&#9744;</span></div>
         </div>
 
         <div ref={(r) => { this.vidPlayer = r }}></div>
 
-        <ProgressBar duration={ this.state.duration } />
+        <ProgressBar duration={ this.state.duration } playState={ this.state.playState }/>
 
       </div>
     );

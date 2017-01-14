@@ -22659,7 +22659,7 @@
 	          case YT.PlayerState.PLAYING:
 	            {
 	              _this.setState({ playState: 'running' });
-	              console.log(_this.state.progress);
+	              console.log(_this.state.playState);
 	              break;
 	            }
 	          case YT.PlayerState.PAUSED:
@@ -22686,10 +22686,20 @@
 	        }
 	      }
 	    });
+	    Object.defineProperty(_this, '_playButton', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        _this.player.a.previousSibling.childNodes[0].style.display = 'none';
+	        console.log(_this.player.a.previousSibling.childNodes[0].style);
+	        _this.player.playVideo();
+	      }
+	    });
 	    Object.defineProperty(_this, '_onPlayerReady', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
+	        console.log(e);
 	        _this.setState({
 	          playStatus: e.target.getPlayerState(),
 	          duration: e.target.getDuration(),
@@ -22727,7 +22737,6 @@
 	          events: {
 	            onStateChange: _this2._onPlayerStateChange,
 	            onReady: _this2._onPlayerReady
-	
 	          }
 	        });
 	        window.addEventListener('resize', _this2._resizeVideo);
@@ -22756,12 +22765,13 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle, className: 'video-container' },
+	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration, playState: this.state.playState }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'video-overlay' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'video-player-button' },
+	            { className: 'video-player-button', onClick: this._playButton },
 	            _react2.default.createElement(
 	              'span',
 	              null,
@@ -22772,7 +22782,7 @@
 	        _react2.default.createElement('div', { ref: function ref(r) {
 	            _this3.vidPlayer = r;
 	          } }),
-	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration })
+	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration, playState: this.state.playState })
 	      );
 	    }
 	  }]);
@@ -22838,12 +22848,19 @@
 	
 	    var _this = _possibleConstructorReturn(this, (ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call(this, props));
 	
+	    Object.defineProperty(_this, '_getPosition', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        console.log(e.layerX);
+	      }
+	    });
 	    Object.defineProperty(_this, '_setAnimationStyle', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value() {
 	        Object.keys(_this.props.animationStyle).map(function (prefix) {
-	          _this.props.animationStyle[prefix] = 'progress ' + _this.props.duration + 's linear forwards ' + _this.state.playState;
+	          _this.props.animationStyle[prefix] = 'progress ' + _this.props.duration + 's linear forwards ' + _this.props.playState;
 	        });
 	      }
 	    });
@@ -22876,12 +22893,10 @@
 	    // animation-fill-mode: none            forwards
 	    // animation-play-state: running        -------
 	
-	
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      this._setAnimationStyle();
-	      console.log(this.props.animationStyle, this.props.duration);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'progress-bar-container' },

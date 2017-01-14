@@ -32,16 +32,18 @@ export default class ProgressBar extends React.Component {
 // animation-fill-mode: none            forwards
 // animation-play-state: running        -------
 
+_getPosition = (e) => {
+  console.log(e.layerX);
+}
 
 _setAnimationStyle = () => {
   Object.keys(this.props.animationStyle).map((prefix) => {
-    this.props.animationStyle[prefix] = `progress ${ this.props.duration }s linear forwards ${ this.state.playState }`
+    this.props.animationStyle[prefix] = `progress ${ this.props.duration }s linear forwards ${ this.props.playState }`
   })
 }
 
   render() {
     this._setAnimationStyle();
-    console.log(this.props.animationStyle, this.props.duration);
     return (
       <div className='progress-bar-container'>
         <div className='progress-bar' style={ this.props.animationStyle } ></div>

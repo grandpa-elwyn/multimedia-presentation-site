@@ -38,15 +38,24 @@
 .video-container {
   max-width: 90vw;
   position: relative;
+
+  iframe,
+  .video-overlay {
+    margin-top: -8px;
+  }
+
+  .progress-bar-container:last-child {
+      margin-top: -12px;
+    }
 }
 
 .video-overlay {
+  margin-top: -8px;
   background-color: transparentize($rose, .7);
   height: 100%;
   position: absolute;
   width: 100%;
   z-index: 11111;
-  display: none;
 }
 
 .video {
@@ -76,17 +85,17 @@
 }
 
 .progress-bar-container {
-  height: 10px;
+  height: 20px;
   background-color: transparentize($night, 0.7);
   border-radius: 10px;
   width: 100%;
 }
 
 .progress-bar {
+  height: 20px;
   width: 0%;
   max-width: 100%;
   float: left;
-  height: 10px;
   border-radius: 10px;
   background-color: $electric;
 }
