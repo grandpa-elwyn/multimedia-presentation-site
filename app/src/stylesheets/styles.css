@@ -348,6 +348,9 @@ body {
   border-radius: 10px; }
   .video-player-button:hover {
     cursor: pointer; }
+  .video-player-button img {
+    height: 40px;
+    margin: 4px 14px; }
 
 .progress-bar-container {
   height: 20px;
@@ -444,7 +447,5 @@ body {
     background-color: rgba(1, 27, 35, 0.3); }
   .page-6 .progress-bar {
     background-color: #fcafa9; }
-  .page-6 .video-overlay {
-    display: none; }
 
 /*# sourceMappingURL=styles.css.map */

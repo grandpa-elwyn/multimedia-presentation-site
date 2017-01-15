@@ -13,12 +13,6 @@ export default class ProgressBar extends React.Component {
     }
   }
 
-  setAnimationStyle = () => {
-    Object.keys(this.props.animationStyle).map((prefix) => {
-      this.props.animationStyle[prefix] = `progress ${ this.props.duration}s linear forwards ${ this.props.playState }`
-    })
-  }
-
   _formatTime(t) {
     var hr = Math.floor(t / 3600),
         min = Math.floor((t % 3600) / 60),
@@ -39,11 +33,11 @@ export default class ProgressBar extends React.Component {
     let parentDiv = e.target.offsetParent,
         clickPosition = e.pageX - parentDiv.offsetLeft,
         clickPercent = clickPosition / parentDiv.scrollWidth;
-    return this.props.duration * clickPercent;
+    return this.props.media.getDuration() * clickPercent;
   }
 
   _showPosition = (e) => {
-    console.log((this._formatTime(this._getPosition(e))), e);
+    console.log((this._formatTime(this._getPosition(e))));
   }
 
   _setPosition = (e) => {
@@ -53,8 +47,8 @@ export default class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let newPlayerWidth = nextProps.progress + '%'
-    this.setState({ completionWidth: { width: newPlayerWidth }})
+    let newPlayerWidth = nextProps.progress + '%';
+    this.setState({ completionWidth: { width: newPlayerWidth }});
   }
 
   render() {
@@ -64,13 +58,4 @@ export default class ProgressBar extends React.Component {
       </div>
     );
   }
-}
-
-ProgressBar.defaultProps = {
-  duration: 0
-}
-
-ProgressBar.propTypes = {
-  duration: React.PropTypes.number,
-  elapsed: React.PropTypes.func
 }

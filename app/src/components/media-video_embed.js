@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import PlayerButton from '../components/media_player-button.js';
 import ProgressBar from '../components/media_player-progress.js';
 
 let loadVid;
@@ -38,48 +39,31 @@ export default class Video extends React.Component {
   }
 
   _onPlayerStateChange = (e) => {
-    switch(e.data) {
-      case YT.PlayerState.ENDED: {
-        clearInterval(this.state.updateProgress);
-        this.setState({ playState: 'unset' });
-        console.log('ended');
-        // SHOW PLAY BUTTON W/RESET IMAGE
-           break;
-         }
-      case YT.PlayerState.PLAYING: {
-          this.setState({
-            updateProgress: setInterval(this._checkProgress, 500),
-            playState: 'running'
-           });
-          console.log(this.state.playState);
-          // HIDE PLAY BUTTON
-           break;
-         }
-      case YT.PlayerState.PAUSED: {
-        clearInterval(this.state.updateProgress);
-        this.setState({ playState: 'paused' });
-        console.log('paused');
-           break;
-         }
-      case YT.PlayerState.BUFFERING: {
-        this.setState({ playState: 'paused' });
-        console.log('buffering');
-           break;
-         }
-      case YT.PlayerState.CUED: {
-        this.setState({ playState: 'unset' });
-        console.log('cued');
-        // SHOW PLAY BUTTON
-           break;
-         }
-      default:
-        return;
-    }
-  }
+  // YT.PlayerState:
+  //   BUFFERING: 3
+  //   CUED: 5
+  //   ENDED: 0
+  //   PAUSED: 2
+  //   PLAYING: 1
+  //   UNSTARTED: -1
 
-  _playButton = () => {
-    this.player.a.previousSibling.childNodes[0].style.display = 'none';
-    this.player.playVideo();
+    if (e.data == 1) {
+      this.setState({
+        updateProgress: setInterval(this._checkProgress, 500),
+        playState: 'playing'
+       });
+     }
+    else if (e.data ==  2 || e.data == -1 || e.data == 5) {
+     clearInterval(this.state.updateProgress);
+     this.setState({ playState: 'paused'});
+    }
+    else if (e.data ==  0) {
+     clearInterval(this.state.updateProgress);
+     this.setState({ playState: 'ended'});
+    }
+    else {
+     this.setState({ playState: 'buffering'});
+    }
   }
 
   _onPlayerReady = (e) => {
@@ -128,15 +112,13 @@ export default class Video extends React.Component {
     return (
       <div style={ containerStyle } className='video-container'>
 
-        <ProgressBar progress={ this.state.progress } duration={ this.state.duration } playState={ this.state.playState } media={ this.player }/>
+        <ProgressBar progress={ this.state.progress } playState={ this.state.playState } media={ this.player }/>
 
-        <div className='video-overlay'>
-          <div className='video-player-button' onClick={this._playButton}><span>&#9744;</span></div>
-        </div>
+        <PlayerButton playState={ this.state.playState } media={ this.player } />
 
         <div ref={(r) => { this.vidPlayer = r }}></div>
 
-        <ProgressBar progress={ this.state.progress } duration={ this.state.duration } playState={ this.state.playState } media={ this.player }/>
+        <ProgressBar progress={ this.state.progress } playState={ this.state.playState } media={ this.player } />
 
       </div>
     );

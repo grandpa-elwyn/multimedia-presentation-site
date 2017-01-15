@@ -22611,6 +22611,10 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _media_playerButton = __webpack_require__(/*! ../components/media_player-button.js */ 189);
+	
+	var _media_playerButton2 = _interopRequireDefault(_media_playerButton);
+	
 	var _media_playerProgress = __webpack_require__(/*! ../components/media_player-progress.js */ 188);
 	
 	var _media_playerProgress2 = _interopRequireDefault(_media_playerProgress);
@@ -22663,56 +22667,28 @@
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        switch (e.data) {
-	          case YT.PlayerState.ENDED:
-	            {
-	              clearInterval(_this.state.updateProgress);
-	              _this.setState({ playState: 'unset' });
-	              console.log('ended');
-	              // SHOW PLAY BUTTON W/RESET IMAGE
-	              break;
-	            }
-	          case YT.PlayerState.PLAYING:
-	            {
-	              _this.setState({
-	                updateProgress: setInterval(_this._checkProgress, 500),
-	                playState: 'running'
-	              });
-	              console.log(_this.state.playState);
-	              // HIDE PLAY BUTTON
-	              break;
-	            }
-	          case YT.PlayerState.PAUSED:
-	            {
-	              clearInterval(_this.state.updateProgress);
-	              _this.setState({ playState: 'paused' });
-	              console.log('paused');
-	              break;
-	            }
-	          case YT.PlayerState.BUFFERING:
-	            {
-	              _this.setState({ playState: 'paused' });
-	              console.log('buffering');
-	              break;
-	            }
-	          case YT.PlayerState.CUED:
-	            {
-	              _this.setState({ playState: 'unset' });
-	              console.log('cued');
-	              // SHOW PLAY BUTTON
-	              break;
-	            }
-	          default:
-	            return;
+	        // YT.PlayerState:
+	        //   BUFFERING: 3
+	        //   CUED: 5
+	        //   ENDED: 0
+	        //   PAUSED: 2
+	        //   PLAYING: 1
+	        //   UNSTARTED: -1
+	
+	        if (e.data == 1) {
+	          _this.setState({
+	            updateProgress: setInterval(_this._checkProgress, 500),
+	            playState: 'playing'
+	          });
+	        } else if (e.data == 2 || e.data == -1 || e.data == 5) {
+	          clearInterval(_this.state.updateProgress);
+	          _this.setState({ playState: 'paused' });
+	        } else if (e.data == 0) {
+	          clearInterval(_this.state.updateProgress);
+	          _this.setState({ playState: 'ended' });
+	        } else {
+	          _this.setState({ playState: 'buffering' });
 	        }
-	      }
-	    });
-	    Object.defineProperty(_this, '_playButton', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value() {
-	        _this.player.a.previousSibling.childNodes[0].style.display = 'none';
-	        _this.player.playVideo();
 	      }
 	    });
 	    Object.defineProperty(_this, '_onPlayerReady', {
@@ -22784,24 +22760,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle, className: 'video-container' },
-	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, duration: this.state.duration, playState: this.state.playState, media: this.player }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'video-overlay' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'video-player-button', onClick: this._playButton },
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '\u2610'
-	            )
-	          )
-	        ),
+	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, playState: this.state.playState, media: this.player }),
+	        _react2.default.createElement(_media_playerButton2.default, { playState: this.state.playState, media: this.player }),
 	        _react2.default.createElement('div', { ref: function ref(r) {
 	            _this3.vidPlayer = r;
 	          } }),
-	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, duration: this.state.duration, playState: this.state.playState, media: this.player })
+	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, playState: this.state.playState, media: this.player })
 	      );
 	    }
 	  }]);
@@ -22867,15 +22831,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call(this, props));
 	
-	    Object.defineProperty(_this, 'setAnimationStyle', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value() {
-	        Object.keys(_this.props.animationStyle).map(function (prefix) {
-	          _this.props.animationStyle[prefix] = 'progress ' + _this.props.duration + 's linear forwards ' + _this.props.playState;
-	        });
-	      }
-	    });
 	    Object.defineProperty(_this, '_getPosition', {
 	      enumerable: true,
 	      writable: true,
@@ -22883,14 +22838,14 @@
 	        var parentDiv = e.target.offsetParent,
 	            clickPosition = e.pageX - parentDiv.offsetLeft,
 	            clickPercent = clickPosition / parentDiv.scrollWidth;
-	        return _this.props.duration * clickPercent;
+	        return _this.props.media.getDuration() * clickPercent;
 	      }
 	    });
 	    Object.defineProperty(_this, '_showPosition', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        console.log(_this._formatTime(_this._getPosition(e)), e);
+	        console.log(_this._formatTime(_this._getPosition(e)));
 	      }
 	    });
 	    Object.defineProperty(_this, '_setPosition', {
@@ -22953,15 +22908,108 @@
 	}(_react2.default.Component);
 	
 	exports.default = ProgressBar;
+
+/***/ },
+/* 189 */
+/*!***************************************************!*\
+  !*** ./app/src/components/media_player-button.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlayerButton = function (_React$Component) {
+	  _inherits(PlayerButton, _React$Component);
+	
+	  function PlayerButton(props) {
+	    _classCallCheck(this, PlayerButton);
+	
+	    var _this = _possibleConstructorReturn(this, (PlayerButton.__proto__ || Object.getPrototypeOf(PlayerButton)).call(this, props));
+	
+	    Object.defineProperty(_this, '_buttonDisplay', {
+	      enumerable: true,
+	      writable: true,
+	      value: {
+	        display: 'block'
+	      }
+	    });
+	    Object.defineProperty(_this, '_showButton', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        _this._buttonDisplay.display = 'block';
+	      }
+	    });
+	    Object.defineProperty(_this, '_togglePlay', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        if (_this.props.playState === 'playing') {
+	          _this.props.media.pauseVideo();
+	        } else if (_this.props.playState === 'buffering') {
+	          return;
+	        } else {
+	          _this.props.media.playVideo();
+	        }
+	      }
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(PlayerButton, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.playState === 'playing' || nextProps.playState === 'buffering') {
+	        this._buttonDisplay.display = 'none';
+	      } else {
+	        this._buttonDisplay.display = 'block';
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'video-overlay', onClick: this._togglePlay },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'video-player-button', onClick: this._togglePlay, style: this._buttonDisplay },
+	          _react2.default.createElement('img', { src: 'app/src/assets/img/media-buttons/play.png' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PlayerButton;
+	}(_react2.default.Component);
+	
+	exports.default = PlayerButton;
 	
 	
-	ProgressBar.defaultProps = {
-	  duration: 0
-	};
-	
-	ProgressBar.propTypes = {
-	  duration: _react2.default.PropTypes.number,
-	  elapsed: _react2.default.PropTypes.func
+	PlayerButton.defaultProps = {
+	  playState: 'paused'
 	};
 
 /***/ }
