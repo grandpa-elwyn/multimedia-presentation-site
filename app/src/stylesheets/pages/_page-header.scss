@@ -54,8 +54,8 @@
 }
 
 // INSTANCES
-@mixin page-header($alignment, $text-color, $background-color, $border-color, $header-border-color) {
-  @include header-content-align($alignment);
+@mixin page-header($text-color, $background-color, $border-color, $header-border-color) {
+  @include header-content-align(right);
   color: $text-color;
   background-color: $background-color;
 

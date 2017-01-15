@@ -108,7 +108,8 @@
 	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }),
 	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }),
 	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }),
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 })
+	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }),
+	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })
 	      );
 	    }
 	  }]);
@@ -22498,6 +22499,12 @@
 	    header: 'romance of the black grief (otherwise fallin\' in love with)',
 	    videoId: 'YxOZUseg5OI',
 	    description: 'early concert footage.'
+	  },
+	  page6: {
+	    class: 'page-6',
+	    header: 'improvisation',
+	    videoId: 'ZF57c1bKO-w',
+	    description: 'october 2, 1982: live at keio university, yokohama'
 	  }
 	};
 
@@ -22645,6 +22652,13 @@
 	        });
 	      }
 	    });
+	    Object.defineProperty(_this, '_checkProgress', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        _this.setState({ progress: _this.player.getCurrentTime() / _this.state.duration * 100 });
+	      }
+	    });
 	    Object.defineProperty(_this, '_onPlayerStateChange', {
 	      enumerable: true,
 	      writable: true,
@@ -22652,18 +22666,25 @@
 	        switch (e.data) {
 	          case YT.PlayerState.ENDED:
 	            {
+	              clearInterval(_this.state.updateProgress);
 	              _this.setState({ playState: 'unset' });
 	              console.log('ended');
+	              // SHOW PLAY BUTTON W/RESET IMAGE
 	              break;
 	            }
 	          case YT.PlayerState.PLAYING:
 	            {
-	              _this.setState({ playState: 'running' });
+	              _this.setState({
+	                updateProgress: setInterval(_this._checkProgress, 500),
+	                playState: 'running'
+	              });
 	              console.log(_this.state.playState);
+	              // HIDE PLAY BUTTON
 	              break;
 	            }
 	          case YT.PlayerState.PAUSED:
 	            {
+	              clearInterval(_this.state.updateProgress);
 	              _this.setState({ playState: 'paused' });
 	              console.log('paused');
 	              break;
@@ -22678,10 +22699,10 @@
 	            {
 	              _this.setState({ playState: 'unset' });
 	              console.log('cued');
+	              // SHOW PLAY BUTTON
 	              break;
 	            }
 	          default:
-	            console.log('return');
 	            return;
 	        }
 	      }
@@ -22691,7 +22712,6 @@
 	      writable: true,
 	      value: function value() {
 	        _this.player.a.previousSibling.childNodes[0].style.display = 'none';
-	        console.log(_this.player.a.previousSibling.childNodes[0].style);
 	        _this.player.playVideo();
 	      }
 	    });
@@ -22699,11 +22719,9 @@
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        console.log(e);
 	        _this.setState({
 	          playStatus: e.target.getPlayerState(),
-	          duration: e.target.getDuration(),
-	          progress: e.target.getCurrentTime()
+	          duration: e.target.getDuration()
 	        });
 	      }
 	    });
@@ -22711,7 +22729,8 @@
 	
 	    _this.state = {
 	      playerWidth: 0,
-	      playerHeight: 0
+	      playerHeight: 0,
+	      progress: 0
 	    };
 	    return _this;
 	  }
@@ -22765,7 +22784,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle, className: 'video-container' },
-	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration, playState: this.state.playState }),
+	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, duration: this.state.duration, playState: this.state.playState, media: this.player }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'video-overlay' },
@@ -22782,7 +22801,7 @@
 	        _react2.default.createElement('div', { ref: function ref(r) {
 	            _this3.vidPlayer = r;
 	          } }),
-	        _react2.default.createElement(_media_playerProgress2.default, { duration: this.state.duration, playState: this.state.playState })
+	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, duration: this.state.duration, playState: this.state.playState, media: this.player })
 	      );
 	    }
 	  }]);
@@ -22848,14 +22867,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (ProgressBar.__proto__ || Object.getPrototypeOf(ProgressBar)).call(this, props));
 	
-	    Object.defineProperty(_this, '_getPosition', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	        console.log(e.layerX);
-	      }
-	    });
-	    Object.defineProperty(_this, '_setAnimationStyle', {
+	    Object.defineProperty(_this, 'setAnimationStyle', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value() {
@@ -22864,43 +22876,75 @@
 	        });
 	      }
 	    });
+	    Object.defineProperty(_this, '_getPosition', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        var parentDiv = e.target.offsetParent,
+	            clickPosition = e.pageX - parentDiv.offsetLeft,
+	            clickPercent = clickPosition / parentDiv.scrollWidth;
+	        return _this.props.duration * clickPercent;
+	      }
+	    });
+	    Object.defineProperty(_this, '_showPosition', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        console.log(_this._formatTime(_this._getPosition(e)), e);
+	      }
+	    });
+	    Object.defineProperty(_this, '_setPosition', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        var clickTime = _this._getPosition(e);
+	        _this.props.media.seekTo(clickTime);
+	        console.log(clickTime, _this.props.media);
+	      }
+	    });
 	
 	
 	    _this.state = {
-	      playState: 'paused'
+	      completionWidth: {
+	        width: '0%'
+	      }
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(ProgressBar, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this._setAnimationStyle();
+	    key: '_formatTime',
+	    value: function _formatTime(t) {
+	      var hr = Math.floor(t / 3600),
+	          min = Math.floor(t % 3600 / 60),
+	          sec = Math.round(t % 3600 % 60);
+	
+	      if (sec < 10) {
+	        sec = '0' + sec;
+	      };
+	
+	      if (t >= 3600) {
+	        if (min < 10) {
+	          min = '0' + min;
+	        };
+	        return hr + ':' + min + ':' + sec;
+	      } else {
+	        return min + ':' + sec;
+	      }
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {}
-	
-	    // animation-name: none                 progress
-	    // animation-duration: 0s               this.props.duration
-	    // animation-timing-function: ease      linear
-	    // animation-delay: 0s                  0
-	    // animation-iteration-count: 1         1
-	    // animation-direction: normal          normal
-	    // animation-fill-mode: none            forwards
-	    // animation-play-state: running        -------
-	
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var newPlayerWidth = nextProps.progress + '%';
+	      this.setState({ completionWidth: { width: newPlayerWidth } });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      this._setAnimationStyle();
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'progress-bar-container' },
-	        _react2.default.createElement('div', { className: 'progress-bar', style: this.props.animationStyle })
+	        { className: 'progress-bar-container', onClick: this._setPosition, onMouseEnter: this._showPosition },
+	        _react2.default.createElement('div', { className: 'progress-bar', style: this.state.completionWidth })
 	      );
 	    }
 	  }]);
@@ -22912,19 +22956,12 @@
 	
 	
 	ProgressBar.defaultProps = {
-	  duration: 0,
-	  animationStyle: {
-	    WebkitAnimation: '',
-	    MozAnimation: '',
-	    msAnimation: '',
-	    animation: ''
-	  }
+	  duration: 0
 	};
 	
 	ProgressBar.propTypes = {
 	  duration: _react2.default.PropTypes.number,
-	  elapsed: _react2.default.PropTypes.func,
-	  animationStyle: _react2.default.PropTypes.object
+	  elapsed: _react2.default.PropTypes.func
 	};
 
 /***/ }

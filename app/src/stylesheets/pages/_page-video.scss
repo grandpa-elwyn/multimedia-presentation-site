@@ -24,17 +24,6 @@
   }
 }
 
-// INSTANCES
-@mixin header-page($alignment, $text-color, $background-color, $border-color, $header-border-color) {
-  @include header-content-align($alignment);
-  color: $text-color;
-  background-color: $background-color;
-
-  h1 {
-    border-bottom: $single-border $header-border-color;
-  }
-}
-
 .video-container {
   max-width: 90vw;
   position: relative;
@@ -45,13 +34,12 @@
   }
 
   .progress-bar-container:last-child {
-      margin-top: -12px;
-    }
+    margin-top: -12px;
+  }
 }
 
 .video-overlay {
   margin-top: -8px;
-  background-color: transparentize($rose, .7);
   height: 100%;
   position: absolute;
   width: 100%;
@@ -63,10 +51,6 @@
 }
 
 .video-player-button {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -74,10 +58,8 @@
   height: 48px;
   margin-left: -34px;
   margin-top: -24px;
-  color: $white;
   font-size: 30px;
   border-radius: 10px;
-  background-color: $petal;
 
   &:hover {
     cursor: pointer;
@@ -86,38 +68,41 @@
 
 .progress-bar-container {
   height: 20px;
-  background-color: transparentize($night, 0.7);
   border-radius: 10px;
   width: 100%;
+  overflow: hidden;
 }
 
 .progress-bar {
   height: 20px;
-  width: 0%;
   max-width: 100%;
   float: left;
   border-radius: 10px;
-  background-color: $electric;
 }
 
-@-webkit-keyframes progress {
-    from { }
+// INSTANCES
+@mixin video-page($text-color, $background-color, $overlay-color, $overlay-opacity, $accent-color-1, $accent-color-2) {
+  color: $text-color;
+  background-color: $background-color;
 
-    to { width: 100% }
-}
+  .page-timeline-header {
+    text-align: right;
+  }
 
-@-moz-keyframes progress {
-    from { }
+  .video-overlay {
+    background-color: transparentize($overlay-color, $overlay-opacity);
+  }
 
-    to { width: 100% }
-}
+  .video-player-button {
+    color: $background-color;
+    background: $accent-color-1;
+  }
 
-@-ms-keyframes progress {
-    from { }
+  .progress-bar-container {
+    background-color: transparentize($text-color, $overlay-opacity);
+  }
 
-    to { width: 100% }
-}
-
-@keyframes progress {
-    from { }
+  .progress-bar {
+    background-color: $accent-color-2;
+  }
 }

@@ -328,7 +328,6 @@ body {
 
 .video-overlay {
   margin-top: -8px;
-  background-color: rgba(255, 119, 119, 0.3);
   height: 100%;
   position: absolute;
   width: 100%;
@@ -338,10 +337,6 @@ body {
   display: block; }
 
 .video-player-button {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -349,36 +344,23 @@ body {
   height: 48px;
   margin-left: -34px;
   margin-top: -24px;
-  color: #fff;
   font-size: 30px;
-  border-radius: 10px;
-  background-color: #fcafa9; }
+  border-radius: 10px; }
   .video-player-button:hover {
     cursor: pointer; }
 
 .progress-bar-container {
   height: 20px;
-  background-color: rgba(1, 27, 35, 0.3);
   border-radius: 10px;
-  width: 100%; }
+  width: 100%;
+  overflow: hidden; }
 
 .progress-bar {
   height: 20px;
-  width: 0%;
   max-width: 100%;
   float: left;
-  border-radius: 10px;
-  background-color: #3cc47c; }
+  border-radius: 10px; }
 
-@-webkit-keyframes progress {
-  to {
-    width: 100%; } }
-@-moz-keyframes progress {
-  to {
-    width: 100%; } }
-@-ms-keyframes progress {
-  to {
-    width: 100%; } }
 .page-1 {
   color: #fff; }
   .page-1 .page-image-top {
@@ -388,14 +370,14 @@ body {
 
 .page-2 {
   background-color: #fff;
-  color: #121619; }
+  color: #011b23; }
   .page-2 .event-date h2 {
     border: 2px solid #3cc47c;
-    color: #121619; }
+    color: #011b23; }
   .page-2 .event-date .date-box-line {
     border-top: 2px solid #3cc47c; }
   .page-2 .event-text {
-    border-left: 2px solid #121619; }
+    border-left: 2px solid #011b23; }
   .page-2 .event-dot {
     -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #3cc47c;
     -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 5px #3cc47c;
@@ -426,6 +408,21 @@ body {
   .page-3 h1 {
     border-bottom: 2px solid #3cc47c; }
 
+.page-4 {
+  color: #011b23;
+  background-color: #fff; }
+  .page-4 .page-timeline-header {
+    text-align: right; }
+  .page-4 .video-overlay {
+    background-color: rgba(255, 119, 119, 0.3); }
+  .page-4 .video-player-button {
+    color: #fff;
+    background: #fcafa9; }
+  .page-4 .progress-bar-container {
+    background-color: rgba(1, 27, 35, 0.3); }
+  .page-4 .progress-bar {
+    background-color: #3cc47c; }
+
 .page-5 {
   color: #fff; }
   .page-5 .page-image-top {
@@ -433,7 +430,21 @@ body {
     .page-5 .page-image-top .page-content-container h1 {
       border-bottom: 2px solid #fcafa9; }
 
-.ytp-watermark {
-  display: none; }
+.page-6 {
+  color: #011b23;
+  background-color: #fff; }
+  .page-6 .page-timeline-header {
+    text-align: right; }
+  .page-6 .video-overlay {
+    background-color: rgba(60, 196, 124, 0.3); }
+  .page-6 .video-player-button {
+    color: #fff;
+    background: #3cc47c; }
+  .page-6 .progress-bar-container {
+    background-color: rgba(1, 27, 35, 0.3); }
+  .page-6 .progress-bar {
+    background-color: #fcafa9; }
+  .page-6 .video-overlay {
+    display: none; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,27 +1,32 @@
 // @mixin page-image($background-image, $overlay-color, $overlay-opacity, $text-color, $border-color)
 // @mixin page-timeline($background-color, $text-color, $highlight-color, $link-color, $dot-diameter)
 // @mixin header-page($alignment, $text-color, $background-color, $border-color, $header-border-color)
+// @mixin video-page($alignment, $text-color, $background-color, $overlay-color, $overlay-opacity, $accent-color-1, $accent-color-2)
+
 
 .page-1 {
   @include page-image($night, .7, $white, $electric);
 }
 
 .page-2 {
-  @include page-timeline($white, $slate, $electric, $petal, 15px);
+  @include page-timeline($white, $night, $electric, $petal, 15px);
 }
 
 .page-3 {
-  @include page-header(right, $white, $night, $petal, $electric);
+  @include page-header($white, $night, $petal, $electric);
 }
 
 .page-4 {
-  //@include page-timeline($white, $slate, $petal, $petal, 15px);
+  @include video-page($night, $white, $rose, .7, $petal, $electric);
 }
 
 .page-5 {
   @include page-image($night, .7, $white, $petal);
 }
 
-.ytp-watermark {
-  display: none;
+.page-6 {
+  @include video-page($night, $white, $electric, .7, $electric, $petal);
+  .video-overlay {
+    display: none;
+  }
 }

@@ -12,7 +12,8 @@ export default class Video extends React.Component {
 
     this.state = {
       playerWidth: 0,
-      playerHeight: 0
+      playerHeight: 0,
+      progress: 0
     }
   }
 
@@ -32,19 +33,30 @@ export default class Video extends React.Component {
     });
   }
 
+  _checkProgress = () => {
+    this.setState({ progress: (this.player.getCurrentTime() / this.state.duration) * 100});
+  }
+
   _onPlayerStateChange = (e) => {
     switch(e.data) {
       case YT.PlayerState.ENDED: {
+        clearInterval(this.state.updateProgress);
         this.setState({ playState: 'unset' });
         console.log('ended');
+        // SHOW PLAY BUTTON W/RESET IMAGE
            break;
          }
       case YT.PlayerState.PLAYING: {
-          this.setState({ playState: 'running' });
+          this.setState({
+            updateProgress: setInterval(this._checkProgress, 500),
+            playState: 'running'
+           });
           console.log(this.state.playState);
+          // HIDE PLAY BUTTON
            break;
          }
       case YT.PlayerState.PAUSED: {
+        clearInterval(this.state.updateProgress);
         this.setState({ playState: 'paused' });
         console.log('paused');
            break;
@@ -57,26 +69,23 @@ export default class Video extends React.Component {
       case YT.PlayerState.CUED: {
         this.setState({ playState: 'unset' });
         console.log('cued');
+        // SHOW PLAY BUTTON
            break;
          }
       default:
-        console.log('return');
-           return;
+        return;
     }
   }
 
   _playButton = () => {
     this.player.a.previousSibling.childNodes[0].style.display = 'none';
-    console.log(this.player.a.previousSibling.childNodes[0].style);
     this.player.playVideo();
   }
 
   _onPlayerReady = (e) => {
-    console.log(e);
     this.setState({
       playStatus: e.target.getPlayerState(),
-      duration: e.target.getDuration(),
-      progress: e.target.getCurrentTime()
+      duration: e.target.getDuration()
     });
   }
 
@@ -119,15 +128,15 @@ export default class Video extends React.Component {
     return (
       <div style={ containerStyle } className='video-container'>
 
-        <ProgressBar duration={ this.state.duration } playState={ this.state.playState }/>
-        
+        <ProgressBar progress={ this.state.progress } duration={ this.state.duration } playState={ this.state.playState } media={ this.player }/>
+
         <div className='video-overlay'>
           <div className='video-player-button' onClick={this._playButton}><span>&#9744;</span></div>
         </div>
 
         <div ref={(r) => { this.vidPlayer = r }}></div>
 
-        <ProgressBar duration={ this.state.duration } playState={ this.state.playState }/>
+        <ProgressBar progress={ this.state.progress } duration={ this.state.duration } playState={ this.state.playState } media={ this.player }/>
 
       </div>
     );

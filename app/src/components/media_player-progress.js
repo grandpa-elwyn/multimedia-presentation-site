@@ -7,63 +7,70 @@ export default class ProgressBar extends React.Component {
     super(props);
 
     this.state = {
-      playState: 'paused'
+      completionWidth: {
+        width: '0%'
+      }
     }
   }
 
-  componentDidMount() {
-    this._setAnimationStyle();
+  setAnimationStyle = () => {
+    Object.keys(this.props.animationStyle).map((prefix) => {
+      this.props.animationStyle[prefix] = `progress ${ this.props.duration}s linear forwards ${ this.props.playState }`
+    })
   }
 
-  componentWillMount() {
+  _formatTime(t) {
+    var hr = Math.floor(t / 3600),
+        min = Math.floor((t % 3600) / 60),
+        sec = Math.round((t % 3600) % 60);
 
+    if (sec < 10) { sec = '0' + sec };
+
+    if (t >= 3600) {
+        if (min < 10) {min = '0' + min};
+        return hr + ':' + min + ':' + sec;
+    }
+    else {
+      return min + ':' + sec;
+    }
   }
 
-  componentWillUnmount() {
-
+  _getPosition = (e) => {
+    let parentDiv = e.target.offsetParent,
+        clickPosition = e.pageX - parentDiv.offsetLeft,
+        clickPercent = clickPosition / parentDiv.scrollWidth;
+    return this.props.duration * clickPercent;
   }
 
-// animation-name: none                 progress
-// animation-duration: 0s               this.props.duration
-// animation-timing-function: ease      linear
-// animation-delay: 0s                  0
-// animation-iteration-count: 1         1
-// animation-direction: normal          normal
-// animation-fill-mode: none            forwards
-// animation-play-state: running        -------
+  _showPosition = (e) => {
+    console.log((this._formatTime(this._getPosition(e))), e);
+  }
 
-_getPosition = (e) => {
-  console.log(e.layerX);
-}
+  _setPosition = (e) => {
+    let clickTime = this._getPosition(e);
+    this.props.media.seekTo(clickTime);
+    console.log(clickTime, this.props.media);
+  }
 
-_setAnimationStyle = () => {
-  Object.keys(this.props.animationStyle).map((prefix) => {
-    this.props.animationStyle[prefix] = `progress ${ this.props.duration }s linear forwards ${ this.props.playState }`
-  })
-}
+  componentWillReceiveProps(nextProps) {
+    let newPlayerWidth = nextProps.progress + '%'
+    this.setState({ completionWidth: { width: newPlayerWidth }})
+  }
 
   render() {
-    this._setAnimationStyle();
     return (
-      <div className='progress-bar-container'>
-        <div className='progress-bar' style={ this.props.animationStyle } ></div>
+      <div className='progress-bar-container' onClick={ this._setPosition } onMouseEnter={ this._showPosition }>
+        <div className='progress-bar' style={ this.state.completionWidth }></div>
       </div>
     );
   }
 }
 
 ProgressBar.defaultProps = {
-  duration: 0,
-  animationStyle: {
-    WebkitAnimation: '',
-    MozAnimation: '',
-    msAnimation: '',
-    animation: ''
-  }
+  duration: 0
 }
 
 ProgressBar.propTypes = {
   duration: React.PropTypes.number,
-  elapsed: React.PropTypes.func,
-  animationStyle: React.PropTypes.object
+  elapsed: React.PropTypes.func
 }

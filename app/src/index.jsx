@@ -23,6 +23,7 @@ class BandBio extends React.Component {
       <HeaderPage page={HdContent.page3} />
       <VideoPage page={VidContent.page4} />
       <ImagePage page={ImgContent.page5} />
+      <VideoPage page={VidContent.page6} />
     </div>
     );
   }
