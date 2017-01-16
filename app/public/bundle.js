@@ -92,21 +92,44 @@
 	var BandBio = function (_React$Component) {
 	  _inherits(BandBio, _React$Component);
 	
-	  function BandBio() {
+	  function BandBio(props) {
 	    _classCallCheck(this, BandBio);
 	
-	    return _possibleConstructorReturn(this, (BandBio.__proto__ || Object.getPrototypeOf(BandBio)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (BandBio.__proto__ || Object.getPrototypeOf(BandBio)).call(this, props));
+	
+	    Object.defineProperty(_this, '_testIt', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        console.log(e);
+	      }
+	    });
+	
+	
+	    _this.state = {
+	      page: 1
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(BandBio, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      window.onscroll = function () {
+	        console.log(_this2);
+	      };
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }),
-	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }),
-	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }),
+	        _react2.default.createElement(_page_imageHeader2.default, { ref: 'page1', page: _content_imagePage.ImgContent.page1 }),
+	        _react2.default.createElement(_page_timeline2.default, { ref: 'page2', page: _content_timelinePage.TlContent.page2 }),
+	        _react2.default.createElement(_page_frameHeader2.default, { ref: 'page3', page: _content_headerPage.HdContent.page3 }),
 	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }),
 	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }),
 	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })
@@ -22350,7 +22373,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'event-text' },
-	          this.props.event.description
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.props.event.description
+	          )
 	        )
 	      );
 	    }
@@ -22565,7 +22592,7 @@
 	          { className: 'page-content-container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'page-timeline-header' },
+	            { className: 'page-video-header' },
 	            _react2.default.createElement(
 	              'h1',
 	              null,
@@ -22643,8 +22670,8 @@
 	      value: function value() {
 	        var windowWidth = void 0;
 	
-	        if (window.innerWidth > 850) {
-	          windowWidth = 850;
+	        if (window.innerWidth > 948) {
+	          windowWidth = 948;
 	        } else {
 	          windowWidth = window.innerWidth;
 	        }
@@ -22654,6 +22681,25 @@
 	          playerHeight: playerUnit * 9,
 	          playerWidth: playerUnit * 16
 	        });
+	
+	        _this._checkHeight();
+	      }
+	    });
+	    Object.defineProperty(_this, '_checkHeight', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        var containerHeight = _this.player.a.parentNode.parentNode.scrollHeight,
+	            headerHeight = _this.player.a.parentNode.previousSibling.clientHeight,
+	            availHeight = containerHeight - headerHeight - 140,
+	            playerUnit = availHeight / 9;
+	
+	        if (containerHeight >= window.innerHeight) {
+	          _this.setState({
+	            playerHeight: playerUnit * 9,
+	            playerWidth: playerUnit * 16
+	          });
+	        }
 	      }
 	    });
 	    Object.defineProperty(_this, '_checkProgress', {
@@ -22734,13 +22780,10 @@
 	            onReady: _this2._onPlayerReady
 	          }
 	        });
+	
+	        _this2._resizeVideo();
 	        window.addEventListener('resize', _this2._resizeVideo);
 	      });
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this._resizeVideo();
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22760,7 +22803,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle, className: 'video-container' },
-	        _react2.default.createElement(_media_playerProgress2.default, { progress: this.state.progress, playState: this.state.playState, media: this.player }),
 	        _react2.default.createElement(_media_playerButton2.default, { playState: this.state.playState, media: this.player }),
 	        _react2.default.createElement('div', { ref: function ref(r) {
 	            _this3.vidPlayer = r;
@@ -22845,7 +22887,7 @@
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        console.log(_this._formatTime(_this._getPosition(e)));
+	        _this.setState({ hoverTime: _this._formatTime(_this._getPosition(e)) });
 	      }
 	    });
 	    Object.defineProperty(_this, '_setPosition', {
@@ -22854,15 +22896,14 @@
 	      value: function value(e) {
 	        var clickTime = _this._getPosition(e);
 	        _this.props.media.seekTo(clickTime);
-	        console.log(clickTime, _this.props.media);
 	      }
 	    });
 	
 	
 	    _this.state = {
-	      completionWidth: {
-	        width: '0%'
-	      }
+	      completionWidth: '0%',
+	      containerHeight: '',
+	      containerMargin: ''
 	    };
 	    return _this;
 	  }
@@ -22890,16 +22931,27 @@
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      var newPlayerWidth = nextProps.progress + '%';
-	      this.setState({ completionWidth: { width: newPlayerWidth } });
+	      var newProgressWidth = nextProps.progress + '%';
+	      this.setState({ completionWidth: newProgressWidth });
+	
+	      var newPlayerHeight = nextProps.media.a.clientHeight + 30;
+	      this.setState({ containerHeight: newPlayerHeight });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var containerStyle = {
+	        height: this.state.containerHeight
+	      },
+	          barStyle = {
+	        width: this.state.completionWidth,
+	        height: this.state.containerHeight
+	      };
+	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'progress-bar-container', onClick: this._setPosition, onMouseEnter: this._showPosition },
-	        _react2.default.createElement('div', { className: 'progress-bar', style: this.state.completionWidth })
+	        { className: 'progress-bar-container', onClick: this._setPosition, onMouseMove: this._showPosition, title: this.state.hoverTime, style: containerStyle },
+	        _react2.default.createElement('div', { className: 'progress-bar', style: barStyle })
 	      );
 	    }
 	  }]);

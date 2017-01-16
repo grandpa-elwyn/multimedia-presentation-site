@@ -21,17 +21,33 @@ export default class Video extends React.Component {
   _resizeVideo = () => {
     let windowWidth;
 
-    if (window.innerWidth > 850) {
-      windowWidth = 850;
+    if (window.innerWidth > 948) {
+      windowWidth = 948;
     } else {
       windowWidth = window.innerWidth;
     }
-    const playerUnit = (windowWidth * .95) / 16;
+    let playerUnit = (windowWidth * .95) / 16;
 
     this.setState({
       playerHeight: playerUnit * 9,
       playerWidth: playerUnit * 16
     });
+
+    this._checkHeight();
+  }
+
+  _checkHeight = () => {
+    let containerHeight = this.player.a.parentNode.parentNode.scrollHeight,
+        headerHeight = this.player.a.parentNode.previousSibling.clientHeight,
+        availHeight = containerHeight - headerHeight - 140,
+        playerUnit = availHeight / 9;
+
+    if (containerHeight >= window.innerHeight) {
+      this.setState({
+        playerHeight: playerUnit * 9,
+        playerWidth: playerUnit * 16
+      });
+    }
   }
 
   _checkProgress = () => {
@@ -90,12 +106,10 @@ export default class Video extends React.Component {
           onReady: this._onPlayerReady
         }
       });
+
+      this._resizeVideo();
       window.addEventListener('resize', this._resizeVideo);
     })
-  }
-
-  componentWillMount() {
-    this._resizeVideo();
   }
 
   componentWillUnmount() {
@@ -111,8 +125,6 @@ export default class Video extends React.Component {
 
     return (
       <div style={ containerStyle } className='video-container'>
-
-        <ProgressBar progress={ this.state.progress } playState={ this.state.playState } media={ this.player }/>
 
         <PlayerButton playState={ this.state.playState } media={ this.player } />
 

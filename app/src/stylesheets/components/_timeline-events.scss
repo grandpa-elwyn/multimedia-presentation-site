@@ -7,9 +7,15 @@
 
     .event-date,
     .event-text {
-      padding-bottom: 40px;
+      padding-bottom: 20px;
     }
   }
+}
+
+.event-container {
+  border-right: $single-border transparent;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .event-date,
@@ -26,7 +32,6 @@
   max-width: 200px;
 
   h2 {
-    font-size: 1.125rem;
     padding: 5px 7px;
   }
 
@@ -47,7 +52,13 @@
   padding-left: 30px;
 }
 
-@mixin event-container($text-color, $highlight-color) {
+@mixin event-container($text-color, $highlight-color, $border-color) {
+
+  .event-container:last-child {
+    border-right: $single-border $border-color;
+    border-bottom: $single-border $border-color;
+    padding-bottom: 20px;
+  }
 
   .event-date {
 

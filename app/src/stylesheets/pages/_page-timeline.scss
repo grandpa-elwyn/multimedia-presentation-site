@@ -8,21 +8,12 @@
 }
 
 .page-timeline-header {
-  @extend %align-self-flex-end;
-  padding-bottom: 40px;
+  padding: 30px 20px 20px;
   text-align: right;
-
-  h1 {
-    font-size: 5vmax;
- }
-}
-
-.event-date h2 {
-  font-size: 2.75vmax;
 }
 
 .event-text {
-  font-size: 2.55vmax;
+  letter-spacing: 0;
 }
 
 // @mixin event-dot($color1, $color2, $diameter)
@@ -30,10 +21,15 @@
 
 @mixin page-timeline($background-color, $text-color, $highlight-color, $link-color, $dot-diameter) {
 
-  @include event-container($text-color, $highlight-color);
+  @include event-container($text-color, $highlight-color, $link-color);
 
   background-color: $background-color;
   color: $text-color;
+
+  .page-timeline-header {
+    border-top: $single-border $link-color;
+    border-left: $single-border $link-color;
+  }
 
   .event-dot {
     @include event-dot($highlight-color, $background-color, $dot-diameter);

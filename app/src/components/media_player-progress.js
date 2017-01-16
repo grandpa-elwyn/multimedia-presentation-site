@@ -7,9 +7,9 @@ export default class ProgressBar extends React.Component {
     super(props);
 
     this.state = {
-      completionWidth: {
-        width: '0%'
-      }
+      completionWidth: '0%',
+      containerHeight: '',
+      containerMargin: ''
     }
   }
 
@@ -37,24 +37,34 @@ export default class ProgressBar extends React.Component {
   }
 
   _showPosition = (e) => {
-    console.log((this._formatTime(this._getPosition(e))));
+    this.setState({ hoverTime: this._formatTime(this._getPosition(e)) });
   }
 
   _setPosition = (e) => {
     let clickTime = this._getPosition(e);
     this.props.media.seekTo(clickTime);
-    console.log(clickTime, this.props.media);
   }
 
   componentWillReceiveProps(nextProps) {
-    let newPlayerWidth = nextProps.progress + '%';
-    this.setState({ completionWidth: { width: newPlayerWidth }});
+    let newProgressWidth = nextProps.progress + '%';
+    this.setState({ completionWidth: newProgressWidth });
+
+    let newPlayerHeight = nextProps.media.a.clientHeight + 30;
+    this.setState({ containerHeight: newPlayerHeight });
   }
 
   render() {
+  let containerStyle = {
+      height: this.state.containerHeight
+    },
+    barStyle = {
+      width: this.state.completionWidth,
+      height: this.state.containerHeight
+    };
+
     return (
-      <div className='progress-bar-container' onClick={ this._setPosition } onMouseEnter={ this._showPosition }>
-        <div className='progress-bar' style={ this.state.completionWidth }></div>
+      <div className='progress-bar-container' onClick={ this._setPosition } onMouseMove={ this._showPosition } title={ this.state.hoverTime } style={ containerStyle }>
+        <div className='progress-bar' style={ barStyle }></div>
       </div>
     );
   }

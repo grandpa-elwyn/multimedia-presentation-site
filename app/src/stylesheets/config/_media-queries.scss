@@ -1,0 +1,62 @@
+@media (max-width: 600px) {
+
+  .page-header {
+    h1 { font-size: 7.25vmax; }
+    h2 { font-size: 3vmax; }
+  }
+  .page-image-top {
+    h1 { font-size: 8.5vmax; }
+    h2 { font-size: 3vmax; }
+  }
+  .page-timeline {
+    h1 { font-size: 5vmax; }
+    .event-date h2 { font-size: 2.25vmax; }
+    .event-text { font-size: 2.5vmax; }
+  }
+  .page-video {
+    h1 { font-size: 3.5vmax; }
+    h2 { font-size: 2.75vmax; }
+  }
+}
+
+@media (max-width: 1000px) {
+
+  .page-header {
+    h1 { font-size: 5.75vmax; }
+    h2 { font-size: 2.5vmax; }
+  }
+  .page-image-top {
+    h1 { font-size: 8vmax; }
+    h2 { font-size: 2.5vmax; }
+  }
+  .page-timeline {
+    h1 { font-size: 4.5vmax; }
+    .event-date h2 { font-size: 1.75vmax; }
+    .event-text { font-size: 2vmax; }
+  }
+  .page-video {
+    h1 { font-size: 3vmax; }
+    h2 { font-size: 2.25vmax; }
+  }
+}
+
+@media (min-width: 1001px) {
+
+  .page-header {
+    h1 { font-size: 5.25vmax; }
+    h2 { font-size: 2vmax; }
+  }
+  .page-image-top {
+    h1 { font-size: 7.5vmax; }
+    h2 { font-size: 2vmax; }
+  }
+  .page-timeline {
+    h1 { font-size: 4vmax; }
+    .event-date h2 { font-size: 1.25vmax; }
+    .event-text { font-size: 1.5vmax; }
+  }
+  .page-video {
+    h1 { font-size: 2.5vmax; }
+    h2 { font-size: 1.75vmax; }
+  }
+}

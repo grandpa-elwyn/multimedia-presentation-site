@@ -2,6 +2,7 @@
 .page-video {
   @extend %page-cover-visible;
   @include add-flex(column, nowrap);
+  padding: 20px 0 35px;
 
   .page-content-container {
     @extend %justify-content-center;
@@ -10,36 +11,34 @@
     max-height: 90vh;
     min-height: 60vh;
   }
+}
+
+.page-video-header {
+  @extend %align-self-flex-end;
+  padding-bottom: 40px;
+  text-align: right;
 
   h1 {
     display: inline-block;
-    font-size: 3.5vmax;
     margin: 12px auto 15px;
     padding-bottom: 5px;
   }
 
   h2 {
-    font-size: 2.75vmax;
     font-weight: 300;
   }
 }
-
 .video-container {
   max-width: 90vw;
   position: relative;
 
-  iframe,
-  .video-overlay {
-    margin-top: -8px;
-  }
-
-  .progress-bar-container:last-child {
-    margin-top: -12px;
+  iframe{
+    position: absolute;
+    z-index: 1111;
   }
 }
 
 .video-overlay {
-  margin-top: -8px;
   height: 100%;
   position: absolute;
   width: 100%;
@@ -58,7 +57,6 @@
   height: 48px;
   margin-left: -34px;
   margin-top: -24px;
-  font-size: 30px;
   border-radius: 10px;
 
   &:hover {
@@ -72,7 +70,8 @@
 }
 
 .progress-bar-container {
-  height: 20px;
+  position: absolute;
+  top: -15px;
   border-radius: 10px;
   width: 100%;
   overflow: hidden;
@@ -90,12 +89,16 @@
   color: $text-color;
   background-color: $background-color;
 
+  h1 {
+    border-bottom: $single-border $accent-color-2;
+  }
+
   .page-timeline-header {
     text-align: right;
   }
 
   .video-overlay {
-    background-color: transparentize($overlay-color, $overlay-opacity);
+    background-color: transparentize($text-color, $overlay-opacity);
   }
 
   .video-player-button {

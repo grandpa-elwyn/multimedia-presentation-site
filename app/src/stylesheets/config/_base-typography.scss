@@ -9,14 +9,13 @@ body,
 %sans-serif-base {
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-weight: 400;
-  letter-spacing: .07rem;
+  letter-spacing: .04rem;
   line-height: 140%;
 }
 
 h1 {
   @extend %serif-base;
   // font-size: 3rem;
-  letter-spacing: .125rem;
   text-transform: lowercase;
 }
 

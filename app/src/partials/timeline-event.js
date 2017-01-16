@@ -10,12 +10,14 @@ export default class TimelineEvent extends React.Component {
     return (
       <div className="event-container">
         <div className="event-date">
-          <h2>{this.props.event.date}</h2>
+          <h2>{ this.props.event.date }</h2>
           <div className="date-box-line"></div>
           <div className="event-dot"></div>
         </div>
         <div className="event-text">
-        {this.props.event.description}
+          <span>
+            { this.props.event.description }
+          </span>
         </div>
       </div>
     );
