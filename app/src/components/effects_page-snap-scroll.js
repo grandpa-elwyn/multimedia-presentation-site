@@ -10,13 +10,13 @@ export default class SnapScroller extends React.Component {
     }
   }
 
-  _onScrollUp = (e) => {
+  _onScrollUp = () => {
     if (this.state.page + 1 < this.props.pageList.length) {
       this.setState({ page: this.state.page + 1 });
     }
   }
 
-  _onScrollDown = (e) => {
+  _onScrollDown = () => {
     if (this.state.page + -1 >= 0) {
       this.setState({ page: this.state.page - 1 });
     }
@@ -32,9 +32,9 @@ export default class SnapScroller extends React.Component {
 
         this.setState({ scrollListen: false });
 
-        e.deltaY > 20 ? this._onScrollUp(e) : this._onScrollDown(e)
+        e.deltaY > 20 ? this._onScrollUp() : this._onScrollDown()
 
-        let nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
         window.scrollTo(0, nextTop);
 
         setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);

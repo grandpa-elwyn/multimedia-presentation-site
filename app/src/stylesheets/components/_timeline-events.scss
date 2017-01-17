@@ -14,8 +14,8 @@
 
 .event-container {
   border-right: $single-border transparent;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 7vh;
+  padding-right: 7vh;
 }
 
 .event-date,
@@ -57,7 +57,7 @@
   .event-container:last-child {
     border-right: $single-border $border-color;
     border-bottom: $single-border $border-color;
-    padding-bottom: 20px;
+    padding-bottom: 7vh;
   }
 
   .event-date {

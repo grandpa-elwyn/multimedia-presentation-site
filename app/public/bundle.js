@@ -23049,7 +23049,7 @@
 	    Object.defineProperty(_this, '_onScrollUp', {
 	      enumerable: true,
 	      writable: true,
-	      value: function value(e) {
+	      value: function value() {
 	        if (_this.state.page + 1 < _this.props.pageList.length) {
 	          _this.setState({ page: _this.state.page + 1 });
 	        }
@@ -23058,7 +23058,7 @@
 	    Object.defineProperty(_this, '_onScrollDown', {
 	      enumerable: true,
 	      writable: true,
-	      value: function value(e) {
+	      value: function value() {
 	        if (_this.state.page + -1 >= 0) {
 	          _this.setState({ page: _this.state.page - 1 });
 	        }
@@ -23077,9 +23077,9 @@
 	
 	            _this.setState({ scrollListen: false });
 	
-	            e.deltaY > 20 ? _this._onScrollUp(e) : _this._onScrollDown(e);
+	            e.deltaY > 20 ? _this._onScrollUp() : _this._onScrollDown();
 	
-	            var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
 	            window.scrollTo(0, nextTop);
 	
 	            setTimeout(function () {
