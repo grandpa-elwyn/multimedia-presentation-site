@@ -15,19 +15,29 @@
 
 .page-video-header {
   @extend %align-self-flex-end;
-  padding-bottom: 40px;
   text-align: right;
 
   h1 {
     display: inline-block;
-    margin: 12px auto 15px;
-    padding-bottom: 5px;
+    padding: 5px 5px 5px 30px;
   }
 
   h2 {
     font-weight: 300;
+    padding: 10px 5px 40px 5px;
   }
 }
+
+.page-video-footer {
+  @extend %align-self-flex-start;
+  padding: 40px 30px 5px 5px;
+  text-align: left;
+
+  a {
+    font-weight: 300;
+  }
+}
+
 .video-container {
   max-width: 90vw;
   position: relative;
@@ -89,12 +99,12 @@
   color: $text-color;
   background-color: $background-color;
 
-  h1 {
+  .page-video-header h1 {
     border-bottom: $single-border $accent-color-2;
   }
 
-  .page-timeline-header {
-    text-align: right;
+  .page-video-footer {
+    border-bottom: $single-border $accent-color-1;
   }
 
   .video-overlay {
@@ -112,5 +122,14 @@
 
   .progress-bar {
     background-color: $accent-color-2;
+  }
+
+  a {
+    &:link,
+    &:hover,
+    &:active,
+    &:visited {
+      color: $text-color;
+    }
   }
 }

@@ -113,6 +113,12 @@
 /*
     Align self
  */
+.page-video-footer {
+  -ms-flex-item-align: start;
+  -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
+  align-self: flex-start; }
+
 .page-video-header {
   -ms-flex-item-align: end;
   -webkit-align-self: flex-end;
@@ -169,6 +175,7 @@ h2 {
   font-weight: 400; }
 
 a:link, a:hover, a:active, a:visited {
+  text-decoration: none;
   text-transform: uppercase; }
 
 body {
@@ -206,10 +213,13 @@ body {
   .page-timeline .event-text {
     font-size: 2.5vmax; }
 
-  .page-video h1 {
+  .page-video-header h1 {
     font-size: 4.25vmax; }
-  .page-video h2 {
-    font-size: 2.75vmax; } }
+  .page-video-header h2 {
+    font-size: 2.75vmax; }
+
+  .page-video-footer {
+    font-size: 1.75vmax; } }
 @media (max-width: 1000px) {
   .page-header h1 {
     font-size: 5.75vmax; }
@@ -228,10 +238,13 @@ body {
   .page-timeline .event-text {
     font-size: 2vmax; }
 
-  .page-video h1 {
+  .page-video-header h1 {
     font-size: 3.75vmax; }
-  .page-video h2 {
-    font-size: 2.25vmax; } }
+  .page-video-header h2 {
+    font-size: 2.25vmax; }
+
+  .page-video-footer {
+    font-size: 1.75vmax; } }
 @media (min-width: 1001px) {
   .page-header h1 {
     font-size: 5.25vmax; }
@@ -250,10 +263,13 @@ body {
   .page-timeline .event-text {
     font-size: 1.5vmax; }
 
-  .page-video h1 {
+  .page-video-header h1 {
     font-size: 3.25vmax; }
-  .page-video h2 {
-    font-size: 1.75vmax; } }
+  .page-video-header h2 {
+    font-size: 1.75vmax; }
+
+  .page-video-footer {
+    font-size: 1.5vmax; } }
 .current-page {
   -webkit-animation: page 1.25s ease-in 0s 1 normal;
   animation: page 1.25s ease-in 0s 1 normal; }
@@ -301,8 +317,8 @@ body {
 
 .event-container {
   border-right: 2px solid transparent;
-  padding-left: 7vh;
-  padding-right: 7vh; }
+  padding-left: 7vmax;
+  padding-right: 7vmax; }
 
 .event-date,
 .event-text {
@@ -380,7 +396,7 @@ body {
   width: 90vw; }
 .page-header .header-block {
   margin: -10vh auto;
-  padding: 0 5vw; }
+  padding: 0 5vmax; }
 .page-header h1 {
   display: inline-block;
   margin: 12px auto 15px;
@@ -401,7 +417,7 @@ body {
   min-width: 100vw; }
 
 .page-timeline-header {
-  padding: 7vh 7vh 20px;
+  padding: 7vh 7vmax 20px;
   text-align: right; }
 
 .event-text {
@@ -414,13 +430,18 @@ body {
     min-height: 60vh; }
 
 .page-video-header {
-  padding-bottom: 40px;
   text-align: right; }
   .page-video-header h1 {
     display: inline-block;
-    margin: 12px auto 15px;
-    padding-bottom: 5px; }
+    padding: 5px 5px 5px 30px; }
   .page-video-header h2 {
+    font-weight: 300;
+    padding: 10px 5px 40px 5px; }
+
+.page-video-footer {
+  padding: 40px 30px 5px 5px;
+  text-align: left; }
+  .page-video-footer a {
     font-weight: 300; }
 
 .video-container {
@@ -524,10 +545,10 @@ body {
 .page-4 {
   color: #011b23;
   background-color: #fff; }
-  .page-4 h1 {
+  .page-4 .page-video-header h1 {
     border-bottom: 2px solid #3cc47c; }
-  .page-4 .page-timeline-header {
-    text-align: right; }
+  .page-4 .page-video-footer {
+    border-bottom: 2px solid #fcafa9; }
   .page-4 .video-overlay {
     background-color: rgba(1, 27, 35, 0.3); }
   .page-4 .video-player-button {
@@ -537,6 +558,8 @@ body {
     background-color: rgba(1, 27, 35, 0.3); }
   .page-4 .progress-bar {
     background-color: #3cc47c; }
+  .page-4 a:link, .page-4 a:hover, .page-4 a:active, .page-4 a:visited {
+    color: #011b23; }
 
 .page-5 {
   color: #fff; }
@@ -548,10 +571,10 @@ body {
 .page-6 {
   color: #011b23;
   background-color: #fff; }
-  .page-6 h1 {
+  .page-6 .page-video-header h1 {
     border-bottom: 2px solid #fcafa9; }
-  .page-6 .page-timeline-header {
-    text-align: right; }
+  .page-6 .page-video-footer {
+    border-bottom: 2px solid #3cc47c; }
   .page-6 .video-overlay {
     background-color: rgba(1, 27, 35, 0.3); }
   .page-6 .video-player-button {
@@ -561,5 +584,7 @@ body {
     background-color: rgba(1, 27, 35, 0.3); }
   .page-6 .progress-bar {
     background-color: #fcafa9; }
+  .page-6 a:link, .page-6 a:hover, .page-6 a:active, .page-6 a:visited {
+    color: #011b23; }
 
 /*# sourceMappingURL=styles.css.map */

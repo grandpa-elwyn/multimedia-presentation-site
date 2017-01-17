@@ -13,9 +13,12 @@
     .event-date h2 { font-size: 2.25vmax; }
     .event-text { font-size: 2.5vmax; }
   }
-  .page-video {
+  .page-video-header {
     h1 { font-size: 4.25vmax; }
     h2 { font-size: 2.75vmax; }
+  }
+  .page-video-footer {
+    font-size: 1.75vmax;
   }
 }
 
@@ -34,9 +37,12 @@
     .event-date h2 { font-size: 1.75vmax; }
     .event-text { font-size: 2vmax; }
   }
-  .page-video {
+  .page-video-header {
     h1 { font-size: 3.75vmax; }
     h2 { font-size: 2.25vmax; }
+  }
+  .page-video-footer {
+    font-size: 1.75vmax;
   }
 }
 
@@ -55,8 +61,11 @@
     .event-date h2 { font-size: 1.25vmax; }
     .event-text { font-size: 1.5vmax; }
   }
-  .page-video {
+  .page-video-header {
     h1 { font-size: 3.25vmax; }
     h2 { font-size: 1.75vmax; }
+  }
+  .page-video-footer {
+    font-size: 1.5vmax;
   }
 }

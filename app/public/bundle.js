@@ -22564,7 +22564,16 @@
 	              current.description
 	            )
 	          ),
-	          _react2.default.createElement(_mediaVideo_embed2.default, { video: current })
+	          _react2.default.createElement(_mediaVideo_embed2.default, { video: current }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'page-video-footer' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://www.youtube.com/watch?v=' + current.videoId },
+	              'watch on youtube'
+	            )
+	          )
 	        )
 	      );
 	    }
