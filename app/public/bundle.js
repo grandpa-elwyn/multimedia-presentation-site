@@ -101,74 +101,47 @@
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        _this.setState({ scrollListen: false });
 	        if (_this.state.page + 1 < _this.state.pageList.length) {
 	          _this.setState({ page: _this.state.page + 1 });
-	          var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	          window.scrollTo(0, nextTop);
 	        }
-	        setTimeout(function () {
-	          _this.setState({ scrollListen: true });
-	        }, 1500);
 	      }
 	    });
 	    Object.defineProperty(_this, '_onScrollDown', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        _this.setState({ scrollListen: false });
 	        if (_this.state.page + -1 >= 0) {
 	          _this.setState({ page: _this.state.page - 1 });
-	          var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	          window.scrollTo(0, nextTop);
 	        }
-	        setTimeout(function () {
-	          _this.setState({ scrollListen: true });
-	        }, 1500);
 	      }
 	    });
 	    Object.defineProperty(_this, '_onScroll', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
+	
 	        e.preventDefault();
 	
-	        _this.setState({ pageList: e.target.offsetParent.childNodes[1].childNodes[0].childNodes });
 	        console.log(e);
-	        console.log(e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop);
-	        console.log(_this.state.pageList[_this.state.page].offSetTop);
+	        _this.setState({ pageList: e.target.offsetParent.childNodes[1].childNodes[0].childNodes });
+	        console.log(_this.state.pageList);
+	
 	        if (_this.state.scrollListen) {
 	
-	          if (e.deltaY > 20) {
-	            _this._onScrollUp(e);
-	          } else if (e.deltaY < -20) {
-	            _this._onScrollDown(e);
-	          } else {
-	            return;
+	          if (e.deltaY > 20 || e.deltaY < -20) {
+	            _this.setState({ scrollListen: false });
+	
+	            e.deltaY > 20 ? _this._onScrollUp(e) : _this._onScrollDown(e);
+	
+	            var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	            window.scrollTo(0, nextTop);
+	
+	            setTimeout(function () {
+	              _this.setState({ scrollListen: true });
+	            }, 1500);
 	          }
 	        } else {
 	          return;
-	        }
-	      }
-	    });
-	    Object.defineProperty(_this, '_onWheelUp', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	        var pageList = e.target.offsetParent.childNodes[1].childNodes[0].childNodes;
-	        // console.log(e);
-	        var scrollTop = e.target.offsetParent.scrollTop,
-	            thisTop = e.target.scrollTop,
-	            // nope
-	        itemTranslate = Math.min(0, scrollTop / 3 - 60);
-	
-	        if (scrollTop > 350) {
-	          if (_this.state.page < 2) {
-	            _this.setState({ page: _this.state.page + 1 });
-	            console.log(e);
-	            pageList[_this.state.page].scrollIntoView();
-	            console.log(pageList[_this.state.page].offsetTop);
-	          }
 	        }
 	      }
 	    });
