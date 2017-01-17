@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import PlayerButton from '../components/media_player-button.js';
 import ProgressBar from '../components/media_player-progress.js';
@@ -89,7 +88,7 @@ export default class Video extends React.Component {
     });
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (!loadVid) {
       loadVid = new Promise((r) => {
         window.onYouTubeIframeAPIReady = () => r(window.YT);

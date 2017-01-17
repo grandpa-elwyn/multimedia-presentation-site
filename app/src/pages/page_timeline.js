@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import TimelineEvent from '../partials/timeline-event';
 

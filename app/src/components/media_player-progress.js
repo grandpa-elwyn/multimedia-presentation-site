@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class ProgressBar extends React.Component {
 
@@ -48,7 +47,6 @@ export default class ProgressBar extends React.Component {
   componentWillReceiveProps(nextProps) {
     let newProgressWidth = nextProps.progress + '%';
     this.setState({ completionWidth: newProgressWidth });
-
     let newPlayerHeight = nextProps.media.a.clientHeight + 30;
     this.setState({ containerHeight: newPlayerHeight });
   }

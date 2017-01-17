@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class ImagePage extends React.Component {
 
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     var current = this.props.page;
     var currentBg = {

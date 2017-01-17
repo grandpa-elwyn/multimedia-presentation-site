@@ -97,39 +97,105 @@
 	
 	    var _this = _possibleConstructorReturn(this, (BandBio.__proto__ || Object.getPrototypeOf(BandBio)).call(this, props));
 	
-	    Object.defineProperty(_this, '_testIt', {
+	    Object.defineProperty(_this, '_onScrollUp', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
+	        _this.setState({ scrollListen: false });
+	        if (_this.state.page + 1 < _this.state.pageList.length) {
+	          _this.setState({ page: _this.state.page + 1 });
+	          var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	          window.scrollTo(0, nextTop);
+	        }
+	        setTimeout(function () {
+	          _this.setState({ scrollListen: true });
+	        }, 1500);
+	      }
+	    });
+	    Object.defineProperty(_this, '_onScrollDown', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        _this.setState({ scrollListen: false });
+	        if (_this.state.page + -1 >= 0) {
+	          _this.setState({ page: _this.state.page - 1 });
+	          var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	          window.scrollTo(0, nextTop);
+	        }
+	        setTimeout(function () {
+	          _this.setState({ scrollListen: true });
+	        }, 1500);
+	      }
+	    });
+	    Object.defineProperty(_this, '_onScroll', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        e.preventDefault();
+	
+	        _this.setState({ pageList: e.target.offsetParent.childNodes[1].childNodes[0].childNodes });
 	        console.log(e);
+	        console.log(e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop);
+	        console.log(_this.state.pageList[_this.state.page].offSetTop);
+	        if (_this.state.scrollListen) {
+	
+	          if (e.deltaY > 20) {
+	            _this._onScrollUp(e);
+	          } else if (e.deltaY < -20) {
+	            _this._onScrollDown(e);
+	          } else {
+	            return;
+	          }
+	        } else {
+	          return;
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, '_onWheelUp', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        var pageList = e.target.offsetParent.childNodes[1].childNodes[0].childNodes;
+	        // console.log(e);
+	        var scrollTop = e.target.offsetParent.scrollTop,
+	            thisTop = e.target.scrollTop,
+	            // nope
+	        itemTranslate = Math.min(0, scrollTop / 3 - 60);
+	
+	        if (scrollTop > 350) {
+	          if (_this.state.page < 2) {
+	            _this.setState({ page: _this.state.page + 1 });
+	            console.log(e);
+	            pageList[_this.state.page].scrollIntoView();
+	            console.log(pageList[_this.state.page].offsetTop);
+	          }
+	        }
 	      }
 	    });
 	
 	
 	    _this.state = {
-	      page: 1
+	      page: 0,
+	      scrollListen: true
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(BandBio, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-	
-	      window.onscroll = function () {
-	        console.log(_this2);
-	      };
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.addEventListener('wheel', this._onScroll);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_page_imageHeader2.default, { ref: 'page1', page: _content_imagePage.ImgContent.page1 }),
-	        _react2.default.createElement(_page_timeline2.default, { ref: 'page2', page: _content_timelinePage.TlContent.page2 }),
-	        _react2.default.createElement(_page_frameHeader2.default, { ref: 'page3', page: _content_headerPage.HdContent.page3 }),
+	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }),
+	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }),
+	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }),
 	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }),
 	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }),
 	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })
@@ -22128,7 +22194,7 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22139,10 +22205,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22162,29 +22224,29 @@
 	  }
 	
 	  _createClass(ImagePage, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var current = this.props.page;
 	      var currentBg = {
-	        backgroundImage: 'url(app/src/assets/img/' + current.img + ')'
+	        backgroundImage: "url(app/src/assets/img/" + current.img + ")"
 	      };
 	
 	      return _react2.default.createElement(
-	        'div',
-	        { className: current.class + ' page-image-bg', style: currentBg },
+	        "div",
+	        { className: current.class + " page-image-bg", style: currentBg },
 	        _react2.default.createElement(
-	          'div',
-	          { className: current.class + ' page-image-top' },
+	          "div",
+	          { className: current.class + " page-image-top" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'page-content-container' },
+	            "div",
+	            { className: "page-content-container" },
 	            _react2.default.createElement(
-	              'h1',
+	              "h1",
 	              null,
 	              current.header
 	            ),
 	            _react2.default.createElement(
-	              'h2',
+	              "h2",
 	              null,
 	              current.description
 	            )
@@ -22252,10 +22314,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _timelineEvent = __webpack_require__(/*! ../partials/timeline-event */ 182);
 	
 	var _timelineEvent2 = _interopRequireDefault(_timelineEvent);
@@ -22320,7 +22378,7 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22331,10 +22389,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22354,27 +22408,27 @@
 	  }
 	
 	  _createClass(TimelineEvent, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'event-container' },
+	        "div",
+	        { className: "event-container" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'event-date' },
+	          "div",
+	          { className: "event-date" },
 	          _react2.default.createElement(
-	            'h2',
+	            "h2",
 	            null,
 	            this.props.event.date
 	          ),
-	          _react2.default.createElement('div', { className: 'date-box-line' }),
-	          _react2.default.createElement('div', { className: 'event-dot' })
+	          _react2.default.createElement("div", { className: "date-box-line" }),
+	          _react2.default.createElement("div", { className: "event-dot" })
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'event-text' },
+	          "div",
+	          { className: "event-text" },
 	          _react2.default.createElement(
-	            'span',
+	            "span",
 	            null,
 	            this.props.event.description
 	          )
@@ -22445,10 +22499,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22554,10 +22604,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _mediaVideo_embed = __webpack_require__(/*! ../components/media-video_embed */ 187);
 	
 	var _mediaVideo_embed2 = _interopRequireDefault(_mediaVideo_embed);
@@ -22633,10 +22679,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	var _media_playerButton = __webpack_require__(/*! ../components/media_player-button.js */ 189);
 	
@@ -22758,8 +22800,8 @@
 	  }
 	
 	  _createClass(Video, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      var _this2 = this;
 	
 	      if (!loadVid) {
@@ -22853,10 +22895,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22933,7 +22971,6 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      var newProgressWidth = nextProps.progress + '%';
 	      this.setState({ completionWidth: newProgressWidth });
-	
 	      var newPlayerHeight = nextProps.media.a.clientHeight + 30;
 	      this.setState({ containerHeight: newPlayerHeight });
 	    }
@@ -22979,10 +23016,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
