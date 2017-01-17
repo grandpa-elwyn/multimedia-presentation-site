@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ScrollSnapper extends React.Component {
+export default class SnapScroller extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +11,7 @@ class ScrollSnapper extends React.Component {
   }
 
   _onScrollUp = (e) => {
-    if (this.state.page + 1 < this.state.pageList.length) {
+    if (this.state.page + 1 < this.props.pageList.length) {
       this.setState({ page: this.state.page + 1 });
     }
   }
@@ -22,17 +22,14 @@ class ScrollSnapper extends React.Component {
     }
   }
 
-  _onScroll = (e) => {
+  onScroll = (e) => {
 
     e.preventDefault();
-
-    console.log(e);
-    this.setState({ pageList: e.target.offsetParent.childNodes[1].childNodes[0].childNodes });
-    console.log(this.state.pageList);
 
     if (this.state.scrollListen) {
 
       if (e.deltaY > 20 || e.deltaY < -20) {
+
         this.setState({ scrollListen: false });
 
         e.deltaY > 20 ? this._onScrollUp(e) : this._onScrollDown(e)
@@ -43,12 +40,20 @@ class ScrollSnapper extends React.Component {
         setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);
       }
     }
-    else {
-      return;
-    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('wheel', this.onScroll);
   }
 
   render() {
 
+    return (
+      <div>
+        { this.props.pageList.map((page, i) => {
+          return <section className={ i === this.state.page ? 'current-page' : '' } key={ i }>{ page }</section>;
+        })}
+      </div>
+    );
   }
 }

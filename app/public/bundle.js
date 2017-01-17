@@ -81,6 +81,10 @@
 	
 	var _page_video2 = _interopRequireDefault(_page_video);
 	
+	var _effects_pageSnapScroll = __webpack_require__(/*! ./components/effects_page-snap-scroll */ 190);
+	
+	var _effects_pageSnapScroll2 = _interopRequireDefault(_effects_pageSnapScroll);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97,82 +101,19 @@
 	
 	    var _this = _possibleConstructorReturn(this, (BandBio.__proto__ || Object.getPrototypeOf(BandBio)).call(this, props));
 	
-	    Object.defineProperty(_this, '_onScrollUp', {
+	    Object.defineProperty(_this, 'pageList', {
 	      enumerable: true,
 	      writable: true,
-	      value: function value(e) {
-	        if (_this.state.page + 1 < _this.state.pageList.length) {
-	          _this.setState({ page: _this.state.page + 1 });
-	        }
-	      }
+	      value: [_react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }), _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }), _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }), _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }), _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }), _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })]
 	    });
-	    Object.defineProperty(_this, '_onScrollDown', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	        if (_this.state.page + -1 >= 0) {
-	          _this.setState({ page: _this.state.page - 1 });
-	        }
-	      }
-	    });
-	    Object.defineProperty(_this, '_onScroll', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	
-	        e.preventDefault();
-	
-	        console.log(e);
-	        _this.setState({ pageList: e.target.offsetParent.childNodes[1].childNodes[0].childNodes });
-	        console.log(_this.state.pageList);
-	
-	        if (_this.state.scrollListen) {
-	
-	          if (e.deltaY > 20 || e.deltaY < -20) {
-	            _this.setState({ scrollListen: false });
-	
-	            e.deltaY > 20 ? _this._onScrollUp(e) : _this._onScrollDown(e);
-	
-	            var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	            window.scrollTo(0, nextTop);
-	
-	            setTimeout(function () {
-	              _this.setState({ scrollListen: true });
-	            }, 1500);
-	          }
-	        } else {
-	          return;
-	        }
-	      }
-	    });
-	
-	
-	    _this.state = {
-	      page: 0,
-	      scrollListen: true
-	    };
 	    return _this;
 	  }
 	
 	  _createClass(BandBio, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      window.addEventListener('wheel', this._onScroll);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }),
-	        _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }),
-	        _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }),
-	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }),
-	        _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }),
-	        _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })
-	      );
+	      return _react2.default.createElement(_effects_pageSnapScroll2.default, { pageList: this.pageList });
 	    }
 	  }]);
 	
@@ -23069,6 +23010,122 @@
 	PlayerButton.defaultProps = {
 	  playState: 'paused'
 	};
+
+/***/ },
+/* 190 */
+/*!********************************************************!*\
+  !*** ./app/src/components/effects_page-snap-scroll.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SnapScroller = function (_React$Component) {
+	  _inherits(SnapScroller, _React$Component);
+	
+	  function SnapScroller(props) {
+	    _classCallCheck(this, SnapScroller);
+	
+	    var _this = _possibleConstructorReturn(this, (SnapScroller.__proto__ || Object.getPrototypeOf(SnapScroller)).call(this, props));
+	
+	    Object.defineProperty(_this, '_onScrollUp', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        if (_this.state.page + 1 < _this.props.pageList.length) {
+	          _this.setState({ page: _this.state.page + 1 });
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, '_onScrollDown', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        if (_this.state.page + -1 >= 0) {
+	          _this.setState({ page: _this.state.page - 1 });
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, 'onScroll', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	
+	        e.preventDefault();
+	
+	        if (_this.state.scrollListen) {
+	
+	          if (e.deltaY > 20 || e.deltaY < -20) {
+	
+	            _this.setState({ scrollListen: false });
+	
+	            e.deltaY > 20 ? _this._onScrollUp(e) : _this._onScrollDown(e);
+	
+	            var nextTop = e.target.offsetParent.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	            window.scrollTo(0, nextTop);
+	
+	            setTimeout(function () {
+	              _this.setState({ scrollListen: true });
+	            }, 1500);
+	          }
+	        }
+	      }
+	    });
+	
+	
+	    _this.state = {
+	      page: 0,
+	      scrollListen: true
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(SnapScroller, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.addEventListener('wheel', this.onScroll);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.pageList.map(function (page, i) {
+	          return _react2.default.createElement(
+	            'section',
+	            { className: i === _this2.state.page ? 'current-page' : '', key: i },
+	            page
+	          );
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return SnapScroller;
+	}(_react2.default.Component);
+	
+	exports.default = SnapScroller;
 
 /***/ }
 /******/ ]);
