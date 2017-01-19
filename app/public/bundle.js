@@ -23298,7 +23298,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (SnapScroller.__proto__ || Object.getPrototypeOf(SnapScroller)).call(this, props));
 	
-	    Object.defineProperty(_this, 'keyHandler', {
+	    Object.defineProperty(_this, '_keyHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
@@ -23311,38 +23311,31 @@
 	        }
 	      }
 	    });
-	    Object.defineProperty(_this, 'touchStartHandler', {
+	    Object.defineProperty(_this, '_touchStartHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
 	        e.preventDefault();
-	        if (_this.state.touchCount % 3 === 0) {
-	          _this.setState({ startTouch: e.touches[0].clientY });
-	        } else {
-	          _this.setState({ altStartTouch: e.touches[0].clientY });
-	        }
-	        _this.setState({ touchCount: _this.state.touchCount + 1 });
+	        var arr = _this.state.startTouch;
+	        arr.push(e.touches[0].clientY);
+	        _this.setState({ startTouch: arr });
 	      }
 	    });
-	    Object.defineProperty(_this, 'touchEndHandler', {
+	    Object.defineProperty(_this, '_touchEndHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	        e.preventDefault();
 	        _this.setState({ endTouch: e.changedTouches[0].clientY });
-	        var startTest = _this.state.endTouch === _this.state.startTouch || !_this.state.startTouch ? _this.state.altStartTouch : _this.state.startTouch;
 	
-	        if (startTest > _this.state.endTouch) {
+	        if (_this.state.startTouch[0] > _this.state.endTouch + 30) {
 	          e.deltaY = 30;
 	          _this.masterHandler(e);
-	        } else if (startTest < _this.state.endTouch) {
+	        } else if (_this.state.startTouch[0] < _this.state.endTouch + 30) {
 	          e.deltaY = -30;
 	          _this.masterHandler(e);
 	        }
 	        _this.setState({
-	          touchCount: 0,
-	          startTouch: 0,
-	          altStartTouch: 0,
+	          startTouch: [],
 	          endTouch: 0
 	        });
 	      }
@@ -23404,7 +23397,8 @@
 	
 	    _this.state = {
 	      page: 0,
-	      scrollListen: true
+	      scrollListen: true,
+	      startTouch: []
 	    };
 	    return _this;
 	  }
@@ -23413,9 +23407,9 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      window.onwheel = this.masterHandler;
-	      window.onkeydown = this.keyHandler;
-	      window.ontouchmove = this.touchStartHandler;
-	      window.ontouchend = this.touchEndHandler;
+	      window.onkeydown = this._keyHandler;
+	      window.ontouchmove = this._touchStartHandler;
+	      window.ontouchend = this._touchEndHandler;
 	    }
 	  }, {
 	    key: 'render',

@@ -6,12 +6,11 @@ export default class SnapScroller extends React.Component {
 
     this.state = {
       page: 0,
-      scrollListen: true,
-      startTouch: []
+      scrollListen: true
     }
   }
 
-  _keyHandler = (e) => {
+  keyHandler = (e) => {
     if (e.code === 'ArrowDown') {
       e.deltaY = 30;
       this.masterHandler(e);
@@ -22,26 +21,34 @@ export default class SnapScroller extends React.Component {
     }
   }
 
-  _touchStartHandler = (e) => {
+  touchStartHandler = (e) => {
     e.preventDefault();
-    let arr = this.state.startTouch;
-    arr.push(e.touches[0].clientY);
-    this.setState({ startTouch: arr });
+    if (this.state.touchCount % 3 === 0) {
+      this.setState({ startTouch: e.touches[0].clientY });
+    }
+    else {
+      this.setState({ altStartTouch: e.touches[0].clientY });
+    }
+    this.setState({ touchCount: this.state.touchCount + 1 });
   }
 
-  _touchEndHandler = (e) => {
+  touchEndHandler = (e) => {
+    e.preventDefault();
     this.setState({ endTouch: e.changedTouches[0].clientY });
+    let startTest = this.state.endTouch === this.state.startTouch || !this.state.startTouch ? this.state.altStartTouch : this.state.startTouch;
 
-    if (this.state.startTouch[0] > this.state.endTouch + 30) {
+    if (startTest > this.state.endTouch) {
       e.deltaY = 30;
       this.masterHandler(e);
     }
-    else if (this.state.startTouch[0] < this.state.endTouch + 30) {
+    else if (startTest < this.state.endTouch) {
       e.deltaY = -30;
       this.masterHandler(e);
     }
     this.setState({
-      startTouch: [],
+      touchCount: 0,
+      startTouch: 0,
+      altStartTouch: 0,
       endTouch: 0
     });
   }
@@ -90,9 +97,9 @@ export default class SnapScroller extends React.Component {
 
   componentDidMount() {
     window.onwheel = this.masterHandler;
-    window.onkeydown = this._keyHandler;
-    window.ontouchmove = this._touchStartHandler;
-    window.ontouchend = this._touchEndHandler;
+    window.onkeydown = this.keyHandler;
+    window.ontouchmove = this.touchStartHandler;
+    window.ontouchend = this.touchEndHandler;
   }
 
   render() {
