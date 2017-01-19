@@ -23334,15 +23334,9 @@
 	            // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
 	            // console.log(tlPage);
 	
-	            var nextTop = void 0;
+	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
 	
-	            if (e.target.ownerDocument) {
-	              nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	            } else {
-	              nextTop = e.target.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	            }
-	            _this.setState({ scrollTop: nextTop });
-	            window.scrollTo(0, _this.state.scrollTop);
+	            window.scrollTo(0, nextTop);
 	
 	            setTimeout(function () {
 	              _this.setState({ scrollListen: true });
@@ -23364,30 +23358,47 @@
 	        }
 	      }
 	    });
-	    Object.defineProperty(_this, 'scrollHandler', {
+	    Object.defineProperty(_this, 'touchStartHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
 	        e.preventDefault();
-	        var scrolled = e.target.body.scrollTop;
+	        if (_this.state.touchCount % 3 === 0) {
+	          _this.setState({ startTouch: e.touches[0].clientY });
+	        } else {
+	          _this.setState({ altStartTouch: e.touches[0].clientY });
+	        }
+	        _this.setState({ touchCount: _this.state.touchCount + 1 });
+	      }
+	    });
+	    Object.defineProperty(_this, 'touchEndHandler', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        e.preventDefault();
+	        _this.setState({ endTouch: e.changedTouches[0].clientY });
+	        var startTest = _this.state.endTouch === _this.state.startTouch || !_this.state.startTouch ? _this.state.altStartTouch : _this.state.startTouch;
 	
-	        window.scrollTo(0, _this.state.scrollTop);
-	
-	        if (scrolled > _this.state.scrollTop && scrolled < _this.state.scrollTop + 7 || scrolled > _this.state.scrollTop + 50) {
+	        if (startTest > _this.state.endTouch) {
 	          e.deltaY = 30;
 	          _this.masterHandler(e);
-	        } else if (scrolled < _this.state.scrollTop && scrolled > _this.state.scrollTop - 7 || scrolled < _this.state.scrollTop - 50) {
+	        } else if (startTest < _this.state.endTouch) {
 	          e.deltaY = -30;
 	          _this.masterHandler(e);
 	        }
+	        _this.setState({
+	          touchCount: 0,
+	          startTouch: 0,
+	          altStartTouch: 0,
+	          endTouch: 0
+	        });
 	      }
 	    });
 	
 	
 	    _this.state = {
 	      page: 0,
-	      scrollListen: true,
-	      scrollTop: 0
+	      scrollListen: true
 	    };
 	    return _this;
 	  }
@@ -23395,18 +23406,15 @@
 	  _createClass(SnapScroller, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
-	
 	      window.onwheel = this.masterHandler;
 	      window.onkeydown = this.keyHandler;
-	      setTimeout(function () {
-	        window.onscroll = _this2.scrollHandler;
-	      }, 1500);
+	      window.ontouchmove = this.touchStartHandler;
+	      window.ontouchend = this.touchEndHandler;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -23414,7 +23422,7 @@
 	        this.props.pageList.map(function (page, i) {
 	          return _react2.default.createElement(
 	            'section',
-	            { className: i === _this3.state.page ? 'current-page' : '', key: i },
+	            { className: i === _this2.state.page ? 'current-page' : '', key: i },
 	            page
 	          );
 	        })

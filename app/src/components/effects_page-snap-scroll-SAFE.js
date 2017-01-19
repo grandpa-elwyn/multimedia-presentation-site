@@ -6,7 +6,8 @@ export default class SnapScroller extends React.Component {
 
     this.state = {
       page: 0,
-      scrollListen: true
+      scrollListen: true,
+      scrollTop: 0
     }
   }
 
@@ -24,6 +25,7 @@ export default class SnapScroller extends React.Component {
 
   masterHandler = (e) => {
 
+
     e.preventDefault();
 
     if (this.state.scrollListen) {
@@ -37,9 +39,16 @@ export default class SnapScroller extends React.Component {
         // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
         // console.log(tlPage);
 
-        let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        let nextTop;
 
-        window.scrollTo(0, nextTop);
+        if (e.target.ownerDocument) {
+          nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        }
+        else {
+           nextTop = e.target.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        }
+        this.setState({ scrollTop: nextTop });
+        window.scrollTo(0, this.state.scrollTop);
 
         setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);
       }
@@ -56,35 +65,45 @@ export default class SnapScroller extends React.Component {
       this.masterHandler(e);
     }
   }
-
-  touchStartHandler = (e) => {
+  
+  scrollHandler = (e) => {
     e.preventDefault();
-    if (this.state.touchCount % 3 === 0) {
-      this.setState({ startTouch: e.touches[0].clientY });
-    }
-    else {
-      this.setState({ altStartTouch: e.touches[0].clientY });
-    }
-    this.setState({ touchCount: this.state.touchCount + 1 });
-  }
+    let scrolled = e.target.body.scrollTop;
 
-  touchEndHandler = (e) => {
-    e.preventDefault();
-    this.setState({ endTouch: e.changedTouches[0].clientY });
-    let startTest = this.state.endTouch === this.state.startTouch || !this.state.startTouch ? this.state.altStartTouch : this.state.startTouch;
+    window.scrollTo(0, this.state.scrollTop);
 
-    if (startTest > this.state.endTouch) {
+    if (
+      ((scrolled > this.state.scrollTop) && (scrolled < this.state.scrollTop + 7))
+      || scrolled > this.state.scrollTop + 50
+    ) {
       e.deltaY = 30;
       this.masterHandler(e);
     }
-    else if (startTest < this.state.endTouch) {
+    else if (
+      ((scrolled < this.state.scrollTop) && (scrolled > this.state.scrollTop - 7))
+      || scrolled < this.state.scrollTop - 50
+    ) {
+      e.deltaY = -30;
+      this.masterHandler(e);
+    }
+  }
+
+  touchStartHandler = (e) => {
+    this.setState({ startTouch: e.touches[0].clientY });
+  }
+
+  endTouchHandler = (e) => {
+    this.setState({ endTouch: e.touches[0].clientY });
+    if (this.state.startTouch < this.state.endTouch) {
+      e.deltaY = 30;
+      this.masterHandler(e);
+    }
+    else if (this.state.startTouch < this.state.endTouch) {
       e.deltaY = -30;
       this.masterHandler(e);
     }
     this.setState({
-      touchCount: 0,
       startTouch: 0,
-      altStartTouch: 0,
       endTouch: 0
     });
   }
@@ -92,6 +111,7 @@ export default class SnapScroller extends React.Component {
   componentDidMount() {
     window.onwheel = this.masterHandler;
     window.onkeydown = this.keyHandler;
+    // setTimeout(() => {window.onscroll = this.scrollHandler}, 1500);
     window.ontouchmove = this.touchStartHandler;
     window.ontouchend = this.touchEndHandler;
   }
