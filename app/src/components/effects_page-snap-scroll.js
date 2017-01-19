@@ -10,42 +10,6 @@ export default class SnapScroller extends React.Component {
     }
   }
 
-  _masterHandlerUp = () => {
-    if (this.state.page + 1 < this.props.pageList.length) {
-      this.setState({ page: this.state.page + 1 });
-    }
-  }
-
-  _masterHandlerDown = () => {
-    if (this.state.page + -1 >= 0) {
-      this.setState({ page: this.state.page - 1 });
-    }
-  }
-
-  masterHandler = (e) => {
-
-    e.preventDefault();
-
-    if (this.state.scrollListen) {
-
-      if (e.deltaY > 20 || e.deltaY < -20) {
-
-        this.setState({ scrollListen: false });
-
-        e.deltaY > 20 ? this._masterHandlerUp() : this._masterHandlerDown()
-
-        // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
-        // console.log(tlPage);
-
-        let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
-
-        window.scrollTo(0, nextTop);
-
-        setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);
-      }
-    }
-  }
-
   keyHandler = (e) => {
     if (e.code === 'ArrowDown') {
       e.deltaY = 30;
@@ -89,6 +53,48 @@ export default class SnapScroller extends React.Component {
     });
   }
 
+  _masterHandlerUp = () => {
+    if (this.state.page + 1 < this.props.pageList.length) {
+      this.setState({
+        page: this.state.page + 1,
+        direction: 'up'
+       });
+    }
+  }
+
+  _masterHandlerDown = () => {
+    if (this.state.page + -1 >= 0) {
+      this.setState({
+        page: this.state.page - 1,
+        direction: 'down'
+      });
+    }
+  }
+
+  masterHandler = (e) => {
+
+    e.preventDefault();
+
+    if (this.state.scrollListen) {
+
+      if (e.deltaY > 20 || e.deltaY < -20) {
+
+        this.setState({ scrollListen: false });
+
+        e.deltaY > 20 ? this._masterHandlerUp() : this._masterHandlerDown()
+
+        // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
+        // console.log(tlPage);
+
+        let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+
+        window.scrollTo(0, nextTop);
+
+        setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);
+      }
+    }
+  }
+
   componentDidMount() {
     window.onwheel = this.masterHandler;
     window.onkeydown = this.keyHandler;
@@ -101,7 +107,7 @@ export default class SnapScroller extends React.Component {
     return (
       <div>
         { this.props.pageList.map((page, i) => {
-          return <section className={ i === this.state.page ? 'current-page' : '' } key={ i }>{ page }</section>;
+          return <section className={ i === this.state.page ? `current-page-slide-${this.state.direction}` : '' } key={ i }>{ page }</section>;
         })}
       </div>
     );

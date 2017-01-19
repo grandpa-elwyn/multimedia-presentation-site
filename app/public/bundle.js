@@ -23298,53 +23298,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (SnapScroller.__proto__ || Object.getPrototypeOf(SnapScroller)).call(this, props));
 	
-	    Object.defineProperty(_this, '_masterHandlerUp', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value() {
-	        if (_this.state.page + 1 < _this.props.pageList.length) {
-	          _this.setState({ page: _this.state.page + 1 });
-	        }
-	      }
-	    });
-	    Object.defineProperty(_this, '_masterHandlerDown', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value() {
-	        if (_this.state.page + -1 >= 0) {
-	          _this.setState({ page: _this.state.page - 1 });
-	        }
-	      }
-	    });
-	    Object.defineProperty(_this, 'masterHandler', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	
-	        e.preventDefault();
-	
-	        if (_this.state.scrollListen) {
-	
-	          if (e.deltaY > 20 || e.deltaY < -20) {
-	
-	            _this.setState({ scrollListen: false });
-	
-	            e.deltaY > 20 ? _this._masterHandlerUp() : _this._masterHandlerDown();
-	
-	            // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
-	            // console.log(tlPage);
-	
-	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	
-	            window.scrollTo(0, nextTop);
-	
-	            setTimeout(function () {
-	              _this.setState({ scrollListen: true });
-	            }, 1500);
-	          }
-	        }
-	      }
-	    });
 	    Object.defineProperty(_this, 'keyHandler', {
 	      enumerable: true,
 	      writable: true,
@@ -23394,6 +23347,59 @@
 	        });
 	      }
 	    });
+	    Object.defineProperty(_this, '_masterHandlerUp', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        if (_this.state.page + 1 < _this.props.pageList.length) {
+	          _this.setState({
+	            page: _this.state.page + 1,
+	            direction: 'up'
+	          });
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, '_masterHandlerDown', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        if (_this.state.page + -1 >= 0) {
+	          _this.setState({
+	            page: _this.state.page - 1,
+	            direction: 'down'
+	          });
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, 'masterHandler', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	
+	        e.preventDefault();
+	
+	        if (_this.state.scrollListen) {
+	
+	          if (e.deltaY > 20 || e.deltaY < -20) {
+	
+	            _this.setState({ scrollListen: false });
+	
+	            e.deltaY > 20 ? _this._masterHandlerUp() : _this._masterHandlerDown();
+	
+	            // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
+	            // console.log(tlPage);
+	
+	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	
+	            window.scrollTo(0, nextTop);
+	
+	            setTimeout(function () {
+	              _this.setState({ scrollListen: true });
+	            }, 1500);
+	          }
+	        }
+	      }
+	    });
 	
 	
 	    _this.state = {
@@ -23422,7 +23428,7 @@
 	        this.props.pageList.map(function (page, i) {
 	          return _react2.default.createElement(
 	            'section',
-	            { className: i === _this2.state.page ? 'current-page' : '', key: i },
+	            { className: i === _this2.state.page ? 'current-page-slide-' + _this2.state.direction : '', key: i },
 	            page
 	          );
 	        })

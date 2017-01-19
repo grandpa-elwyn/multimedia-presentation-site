@@ -6,7 +6,10 @@
 @import 'config/base-typography';
 @import 'config/base-pages';
 @import 'config/media-queries';
-@import 'config/scroll-animation';
+
+@import 'config/scroll-animation_bounce';
+@import 'config/scroll-animation_slide';
+@import 'config/scroll-animation_flip';
 
 @import 'components/timeline-events';
 @import 'components/timeline-event-animation';

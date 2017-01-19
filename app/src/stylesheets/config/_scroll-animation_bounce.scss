@@ -1,9 +1,9 @@
-.current-page {
-  -webkit-animation: page 1.25s ease-in 0s 1 normal;
-  animation: page 1.25s ease-in 0s 1 normal;
+.current-page-bounce {
+  -webkit-animation: page-bounce 1.25s ease-in 0s 1 normal;
+  animation: page-bounce 1.25s ease-in 0s 1 normal;
 }
 
-@-webkit-keyframes page {
+@-webkit-keyframes page-bounce {
     0% {
         -webkit-transform: translateY(0);
         transform: translateY(0);
@@ -39,7 +39,7 @@
         transform: translateY(0);
     }
 }
-@keyframes page {
+@keyframes page-bounce {
     0% {
         transform: translateY(0);
     }
