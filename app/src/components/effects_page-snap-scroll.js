@@ -6,25 +6,25 @@ export default class SnapScroller extends React.Component {
 
     this.state = {
       page: 0,
-      scrollListen: true
+      scrollListen: true,
+      scrollTop: 0
     }
   }
 
-  _onScrollUp = () => {
+  _masterHandlerUp = () => {
     if (this.state.page + 1 < this.props.pageList.length) {
       this.setState({ page: this.state.page + 1 });
     }
   }
 
-  _onScrollDown = () => {
+  _masterHandlerDown = () => {
     if (this.state.page + -1 >= 0) {
       this.setState({ page: this.state.page - 1 });
     }
   }
 
-  onScroll = (e) => {
+  masterHandler = (e) => {
 
-    // console.log(e, this);
 
     e.preventDefault();
 
@@ -34,33 +34,58 @@ export default class SnapScroller extends React.Component {
 
         this.setState({ scrollListen: false });
 
-        e.deltaY > 20 ? this._onScrollUp() : this._onScrollDown()
+        e.deltaY > 20 ? this._masterHandlerUp() : this._masterHandlerDown()
 
         // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
         // console.log(tlPage);
 
-        let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
-        window.scrollTo(0, nextTop);
+        let nextTop;
+
+        if (e.target.ownerDocument) {
+          nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        }
+        else {
+           nextTop = e.target.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
+        }
+        this.setState({ scrollTop: nextTop });
+        window.scrollTo(0, this.state.scrollTop);
 
         setTimeout(() => { this.setState({ scrollListen: true }) }, 1500);
       }
     }
   }
 
-  onKeyHandler = (e) => {
+  keyHandler = (e) => {
     if (e.code === 'ArrowDown') {
       e.deltaY = 30;
-      this.onScroll(e);
+      this.masterHandler(e);
     }
     else if (e.code === 'ArrowUp') {
       e.deltaY = -30;
-      this.onScroll(e);
+      this.masterHandler(e);
+    }
+  }
+
+  scrollHandler = (e) => {
+    e.preventDefault();
+    let scrolled = e.target.body.scrollTop;
+
+    window.scrollTo(0, this.state.scrollTop);
+
+    if (scrolled > this.state.scrollTop) {
+      e.deltaY = 30;
+      this.masterHandler(e);
+    }
+    else if (scrolled < this.state.scrollTop) {
+      e.deltaY = -30;
+      this.masterHandler(e);
     }
   }
 
   componentDidMount() {
-    window.addEventListener('wheel', this.onScroll);
-    window.onkeydown = this.onKeyHandler;
+    window.onwheel = this.masterHandler;
+    window.onkeydown = this.keyHandler;
+    window.onscroll = this.scrollHandler;
   }
 
   render() {

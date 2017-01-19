@@ -23298,7 +23298,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (SnapScroller.__proto__ || Object.getPrototypeOf(SnapScroller)).call(this, props));
 	
-	    Object.defineProperty(_this, '_onScrollUp', {
+	    Object.defineProperty(_this, '_masterHandlerUp', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value() {
@@ -23307,7 +23307,7 @@
 	        }
 	      }
 	    });
-	    Object.defineProperty(_this, '_onScrollDown', {
+	    Object.defineProperty(_this, '_masterHandlerDown', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value() {
@@ -23316,12 +23316,10 @@
 	        }
 	      }
 	    });
-	    Object.defineProperty(_this, 'onScroll', {
+	    Object.defineProperty(_this, 'masterHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
-	
-	        // console.log(e, this);
 	
 	        e.preventDefault();
 	
@@ -23331,13 +23329,20 @@
 	
 	            _this.setState({ scrollListen: false });
 	
-	            e.deltaY > 20 ? _this._onScrollUp() : _this._onScrollDown();
+	            e.deltaY > 20 ? _this._masterHandlerUp() : _this._masterHandlerDown();
 	
 	            // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
 	            // console.log(tlPage);
 	
-	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
-	            window.scrollTo(0, nextTop);
+	            var nextTop = void 0;
+	
+	            if (e.target.ownerDocument) {
+	              nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	            } else {
+	              nextTop = e.target.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
+	            }
+	            _this.setState({ scrollTop: nextTop });
+	            window.scrollTo(0, _this.state.scrollTop);
 	
 	            setTimeout(function () {
 	              _this.setState({ scrollListen: true });
@@ -23346,16 +23351,34 @@
 	        }
 	      }
 	    });
-	    Object.defineProperty(_this, 'onKeyHandler', {
+	    Object.defineProperty(_this, 'keyHandler', {
 	      enumerable: true,
 	      writable: true,
 	      value: function value(e) {
 	        if (e.code === 'ArrowDown') {
 	          e.deltaY = 30;
-	          _this.onScroll(e);
+	          _this.masterHandler(e);
 	        } else if (e.code === 'ArrowUp') {
 	          e.deltaY = -30;
-	          _this.onScroll(e);
+	          _this.masterHandler(e);
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, 'scrollHandler', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        e.preventDefault();
+	        var scrolled = e.target.body.scrollTop;
+	
+	        window.scrollTo(0, _this.state.scrollTop);
+	
+	        if (scrolled > _this.state.scrollTop) {
+	          e.deltaY = 30;
+	          _this.masterHandler(e);
+	        } else if (scrolled < _this.state.scrollTop) {
+	          e.deltaY = -30;
+	          _this.masterHandler(e);
 	        }
 	      }
 	    });
@@ -23363,7 +23386,8 @@
 	
 	    _this.state = {
 	      page: 0,
-	      scrollListen: true
+	      scrollListen: true,
+	      scrollTop: 0
 	    };
 	    return _this;
 	  }
@@ -23371,8 +23395,9 @@
 	  _createClass(SnapScroller, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      window.addEventListener('wheel', this.onScroll);
-	      window.onkeydown = this.onKeyHandler;
+	      window.onwheel = this.masterHandler;
+	      window.onkeydown = this.keyHandler;
+	      window.onscroll = this.scrollHandler;
 	    }
 	  }, {
 	    key: 'render',
