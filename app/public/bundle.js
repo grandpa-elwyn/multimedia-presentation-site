@@ -23373,10 +23373,10 @@
 	
 	        window.scrollTo(0, _this.state.scrollTop);
 	
-	        if (scrolled > _this.state.scrollTop) {
+	        if (scrolled > _this.state.scrollTop && scrolled < _this.state.scrollTop + 7 || scrolled > _this.state.scrollTop + 50) {
 	          e.deltaY = 30;
 	          _this.masterHandler(e);
-	        } else if (scrolled < _this.state.scrollTop) {
+	        } else if (scrolled < _this.state.scrollTop && scrolled > _this.state.scrollTop - 7 || scrolled < _this.state.scrollTop - 50) {
 	          e.deltaY = -30;
 	          _this.masterHandler(e);
 	        }
@@ -23395,14 +23395,18 @@
 	  _createClass(SnapScroller, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+	
 	      window.onwheel = this.masterHandler;
 	      window.onkeydown = this.keyHandler;
-	      window.onscroll = this.scrollHandler;
+	      setTimeout(function () {
+	        window.onscroll = _this2.scrollHandler;
+	      }, 1500);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -23410,7 +23414,7 @@
 	        this.props.pageList.map(function (page, i) {
 	          return _react2.default.createElement(
 	            'section',
-	            { className: i === _this2.state.page ? 'current-page' : '', key: i },
+	            { className: i === _this3.state.page ? 'current-page' : '', key: i },
 	            page
 	          );
 	        })

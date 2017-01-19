@@ -72,11 +72,17 @@ export default class SnapScroller extends React.Component {
 
     window.scrollTo(0, this.state.scrollTop);
 
-    if (scrolled > this.state.scrollTop) {
+    if (
+      ((scrolled > this.state.scrollTop) && (scrolled < this.state.scrollTop + 7))
+      || scrolled > this.state.scrollTop + 50
+    ) {
       e.deltaY = 30;
       this.masterHandler(e);
     }
-    else if (scrolled < this.state.scrollTop) {
+    else if (
+      ((scrolled < this.state.scrollTop) && (scrolled > this.state.scrollTop - 7))
+      || scrolled < this.state.scrollTop - 50
+    ) {
       e.deltaY = -30;
       this.masterHandler(e);
     }
@@ -85,7 +91,7 @@ export default class SnapScroller extends React.Component {
   componentDidMount() {
     window.onwheel = this.masterHandler;
     window.onkeydown = this.keyHandler;
-    window.onscroll = this.scrollHandler;
+    setTimeout(() => {window.onscroll = this.scrollHandler}, 1500);
   }
 
   render() {
