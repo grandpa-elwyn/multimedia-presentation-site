@@ -114,12 +114,16 @@
 	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[1] }), // 1985-1988 live
 	      _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[2] }), // IMG hijacking
 	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[2] }), // HEADER mizutani reclusive
-	      // TL
-	      // VID 1977 concert
-	      // TL 1980 mars studio, french demos
-	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[2] }), // 1982 keio university
-	      // IMG later years
-	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[3] })]
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[2] }), // VID 1977 concert
+	      _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[3] }), // IMG later years
+	      _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent[2] }), // TL 1980 mars studio, french demos
+	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[3] }), // HEADER world catches up
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[3] }), // 1982 keio university
+	      _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[4] }), // IMG later years
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[4] }), // ethan mousike
+	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[4] }), // HEADER concert
+	      _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent[3] }) // TL sources
+	      ]
 	    });
 	    return _this;
 	  }
@@ -22108,18 +22112,44 @@
 	  description: _react2.default.createElement(
 	    'span',
 	    null,
-	    'Described by many as the ultimate cult band, Les Rallizes D\xE9nud\xE9s is remembered as the loudest, most experimental pioneer of the Japanese underground. Despite a career spanning four decades, the band remains shrouded in mystery, having shunned the press, the public, and the music recording industry for the vast majority of that time.'
+	    'Described by many as the ultimate cult band, Les Rallizes D\xE9nud\xE9s undeniably earned a place among the very loudest, most experimental pioneers of the Japanese underground psychedelic and noise rock scene. Despite a career spanning four decades, the band remains shrouded in mystery, having shunned the press, the public, and the music recording industry for the vast majority of that time.'
 	  )
 	}, {
 	  class: 'image-page-2',
 	  img: 'lrd2.jpg',
 	  header: 'sound & shows',
-	  description: 'their earliest live performances were accompanied by avant-garde theater groups, but their music proved to be too loud and intense and distracting to serve as an accompaniment; the shows stood on their own as a multi-sensory experience.'
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'their earliest live performances were accompanied by avant-garde theater groups, but their music proved to be too loud and intense and distracting to serve as an accompaniment; the shows stood on their own as a multi-sensory experience.'
+	  )
 	}, {
 	  class: 'image-page-1',
 	  img: 'lrd3.jpg',
 	  header: 'radical politics',
-	  description: "in 1970, the original base player, moriaki wakabayashi, joined the red army faction in the hijacking of japan airlines flight 351. the plane was diverted to pyongyang, north korea, and the hijackers were granted asylum by the country's communist regime."
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'in 1970, the original bass player, moriaki wakabayashi, joined the red army faction in the hijacking of japan airlines flight 351. the plane was diverted to pyongyang, north korea, and the hijackers were granted asylum by the country\'s communist regime.'
+	  )
+	}, {
+	  class: 'image-page-2',
+	  img: 'lrd4.jpg',
+	  header: 'later years',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'from the time of wakabayashi\'s defection to the band\'s last show in 1996, the members of LRD rotated frequently, with mizutani himself being the only constant presence. he was--perhaps unsurprisingly--notoriously difficult to work with, refusing to compromise on any artistic principle, often hermitting himself away and turning down opportunities for public performance. still, he held a nearly mythical status within the avant-garde community, and continued to attract young musicians eager to be a part of the legendary band.'
+	  )
+	}, {
+	  class: 'image-page-1',
+	  img: 'lrd5.jpg',
+	  header: 'last appearances',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'Les Rallizes D\xE9nud\xE9s performed for the last time in october 1996. takashi mizutani disappeared soon after, and was last verifiably seen by the public in 1997. as of 2016, he is rumoured by some to be alive and well in Paris; others claim he lives as a recluse in Tokyo, still paranoid that he is monitored by the government.'
+	  )
 	}];
 
 /***/ },
@@ -22221,30 +22251,102 @@
 	  header: 'formation & early sound',
 	  timeline: [{
 	    date: '1967',
-	    description: "At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani formed his first band with four other students.  Their early sound was similar to the 'existenial folk' that permeated the far-left Kyoto coffe shop scene."
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani formed his first band with four other students.  Their early sound was similar to the \'existenial folk\' that permeated the far-left Kyoto coffe shop scene.'
+	    )
 	  }, {
 	    date: '1968',
-	    description: "The band recorded a studio demo; the result was something akin to a neutered American garage band, which horrified Mizutani.  Inspired by recent releases from the Velvet Underground and Blue Cheer, the band honed their style into one that was much louder and more distorted."
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'The band recorded a studio demo; the result was something akin to a neutered American garage band, which horrified Mizutani.  Inspired by recent releases from the Velvet Underground and Blue Cheer, the band honed their style into one that was much louder and more distorted.'
+	    )
 	  }]
 	}, {
 	  class: 'timeline-page-2',
 	  header: 'ideology & early performances',
 	  timeline: [{
 	    date: '1962',
-	    description: "The experimental theatre company, Gendai Gekijo, was founded in Kyoto. The group created an atmosphere of anti-commercialism and intellectualism in the Kyoto underground; enamored with French existentialism and beatnik culture, its members took to dressing in black, obscuring their faces, and refusing interviews, while sprinkling their own conversations with French slang and nihilist undertones.  Mizutani was heavily impressed by this mindset and adopted it in his personal affect as well as for his band's foundation."
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'The experimental theatre company, Gendai Gekijo, was founded in Kyoto. The group created an atmosphere of anti-commercialism and intellectualism in the Kyoto underground; enamored with French existentialism and beatnik culture, its members took to dressing in black, obscuring their faces, and refusing interviews, while sprinkling their own conversations with French slang and nihilist undertones.  Mizutani was heavily impressed by this mindset and adopted it in his personal affect as well as for his band\'s foundation.'
+	    )
 	  }, {
 	    date: '1968',
-	    description: "Later, Gendai Gekijo helped put on the band's first public performance, contributing an arresting light show, complete with mirror balls and strobe lights. Mizutani liked it so much that he made the effects a signature of the band's shows, coining the term 'total sensory assault' to describe their goal."
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'Later, Gendai Gekijo helped put on the band\'s first public performance, contributing an arresting light show, complete with mirror balls and strobe lights. Mizutani liked it so much that he made the effects a signature of the band\'s shows, coining the term \'total sensory assault\' to describe their goal.'
+	    )
 	  }]
 	}, {
 	  class: 'timeline-page-1',
+	  header: 'revisiting the studio',
+	  timeline: [{
+	    date: '1980',
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'With the line-up\'s addition of guitarist Fujio Yamaguchi--himself a notable figure within the Japanese underground, having fronted garage and glam-rock bands in the scene--LRD reached a new new clarity in their sound: without compromising the band\'s trademark weight of feedback and volume, Yamaguchi lent a more melodic, psychedelic tone to their music.  During his year-long tenure, Les Rallizes D\xE9nud\xE9s recorded their best-known and most highly acclaimed studio work, which was later released as MARS STUDIO 1980. '
+	    )
+	  }, {
+	    date: 'Late 80s',
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      'At some point later in the decade, LRD returned to the studio for a top-secret session in which they recorded only three songs, though altogether the tracks clocked in at over 40 minutes. the renditions of "night of the assassins" and "the last one" on FRANCE DEMO TAPES are among the most outstanding and unforgivably heavy versions of those songs known to be recorded.'
+	    )
+	  }]
+	}, {
+	  class: 'timeline-page-2',
 	  header: 'sources & further reading',
 	  timeline: [{
-	    date: 'article',
-	    description: "At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani and four other students record the first sprawling scratchy songs that will become Les Rallizes Denudes' signature sound."
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      _react2.default.createElement(
+	        'a',
+	        { href: 'https://www.discogs.com/artist/520482-Les-Rallizes-Denudes' },
+	        'Discography: Les Rallizes D\xE9nud\xE9s'
+	      ),
+	      ' - discogs.com'
+	    )
 	  }, {
-	    date: '1972',
-	    description: 'Major show at suchnsuch.'
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      _react2.default.createElement(
+	        'a',
+	        { href: 'http://www.japrocksampler.com/' },
+	        'Japrocksampler: How the Post-War Japanese Blew Their Minds on Rock \'n\' Roll'
+	      ),
+	      ' - Julian Cope, 2007'
+	    )
+	  }, {
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      _react2.default.createElement(
+	        'a',
+	        { href: 'http://daily.redbullmusicacademy.com/2014/12/les-rallizes-denudes-feature' },
+	        'In Search of Les Rallizes D\xE9nud\xE9s'
+	      ),
+	      ' - Grayson Haver Currin, December 2014 - Red Bull Music Academy Daily'
+	    )
+	  }, {
+	    description: _react2.default.createElement(
+	      'span',
+	      null,
+	      _react2.default.createElement(
+	        'a',
+	        { href: 'http://www.japanvisitor.com/japanese-culture/les-rallizes-denudes-yodo-go-hijack' },
+	        'Les Rallizes D\xE9nud\xE9s & the Yodo-go Hijacking'
+	      ),
+	      ' - Johannes Schonherr, April 2014 - japanvisitor.com'
+	    )
 	  }]
 	}];
 
@@ -22455,18 +22557,18 @@
 	  ), _react2.default.createElement(
 	    'h1',
 	    { key: '2' },
-	    '\'rallizes\' is not a word'
+	    '"rallizes" is not a word'
 	  ), _react2.default.createElement(
 	    'h2',
 	    { key: '3' },
-	    'in any dictionary, so the best english translation of the name is \'the naked rallizes.\''
+	    'in any dictionary, so the best english translation of the name is "the naked rallizes."'
 	  )]
 	}, {
 	  class: 'header-page-1',
 	  headerBlock: [_react2.default.createElement(
 	    'h2',
 	    { key: '1' },
-	    'though mizutani had not been involved in the plot, he became'
+	    'according to some reports, mizutani was also asked to assist in the hijacking, but rejected a role in the plot. though he had no direct involvement, he became'
 	  ), _react2.default.createElement(
 	    'h1',
 	    { key: '2' },
@@ -22474,7 +22576,37 @@
 	  ), _react2.default.createElement(
 	    'h2',
 	    { key: '3' },
-	    'following the hijacking, paranoid that the government would investigate the band\'s leftist leanings.'
+	    'following the hijacking, paranoid that the government would investigate the band for their radical leftist leanings and his personal communist sympathies.'
+	  )]
+	}, {
+	  class: 'header-page-2',
+	  headerBlock: [_react2.default.createElement(
+	    'h2',
+	    { key: '1' },
+	    'by the mid-1980s, loud and distorted music with nihilistic themes had taken over the scenes in London and New York. it seemed that the time for LRD\'s'
+	  ), _react2.default.createElement(
+	    'h1',
+	    { key: '2' },
+	    'visionary noise'
+	  ), _react2.default.createElement(
+	    'h2',
+	    { key: '3' },
+	    'had come, and the world was now primed for mizutani and his crew to claim their place in the "popular underground." but mizutani was uninterested, and instead retreated further and further from the communities now ready to welcome his work.'
+	  )]
+	}, {
+	  class: 'header-page-1',
+	  headerBlock: [_react2.default.createElement(
+	    'h2',
+	    { key: '1' },
+	    '"for those young people - including you - who live this modern agonising adolescence and who are wanting '
+	  ), _react2.default.createElement(
+	    'h1',
+	    { key: '2' },
+	    'the true radical music,'
+	  ), _react2.default.createElement(
+	    'h2',
+	    { key: '3' },
+	    'i sincerely wish the dialogue accompanied by piercing pain will be born and fill this recital hall." (LRD concert flyer, 1968-1969)'
 	  )]
 	}];
 
@@ -22583,18 +22715,31 @@
 	  )
 	}, {
 	  class: 'video-page-1',
-	  header: 'ethan mousike vhs',
+	  header: 'night of the assassins, live at open air festival (1976)',
+	  videoId: 'iJYmLVkdoGA',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'despite their increasingly low-profile and sporadic performances, LRD were invited to headline the major Open Air festival in 1976. on the morning of their scheduled performance, a typhoon forced cancellation of the entire event. the band went ahead with their set, despite the gathering storm and the festival organizers\' requests to keep the amplifiers down, lest the noise trigger an avalanche in the mountains nearby.'
+	  )
+	}, {
+	  class: 'video-page-1',
+	  header: 'unknown, live at keio university, yokohama (1982)',
+	  videoId: 'ZF57c1bKO-w',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'the audio from this concert was included on the bootleg release "naked diza star"; like many of LRD\'s available records, the track listing is incomplete or inconsistent.'
+	  )
+	}, {
+	  class: 'video-page-2',
+	  header: 'romance of the black grief (ethan mousike vhs, 1992)',
 	  videoId: 'YxOZUseg5OI',
 	  description: _react2.default.createElement(
 	    'span',
 	    null,
-	    'romance of the black grief (otherwise fallin\' in love with).'
+	    'in LRD\'s final years, french director ethan mousike traveled to japan to capture the band\'s story. the result was a freeform documentary, devoid of narrative or clear structure; it consists of archival footage of the band, both candid and in concert, soundtracked by various live recordings from mousike\'s period of observation.'
 	  )
-	}, {
-	  class: 'video-page-2',
-	  header: 'improvisation',
-	  videoId: 'ZF57c1bKO-w',
-	  description: 'october 2, 1982: live at keio university, yokohama'
 	}];
 
 /***/ },
@@ -23176,6 +23321,8 @@
 	      writable: true,
 	      value: function value(e) {
 	
+	        // console.log(e, this);
+	
 	        e.preventDefault();
 	
 	        if (_this.state.scrollListen) {
@@ -23186,6 +23333,9 @@
 	
 	            e.deltaY > 20 ? _this._onScrollUp() : _this._onScrollDown();
 	
+	            // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
+	            // console.log(tlPage);
+	
 	            var nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[_this.state.page].offsetTop;
 	            window.scrollTo(0, nextTop);
 	
@@ -23193,6 +23343,19 @@
 	              _this.setState({ scrollListen: true });
 	            }, 1500);
 	          }
+	        }
+	      }
+	    });
+	    Object.defineProperty(_this, 'onKeyHandler', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        if (e.code === 'ArrowDown') {
+	          e.deltaY = 30;
+	          _this.onScroll(e);
+	        } else if (e.code === 'ArrowUp') {
+	          e.deltaY = -30;
+	          _this.onScroll(e);
 	        }
 	      }
 	    });
@@ -23209,6 +23372,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      window.addEventListener('wheel', this.onScroll);
+	      window.onkeydown = this.onKeyHandler;
 	    }
 	  }, {
 	    key: 'render',

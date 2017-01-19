@@ -24,6 +24,8 @@ export default class SnapScroller extends React.Component {
 
   onScroll = (e) => {
 
+    // console.log(e, this);
+
     e.preventDefault();
 
     if (this.state.scrollListen) {
@@ -34,6 +36,9 @@ export default class SnapScroller extends React.Component {
 
         e.deltaY > 20 ? this._onScrollUp() : this._onScrollDown()
 
+        // let tlPage = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].childNodes[0].className;
+        // console.log(tlPage);
+
         let nextTop = e.target.ownerDocument.body.childNodes[1].childNodes[0].childNodes[this.state.page].offsetTop;
         window.scrollTo(0, nextTop);
 
@@ -42,8 +47,20 @@ export default class SnapScroller extends React.Component {
     }
   }
 
+  onKeyHandler = (e) => {
+    if (e.code === 'ArrowDown') {
+      e.deltaY = 30;
+      this.onScroll(e);
+    }
+    else if (e.code === 'ArrowUp') {
+      e.deltaY = -30;
+      this.onScroll(e);
+    }
+  }
+
   componentDidMount() {
     window.addEventListener('wheel', this.onScroll);
+    window.onkeydown = this.onKeyHandler;
   }
 
   render() {

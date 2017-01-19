@@ -395,9 +395,32 @@ body {
   -ms-flex-preferred-size: 240px;
   flex-basis: 240px;
   max-width: 780px;
-  min-height: 15vh;
   padding-left: 20px; }
 
+.timelineAnimation {
+  -webkit-animation-name: timelineAnimation;
+  animation-name: timelineAnimation;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+@-webkit-keyframes timelineAnimation {
+  0% {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    visibility: visible; }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0); } }
+@keyframes timelineAnimation {
+  0% {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    visibility: visible; }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0); } }
 .page-header .page-content-container {
   max-height: 90vh;
   min-height: 60vh; }
@@ -545,6 +568,9 @@ body {
     background-color: #fcafa9;
     height: 12px;
     width: 12px; }
+  .timeline-page-1 a:link, .timeline-page-1 a:hover, .timeline-page-1 a:active, .timeline-page-1 a:visited {
+    color: #011b23;
+    border-bottom: 1px solid #fcafa9; }
 
 .timeline-page-2 {
   background-color: #fff;
@@ -577,6 +603,9 @@ body {
     background-color: #3cc47c;
     height: 12px;
     width: 12px; }
+  .timeline-page-2 a:link, .timeline-page-2 a:hover, .timeline-page-2 a:active, .timeline-page-2 a:visited {
+    color: #011b23;
+    border-bottom: 1px solid #3cc47c; }
 
 .header-page-1 {
   text-align: right;

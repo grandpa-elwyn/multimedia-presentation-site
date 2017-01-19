@@ -66,7 +66,6 @@
 .event-text {
   @include flex(3, 1, 240px);
   max-width: 780px;
-  min-height: 15vh;
   padding-left: 20px;
 }
 

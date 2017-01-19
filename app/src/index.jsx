@@ -31,14 +31,15 @@ class BandBio extends React.Component {
     <VideoPage page={ VidContent[1] } />, // 1985-1988 live
     <ImagePage page={ ImgContent[2] } />, // IMG hijacking
     <HeaderPage page={ HdContent[2] } />, // HEADER mizutani reclusive
-      // TL
-      // VID 1977 concert
-      // TL 1980 mars studio, french demos
-    <VideoPage page={ VidContent[2] } />, // 1982 keio university
-      // IMG later years
-    <VideoPage page={ VidContent[3] } />, // ethan mousike
-      // HEADER
-      // TL sources
+    <VideoPage page={ VidContent[2] } />, // VID 1977 concert
+    <ImagePage page={ ImgContent[3] } />, // IMG later years
+    <TimelinePage page={ TlContent[2] } />, // TL 1980 mars studio, french demos
+    <HeaderPage page={ HdContent[3] } />, // HEADER world catches up
+    <VideoPage page={ VidContent[3] } />, // 1982 keio university
+    <ImagePage page={ ImgContent[4] } />, // IMG later years
+    <VideoPage page={ VidContent[4] } />, // ethan mousike
+    <HeaderPage page={ HdContent[4] } />, // HEADER concert
+    <TimelinePage page={ TlContent[3] } />  // TL sources
   ];
 
   render() {
