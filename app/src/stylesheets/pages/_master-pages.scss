@@ -4,26 +4,34 @@
 // @mixin video-page($alignment, $text-color, $background-color, $overlay-color, $overlay-opacity, $accent-color-1, $accent-color-2)
 
 
-.page-1 {
+.image-page-1 {
   @include page-image($night, .7, $white, $electric);
 }
 
-.page-2 {
-  @include page-timeline($white, $night, $electric, $petal, 15px);
-}
-
-.page-3 {
-  @include page-header($white, $night, $petal, $electric);
-}
-
-.page-4 {
-  @include video-page($night, $white, $rose, .7, $petal, $electric);
-}
-
-.page-5 {
+.image-page-2 {
   @include page-image($night, .7, $white, $petal);
 }
 
-.page-6 {
+.timeline-page-1 {
+  @include page-timeline($white, $night, $electric, $petal, 12px);
+}
+
+.timeline-page-2 {
+  @include page-timeline($white, $night, $petal, $electric, 12px);
+}
+
+.header-page-1 {
+  @include page-header($white, $night, $petal, $electric);
+}
+
+.header-page-2 {
+  @include page-header($white, $night, $electric, $petal);
+}
+
+.video-page-1 {
+  @include video-page($night, $white, $rose, .7, $petal, $electric);
+}
+
+.video-page-2 {
   @include video-page($night, $white, $electric, .7, $electric, $petal);
 }

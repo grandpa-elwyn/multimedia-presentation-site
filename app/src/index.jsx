@@ -21,12 +21,24 @@ class BandBio extends React.Component {
   }
 
   pageList = [
-    <ImagePage page={ ImgContent.page1 } />,
-    <TimelinePage page={ TlContent.page2 } />,
-    <HeaderPage page={ HdContent.page3 } />,
-    <VideoPage page={ VidContent.page4 } />,
-    <ImagePage page={ ImgContent.page5 } />,
-    <VideoPage page={ VidContent.page6 } />
+    <ImagePage page={ ImgContent[0] } />, // intro
+    <TimelinePage page={ TlContent[0] } />, // formation and early sound
+    <HeaderPage page={ HdContent[0] } />, // no official recordings
+    <VideoPage page={ VidContent[0] } />, // early recordings
+    <ImagePage page={ ImgContent[1] } />, // sound and shows
+    <TimelinePage page={ TlContent[1] } />, // TL use of visual aids
+    <HeaderPage page={ HdContent[1] } />, // language
+    <VideoPage page={ VidContent[1] } />, // 1985-1988 live
+    <ImagePage page={ ImgContent[2] } />, // IMG hijacking
+    <HeaderPage page={ HdContent[2] } />, // HEADER mizutani reclusive
+      // TL
+      // VID 1977 concert
+      // TL 1980 mars studio, french demos
+    <VideoPage page={ VidContent[2] } />, // 1982 keio university
+      // IMG later years
+    <VideoPage page={ VidContent[3] } />, // ethan mousike
+      // HEADER
+      // TL sources
   ];
 
   render() {

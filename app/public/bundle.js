@@ -104,7 +104,22 @@
 	    Object.defineProperty(_this, 'pageList', {
 	      enumerable: true,
 	      writable: true,
-	      value: [_react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page1 }), _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent.page2 }), _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent.page3 }), _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page4 }), _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent.page5 }), _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent.page6 })]
+	      value: [_react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[0] }), // intro
+	      _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent[0] }), // formation and early sound
+	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[0] }), // no official recordings
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[0] }), // early recordings
+	      _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[1] }), // sound and shows
+	      _react2.default.createElement(_page_timeline2.default, { page: _content_timelinePage.TlContent[1] }), // TL use of visual aids
+	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[1] }), // language
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[1] }), // 1985-1988 live
+	      _react2.default.createElement(_page_imageHeader2.default, { page: _content_imagePage.ImgContent[2] }), // IMG hijacking
+	      _react2.default.createElement(_page_frameHeader2.default, { page: _content_headerPage.HdContent[2] }), // HEADER mizutani reclusive
+	      // TL
+	      // VID 1977 concert
+	      // TL 1980 mars studio, french demos
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[2] }), // 1982 keio university
+	      // IMG later years
+	      _react2.default.createElement(_page_video2.default, { page: _content_videoPage.VidContent[3] })]
 	    });
 	    return _this;
 	  }
@@ -22086,20 +22101,26 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ImgContent = exports.ImgContent = {
-	  page1: {
-	    class: 'page-1',
-	    img: 'lrd1.jpg',
-	    header: 'Les Rallizes Dénudés',
-	    description: 'The most legendary and mysterious group of the Japanese underground, Les Rallizes Denudes went on again, off again until the late 1990\'s.'
-	  },
-	  page5: {
-	    class: 'page-5',
-	    img: 'lrd2.jpg',
-	    header: 'sound & shows',
-	    description: 'their earliest live performances were accompanied by avant-garde theater groups, but their music proved to be too loud and intense and distracting.'
-	  }
-	};
+	var ImgContent = exports.ImgContent = [{
+	  class: 'image-page-1',
+	  img: 'lrd1.jpg',
+	  header: 'Les Rallizes Dénudés',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'Described by many as the ultimate cult band, Les Rallizes D\xE9nud\xE9s is remembered as the loudest, most experimental pioneer of the Japanese underground. Despite a career spanning four decades, the band remains shrouded in mystery, having shunned the press, the public, and the music recording industry for the vast majority of that time.'
+	  )
+	}, {
+	  class: 'image-page-2',
+	  img: 'lrd2.jpg',
+	  header: 'sound & shows',
+	  description: 'their earliest live performances were accompanied by avant-garde theater groups, but their music proved to be too loud and intense and distracting to serve as an accompaniment; the shows stood on their own as a multi-sensory experience.'
+	}, {
+	  class: 'image-page-1',
+	  img: 'lrd3.jpg',
+	  header: 'radical politics',
+	  description: "in 1970, the original base player, moriaki wakabayashi, joined the red army faction in the hijacking of japan airlines flight 351. the plane was diverted to pyongyang, north korea, and the hijackers were granted asylum by the country's communist regime."
+	}];
 
 /***/ },
 /* 179 */
@@ -22195,19 +22216,37 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TlContent = exports.TlContent = {
-	  page2: {
-	    class: 'page-2',
-	    header: 'formation & early sound',
-	    timeline: [{
-	      date: '1967',
-	      description: 'At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani and four other students record the first sprawling scratchy songs that will become Les Rallizes Denudes\' signature sound.'
-	    }, {
-	      date: '1972',
-	      description: 'Major show at suchnsuch.'
-	    }]
-	  }
-	};
+	var TlContent = exports.TlContent = [{
+	  class: 'timeline-page-1',
+	  header: 'formation & early sound',
+	  timeline: [{
+	    date: '1967',
+	    description: "At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani formed his first band with four other students.  Their early sound was similar to the 'existenial folk' that permeated the far-left Kyoto coffe shop scene."
+	  }, {
+	    date: '1968',
+	    description: "The band recorded a studio demo; the result was something akin to a neutered American garage band, which horrified Mizutani.  Inspired by recent releases from the Velvet Underground and Blue Cheer, the band honed their style into one that was much louder and more distorted."
+	  }]
+	}, {
+	  class: 'timeline-page-2',
+	  header: 'ideology & early performances',
+	  timeline: [{
+	    date: '1962',
+	    description: "The experimental theatre company, Gendai Gekijo, was founded in Kyoto. The group created an atmosphere of anti-commercialism and intellectualism in the Kyoto underground; enamored with French existentialism and beatnik culture, its members took to dressing in black, obscuring their faces, and refusing interviews, while sprinkling their own conversations with French slang and nihilist undertones.  Mizutani was heavily impressed by this mindset and adopted it in his personal affect as well as for his band's foundation."
+	  }, {
+	    date: '1968',
+	    description: "Later, Gendai Gekijo helped put on the band's first public performance, contributing an arresting light show, complete with mirror balls and strobe lights. Mizutani liked it so much that he made the effects a signature of the band's shows, coining the term 'total sensory assault' to describe their goal."
+	  }]
+	}, {
+	  class: 'timeline-page-1',
+	  header: 'sources & further reading',
+	  timeline: [{
+	    date: 'article',
+	    description: "At Doshishi University in Kyoto, 19-year-old Takeshi Mizutani and four other students record the first sprawling scratchy songs that will become Les Rallizes Denudes' signature sound."
+	  }, {
+	    date: '1972',
+	    description: 'Major show at suchnsuch.'
+	  }]
+	}];
 
 /***/ },
 /* 181 */
@@ -22292,7 +22331,7 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22318,31 +22357,47 @@
 	  function TimelineEvent(props) {
 	    _classCallCheck(this, TimelineEvent);
 	
-	    return _possibleConstructorReturn(this, (TimelineEvent.__proto__ || Object.getPrototypeOf(TimelineEvent)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (TimelineEvent.__proto__ || Object.getPrototypeOf(TimelineEvent)).call(this, props));
+	
+	    Object.defineProperty(_this, 'hideDate', {
+	      enumerable: true,
+	      writable: true,
+	      value: {
+	        display: 'none'
+	      }
+	    });
+	    Object.defineProperty(_this, 'showDate', {
+	      enumerable: true,
+	      writable: true,
+	      value: {
+	        display: 'inherit'
+	      }
+	    });
+	    return _this;
 	  }
 	
 	  _createClass(TimelineEvent, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "event-container" },
+	        'div',
+	        { className: 'event-container' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "event-date" },
+	          'div',
+	          { className: 'event-date' },
 	          _react2.default.createElement(
-	            "h2",
-	            null,
+	            'h2',
+	            { style: this.props.event.date ? this.showDate : this.hideDate },
 	            this.props.event.date
 	          ),
-	          _react2.default.createElement("div", { className: "date-box-line" }),
-	          _react2.default.createElement("div", { className: "event-dot" })
+	          _react2.default.createElement('div', { className: 'date-box-line', style: this.props.event.date ? this.showDate : this.hideDate }),
+	          _react2.default.createElement('div', { className: 'event-dot' })
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "event-text" },
+	          'div',
+	          { className: 'event-text' },
 	          _react2.default.createElement(
-	            "span",
+	            'span',
 	            null,
 	            this.props.event.description
 	          )
@@ -22366,7 +22421,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.HdContent = undefined;
 	
@@ -22376,24 +22431,52 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var HdContent = exports.HdContent = {
-	    page3: {
-	        class: 'page-3',
-	        headerBlock: [_react2.default.createElement(
-	            'h2',
-	            { key: '1' },
-	            'mizutani was never pleased with the production value of studio recordings. though they played through four decades, les rallizes d\xE9nud\xE9s released'
-	        ), _react2.default.createElement(
-	            'h1',
-	            { key: '2' },
-	            'no official recordings'
-	        ), _react2.default.createElement(
-	            'h2',
-	            { key: '3' },
-	            'of their music. the discography consists of bootlegs, soundboard archives, and studio scraps.'
-	        )]
-	    }
-	};
+	var HdContent = exports.HdContent = [{
+	  class: 'header-page-1',
+	  headerBlock: [_react2.default.createElement(
+	    'h2',
+	    { key: '1' },
+	    'following the disappointment of early studio visits, les rallizes d\xE9nud\xE9s released'
+	  ), _react2.default.createElement(
+	    'h1',
+	    { key: '2' },
+	    'no official recordings'
+	  ), _react2.default.createElement(
+	    'h2',
+	    { key: '3' },
+	    'of their music, and did not revisit a studio until 1980. as a result, the discography consists of bootlegs, soundboard archives, and studio scraps.'
+	  )]
+	}, {
+	  class: 'header-page-2',
+	  headerBlock: [_react2.default.createElement(
+	    'h2',
+	    { key: '1' },
+	    'to avoid association with the governing cultures he despised, mizutani sang in a gibberish mish-mash of japanese, french, and french creole. neither does the band\'s name have a discernable meaning:'
+	  ), _react2.default.createElement(
+	    'h1',
+	    { key: '2' },
+	    '\'rallizes\' is not a word'
+	  ), _react2.default.createElement(
+	    'h2',
+	    { key: '3' },
+	    'in any dictionary, so the best english translation of the name is \'the naked rallizes.\''
+	  )]
+	}, {
+	  class: 'header-page-1',
+	  headerBlock: [_react2.default.createElement(
+	    'h2',
+	    { key: '1' },
+	    'though mizutani had not been involved in the plot, he became'
+	  ), _react2.default.createElement(
+	    'h1',
+	    { key: '2' },
+	    'even more reclusive'
+	  ), _react2.default.createElement(
+	    'h2',
+	    { key: '3' },
+	    'following the hijacking, paranoid that the government would investigate the band\'s leftist leanings.'
+	  )]
+	}];
 
 /***/ },
 /* 184 */
@@ -22484,20 +22567,35 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var VidContent = exports.VidContent = {
-	  page4: {
-	    class: 'page-4',
-	    header: 'romance of the black grief (otherwise fallin\' in love with)',
-	    videoId: 'YxOZUseg5OI',
-	    description: 'early concert footage.'
-	  },
-	  page6: {
-	    class: 'page-6',
-	    header: 'improvisation',
-	    videoId: 'ZF57c1bKO-w',
-	    description: 'october 2, 1982: live at keio university, yokohama'
-	  }
-	};
+	var VidContent = exports.VidContent = [{
+	  class: 'video-page-1',
+	  header: '[album] studio & soundboard 1969-1975',
+	  videoId: '2-cSamFulpc',
+	  description: "early recordings highlight the band's evolution from the fringe psychedelic-garage scene into its signature screeching assault on the ears."
+	}, {
+	  class: 'video-page-2',
+	  header: 'live performance, late 1980s',
+	  videoId: 'fE0OMbCQWgg',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'light shows and mirror balls remained a vital component of les rallizes d\xE9nud\xE9s\' performances throughout the span of their career.'
+	  )
+	}, {
+	  class: 'video-page-1',
+	  header: 'ethan mousike vhs',
+	  videoId: 'YxOZUseg5OI',
+	  description: _react2.default.createElement(
+	    'span',
+	    null,
+	    'romance of the black grief (otherwise fallin\' in love with).'
+	  )
+	}, {
+	  class: 'video-page-2',
+	  header: 'improvisation',
+	  videoId: 'ZF57c1bKO-w',
+	  description: 'october 2, 1982: live at keio university, yokohama'
+	}];
 
 /***/ },
 /* 186 */
@@ -22603,11 +22701,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _media_playerButton = __webpack_require__(/*! ../components/media_player-button.js */ 189);
+	var _media_playerButton = __webpack_require__(/*! ../components/media_player-button.js */ 188);
 	
 	var _media_playerButton2 = _interopRequireDefault(_media_playerButton);
 	
-	var _media_playerProgress = __webpack_require__(/*! ../components/media_player-progress.js */ 188);
+	var _media_playerProgress = __webpack_require__(/*! ../components/media_player-progress.js */ 189);
 	
 	var _media_playerProgress2 = _interopRequireDefault(_media_playerProgress);
 	
@@ -22801,6 +22899,105 @@
 
 /***/ },
 /* 188 */
+/*!***************************************************!*\
+  !*** ./app/src/components/media_player-button.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlayerButton = function (_React$Component) {
+	  _inherits(PlayerButton, _React$Component);
+	
+	  function PlayerButton(props) {
+	    _classCallCheck(this, PlayerButton);
+	
+	    var _this = _possibleConstructorReturn(this, (PlayerButton.__proto__ || Object.getPrototypeOf(PlayerButton)).call(this, props));
+	
+	    Object.defineProperty(_this, '_buttonDisplay', {
+	      enumerable: true,
+	      writable: true,
+	      value: {
+	        display: 'block'
+	      }
+	    });
+	    Object.defineProperty(_this, '_showButton', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value() {
+	        _this._buttonDisplay.display = 'block';
+	      }
+	    });
+	    Object.defineProperty(_this, '_togglePlay', {
+	      enumerable: true,
+	      writable: true,
+	      value: function value(e) {
+	        if (_this.props.playState === 'playing') {
+	          _this.props.media.pauseVideo();
+	        } else if (_this.props.playState === 'buffering') {
+	          return;
+	        } else {
+	          _this.props.media.playVideo();
+	        }
+	      }
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(PlayerButton, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.playState === 'playing' || nextProps.playState === 'buffering') {
+	        this._buttonDisplay.display = 'none';
+	      } else {
+	        this._buttonDisplay.display = 'block';
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'video-overlay', onClick: this._togglePlay },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'video-player-button', onClick: this._togglePlay, style: this._buttonDisplay },
+	          _react2.default.createElement('img', { src: 'app/src/assets/img/media-buttons/play.png' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PlayerButton;
+	}(_react2.default.Component);
+	
+	exports.default = PlayerButton;
+	
+	
+	PlayerButton.defaultProps = {
+	  playState: 'paused'
+	};
+
+/***/ },
+/* 189 */
 /*!*****************************************************!*\
   !*** ./app/src/components/media_player-progress.js ***!
   \*****************************************************/
@@ -22920,105 +23117,6 @@
 	}(_react2.default.Component);
 	
 	exports.default = ProgressBar;
-
-/***/ },
-/* 189 */
-/*!***************************************************!*\
-  !*** ./app/src/components/media_player-button.js ***!
-  \***************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PlayerButton = function (_React$Component) {
-	  _inherits(PlayerButton, _React$Component);
-	
-	  function PlayerButton(props) {
-	    _classCallCheck(this, PlayerButton);
-	
-	    var _this = _possibleConstructorReturn(this, (PlayerButton.__proto__ || Object.getPrototypeOf(PlayerButton)).call(this, props));
-	
-	    Object.defineProperty(_this, '_buttonDisplay', {
-	      enumerable: true,
-	      writable: true,
-	      value: {
-	        display: 'block'
-	      }
-	    });
-	    Object.defineProperty(_this, '_showButton', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value() {
-	        _this._buttonDisplay.display = 'block';
-	      }
-	    });
-	    Object.defineProperty(_this, '_togglePlay', {
-	      enumerable: true,
-	      writable: true,
-	      value: function value(e) {
-	        if (_this.props.playState === 'playing') {
-	          _this.props.media.pauseVideo();
-	        } else if (_this.props.playState === 'buffering') {
-	          return;
-	        } else {
-	          _this.props.media.playVideo();
-	        }
-	      }
-	    });
-	    return _this;
-	  }
-	
-	  _createClass(PlayerButton, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.playState === 'playing' || nextProps.playState === 'buffering') {
-	        this._buttonDisplay.display = 'none';
-	      } else {
-	        this._buttonDisplay.display = 'block';
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'video-overlay', onClick: this._togglePlay },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'video-player-button', onClick: this._togglePlay, style: this._buttonDisplay },
-	          _react2.default.createElement('img', { src: 'app/src/assets/img/media-buttons/play.png' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return PlayerButton;
-	}(_react2.default.Component);
-	
-	exports.default = PlayerButton;
-	
-	
-	PlayerButton.defaultProps = {
-	  playState: 'paused'
-	};
 
 /***/ },
 /* 190 */
